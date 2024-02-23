@@ -1,0 +1,21 @@
+.menu-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0e223b;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+}
+  
+.logo {
+    font-size: 1.5rem;
+}
+  
+.menu-button {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
