@@ -1,0 +1,214 @@
+.profile {
+    display: grid;
+    grid-template-columns: 0.1fr 0.2fr 1fr 0.1fr;
+    grid-template-rows: 0.1fr 1fr 0.1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 0px;
+}
+
+
+.menuBar {
+    z-index: 0;
+    grid-area: 2 / 2 / 3 / 3;
+    border-radius: 15px;
+    background-color: rgb(41, 30, 58);
+    padding: 8px 0px 8px 0px;
+    position: relative;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7vh; /* Adjust height as needed */
+  
+}
+
+.navbar ul {
+    margin-top: 200px;
+    margin-left: 40px ;
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+.navbar ul li a {
+    /* padding:0 22px; */
+    color: antiquewhite;
+}
+
+.navbar ul li a:hover {
+    /* padding:0 22px; */
+    color: burlywood;
+    margin-left: 15px;
+    transition: 0.4s;
+}
+
+
+.UserProfile {
+    z-index: 0;
+    grid-area: 2 / 3 / 3 / 4;;
+    border-radius: 15px;
+    background-color: rgb(41, 30, 58);
+    /* background-color: cadetblue */
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.7fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 10px;
+
+    padding: 8px 8px 8px 8px;
+
+}
+
+
+.ImgPart {
+    grid-area: 1 / 1 / 2 / 2;
+    /* background-color: rgb(167, 213, 214); */
+    border-radius: 15px;
+
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    background: url( '../../assets/profile-back.jpg');
+    text-align: center;
+    /* z-index: -1; */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: right;
+    border-radius: 10px;
+}
+
+.image-name {
+    grid-area: 1 / 1 / 2 / 2;
+    /* background-color: rgb(11, 150, 29); */
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr repeat(2, 0.5fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.ImgProfile {
+    grid-area: 1 / 1 / 2 / 2;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.ImgProfile img{
+    content: "";
+    position: absolute;
+    width: 45%;
+    height: 80%;
+    border-radius: 50px;
+    text-align: center;
+    /* left: calc(50% - 95px); */
+    /* top: 15.5px; */
+    border: 2px solid rgba(235, 223, 223, 0.5); 
+}
+
+.name {
+    grid-area: 2 / 1 / 3 / 2;
+ 
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+
+}
+
+.name p {
+    margin: 0;
+    text-align: center;
+    color: #b9b9b9;
+    font-size: 1.4em;
+    padding-top: 5px;
+    font-weight: bold;
+}
+
+.edit-profile {
+    grid-area: 3 / 1 / 4 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit {
+    display: flex;
+    color: white;
+    justify-content: center;
+}
+
+.edit  p {
+    padding: 5px 10px;
+    border-radius:  10px;
+    background-color: rgb(73, 6, 68);
+    display: block;
+    width: fit-content;
+    height: fit-content;
+    text-align: center;
+}
+
+
+
+
+.lvl-container {
+    grid-area: 1 / 2 / 2 / 3;
+    /* background-color: red; */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+        
+}
+
+
+.lvl {
+    grid-area: 1 / 1 / 2 / 2;
+    background: rgba(0, 0, 0, 0.5);
+    border: 0.5px solid wheat;
+    text-align: center;
+    /* z-index: -1; */
+
+    border-radius: 10px;
+}
+
+
+
+.achievement {
+    grid-area: 2 / 1 / 3 / 2;
+    background: rgba(0, 0, 0, 0.5);
+    border: 0.5px solid wheat;
+}
+
+.History {
+    grid-area: 2 / 1 / 3 / 2;
+    background-color: rgb(167, 213, 214);
+    border-radius: 15px;
+    position: relative;
+}
+
+
+
+
+
+
+
+
+/* .parent {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.7fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+    .div1 { grid-area: 1 / 1 / 2 / 2; }
+    .div2 { grid-area: 2 / 1 / 3 / 2; }  */

@@ -6,8 +6,8 @@ import {Login} from "./component/Login/Login"
 import './App.css';
 import Avatar from './component/Avatar/Avatar';
 import MenuBar from './component/menubar/menubar';
-import CanvasAnimation from './component/Canvas/canvas';
-import Profile from './component/Profile/Profile';
+import CanvasAnimation from './component/Canvas/canvas'
+import Newprofile from './component/NewProfile/Newprofile';
 
 
 function App() 
@@ -15,10 +15,10 @@ function App()
   return (
       <div>
         <Router>
-          <CanvasAnimation />
+          {/* <CanvasAnimation /> */}
           <Routes>
             <Route path="/" element={<Login />}/>
-            <Route path="/Home" element={<Profile />}/>
+            <Route path="/Home" element={<Newprofile />}/>
           </Routes>
         </Router> 
       </div>
