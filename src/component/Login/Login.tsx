@@ -5,11 +5,14 @@ import CanvasAnimation from '../Canvas/canvas'
 export const Login = () => {
   return (
     <div className='cont'>
-        
-        <button className="styled-button">
-          <span className='button-text'> Login </span>
-        </button>
-    </div>
 
+        <div className='title'>
+          <p></p>
+        </div>
+        <div className='butt'>
+          <p>Login</p>
+        </div>
+        <p className='game-title'>Heroes PingPong</p>
+    </div>
   )
 }

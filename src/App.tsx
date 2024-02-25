@@ -7,7 +7,8 @@ import './App.css';
 import Avatar from './component/Avatar/Avatar';
 import MenuBar from './component/menubar/menubar';
 import CanvasAnimation from './component/Canvas/canvas'
-import Newprofile from './component/NewProfile/Newprofile';
+import Punk from './component/PunkProfile/Punk';
+
 
 
 function App() 
@@ -18,7 +19,7 @@ function App()
           {/* <CanvasAnimation /> */}
           <Routes>
             <Route path="/" element={<Login />}/>
-            <Route path="/Home" element={<Newprofile />}/>
+            <Route path="/Home" element={<Punk />}/>
           </Routes>
         </Router> 
       </div>
