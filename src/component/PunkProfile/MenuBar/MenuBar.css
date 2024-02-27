@@ -132,9 +132,9 @@
     background: var(--shadow-primary);
     transform: translate(var(--border), 0);
   }
-  
+
   .cybr-btn:after {
-    background: rgb(14, 14, 70);
+    background: #033310;
   }
   
  
