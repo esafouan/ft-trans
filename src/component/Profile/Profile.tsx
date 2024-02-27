@@ -4,8 +4,7 @@ import axios from 'axios';
 import CanvasAnimation from '../Canvas/canvas'
 import ProfileImage from './Profileimage/ProfileImage'
 // import Friends from './Freinds/Friends'
-import image1 from '../../assets/theFlash.jpg'
-import image2 from '../../assets/theFlash.jpg'
+
 import ListMatch from './MatchHistory/Match';
 
 
@@ -126,6 +125,7 @@ const Profile = () => {
             </div>
         
         </div>
+        
         <ListMatch />
       </div>
 

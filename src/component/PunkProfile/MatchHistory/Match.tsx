@@ -6,7 +6,7 @@ import image2 from '../../../assets/theFlash.jpg'
 
 
 
-const Match = ({match}) => {
+const Match = ({match}) =>{
 
     return (
         <div className='match'>
@@ -32,7 +32,7 @@ const Match = ({match}) => {
 }
 
 const ListMatch = () => {
-
+    
     const matches = [
         {
             player1: { name: 'Player 1', image: image2 },
@@ -61,9 +61,8 @@ const ListMatch = () => {
 
         <div className='matches-list'>
         
-            {/* {matches.map((match, index) => (
-                <Match key={index} match={match} /> ))} */}
-
+            {matches.map((match, index) => (
+                <Match key={index} match={match} /> ))}
         </div>
     )
 }
