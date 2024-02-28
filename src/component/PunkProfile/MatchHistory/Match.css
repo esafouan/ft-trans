@@ -9,7 +9,7 @@
 } */
 
 /* MatchesList.css */
-.matches-list {
+/* .matches-list {
     display: flex;
     flex-direction: column;
     grid-area: 2 / 2 / 3 / 4;
@@ -24,86 +24,55 @@
     border-bottom: 1px solid rgba(171, 185, 45, 0.2);
     z-index: 10;
     backdrop-filter: blur(25px);
-}
+} */
 /* MainComponent.css */
 
-.match 
-{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    padding: 23px 1px;
-    background: rgba(0,0,0, 0.1);
-    margin: 10px 177px;
-    border-radius: 10px;
-    cursor: pointer;
-    max-height: 100px;
-    width: 32vw;
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 200px; /* Adjust as needed */
+    padding: 0 20px; /* Adjust as needed */
+  }
+  
+  
+
+
+.matches-list {
+    grid-area: 2 / 2 / 3 / 4;
+    position: relative;  
+    display: flex;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 35px; /* Adjust as needed */
 }
 
-.match:hover {
-    background: rgba(245, 29, 29, 0.2);
-
-    box-shadow: -15px 30px 50px rgba(0,0,0, 0.2);
-    transform: scale(1.01);
+/* .swiper{
+    width: 950px;
 }
-
-.match .player1 {
-    grid-area: 1 / 1 / 2 / 2;
+*/
+.card {
     position: relative;
-}
+    height: 30vh;
+    width: 15vw ;
+    background: #045a25;
+    border-radius: 20px;
 
-.match .player1 img {
-    position: relative;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    border-radius: 20px; /* Make it a circle */
-    border: 2px solid rgba(233, 218, 10,0.3);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    
+  }
 
-    overflow: hidden;
+  .next {
+    position: absolute;
+    right: 2px;
+    color: aliceblue;
+  }
 
-}
-
-/* .div1 { grid-area: 1 / 1 / 2 / 2; } date
-.div2 { grid-area: 2 / 1 / 3 / 2; } result
-.div3 { grid-area: 3 / 1 / 4 / 2; }  mode */
-
-.match .result {
-    position: relative;
-    grid-area: 1 / 2 / 2 / 3;
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: 1fr;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-}
-.match .result .res{
-    grid-area: 2 / 1 / 3 / 2;
-    position: relative;
-    left : 40%;
-}
-
-.match .player2 {
-    grid-area: 1 / 3 / 2 / 4;
-    position: relative;
-}
-.namep1 {
-    position: relative;
-    left:35%;
-}
-.match .player2 img {
-    position: relative;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    border-radius: 20px; /* Make it a circle */
-    border: 2px solid rgba(233, 218, 10,0.3);
-    overflow: hidden;
-}
+  .prev
+  {
+    position: absolute;
+    color: aliceblue;
+    left: 2px;
+  }

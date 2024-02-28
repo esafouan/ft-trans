@@ -71,7 +71,6 @@ const Blockedfriend = ( { image, name }) => {
 }
 
 
-
 const Friends = () => {
 
     const Users = [
@@ -99,8 +98,7 @@ const Friends = () => {
     ]
 
       const [searchQuery, setSearchQuery] = useState('');
-    
-      const [Filterfriend, setFilterfriend] = useState(null); // State to hold search result
+      const [Filterfriend, setFilterfriend] = useState(null); //State to store search result
     
     
       const handleSearchChange = (event) => {
@@ -148,9 +146,9 @@ const Friends = () => {
                 ? (
                     <>
                       {
-                      isFriend(Filterfriend) ? ( <Friend image={Filterfriend.image} name={Filterfriend.name} /> ) 
-                      : isBlocked(Filterfriend) ? ( <Blockedfriend image={Filterfriend.image} name={Filterfriend.name} /> ) 
-                      : ( <Notfriend image={Filterfriend.image} name={Filterfriend.name} />)
+                        isFriend(Filterfriend) ? ( <Friend image={Filterfriend.image} name={Filterfriend.name} /> ) 
+                        : isBlocked(Filterfriend) ? ( <Blockedfriend image={Filterfriend.image} name={Filterfriend.name} /> ) 
+                        : ( <Notfriend image={Filterfriend.image} name={Filterfriend.name} />)
                       }
                     </>
                   ) 

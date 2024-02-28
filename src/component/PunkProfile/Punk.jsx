@@ -68,7 +68,8 @@ const Punk = () => {
 
             <Friends />
 
-            {/* <ListMatch /> */}
+            <ListMatch />
+
 
         </div>
 
