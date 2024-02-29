@@ -48,9 +48,9 @@ const Punk = () => {
             <Infos/>
             {/* <Progressbar /> */}
 
-            <Friends />
+            {/* <Friends /> */}
 
-            <ListMatch />
+            {/* <ListMatch /> */}
 
 
         </div>

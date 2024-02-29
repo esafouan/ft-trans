@@ -9,9 +9,10 @@ export const Login = () => {
         <div className='title'>
           <p></p>
         </div>
-        <div className='butt'>
+        {/* <a  className="button-link"></a> */}
+        <a href="http://10.14.55.85:3000/api/auth/42">
           <p>Login</p>
-        </div>
+        </a>
         <p className='game-title'>Heroes PingPong</p>
     </div>
   )
