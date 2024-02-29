@@ -3,6 +3,7 @@ import "./Punk.css";
 import MenuBar from "./MenuBar/MenuBar";
 import ListMatch from "./MatchHistory/Match"
 import Friends from "./friends/friend"
+import Infos from "./Infos/infos"
 import  {useState, useEffect} from 'react'
 
 import im1 from '../../assets/bat.jpg'
@@ -43,27 +44,8 @@ const Punk = () => {
 
         <div className='page'>
           
-            <div className= 'player-infos' >
-                    
-                <div className="ImgProfile">
-                    <img/>
-                </div>
 
-                <div className="name">
-                    <p>King of night</p>
-                </div>
-
-                <div className="edit-profile">
-                    
-                    <div className='edit'>
-                        <p>
-                            Edit profile
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
+            <Infos/>
             {/* <Progressbar /> */}
 
             <Friends />

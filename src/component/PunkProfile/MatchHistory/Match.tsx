@@ -1,4 +1,4 @@
-import React  ,{ useEffect }  from 'react'
+import React  ,{ useEffect, useState }  from 'react'
 import Swiper from 'swiper';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -16,104 +16,82 @@ const Match = ({match}) => {
 
     return (
         <div className='match'>
-
-            <div className='player1'>
-                <img src={match.player1.image} alt={match.player1.name} />
-                <div className='namep1'> {match.player1.name} </div>
-            </div>
-
-            <div className='result'> 
-                <div className='res'>
-                    {match.result} 
-                </div>
-            </div>
-
-            <div className='player2'>
-                <img src={match.player2.image} alt={match.player2.name} />
-                <div className='namep1'>{match.player2.name}</div>
+            <div className=" card">
+                <div className="card-content">{match.result}</div>
             </div>
         </div>
     )
-
 }
-
-
-
-
-
 
 const ListMatch = () => {
 
+const matches = [
+    {
+        player1: { name: 'Player 1', image: image2 },
+        player2: { name: 'Player 2', image: image2 },
+        result: '1'
+    },
+    {
+        player1: { name: 'Player 1', image: image2 },
+        player2: { name: 'Player 2', image: image2 },
+        result: '2'
+    },
+    {
+        player1: { name: 'Player 1', image: image2 },
+        player2: { name: 'Player 2', image: image2 },
+        result: '3'
+    },
+    {
+        player1: { name: 'Player 1', image: image2 },
+        player2: { name: 'Player 2', image: image2 },
+        result: '4'
+    },
+    {
+        player1: { name: 'Player 1', image: image2 },
+        player2: { name: 'Player 2', image: image2 },
+        result: '5'
+    },
+    {
+        player1: { name: 'Player 1', image: image2 },
+        player2: { name: 'Player 2', image: image2 },
+        result: '6'
+    },
+    // Add more match data as needed
+];
 
-  return (
+const [beginIndex, setbeginIndex] = useState(0);
+const [endIndex, setendIndex] = useState(Math.min(3, matches.length));
+
+const handleNext = () => 
+{
+    if (endIndex < matches.length)
+    {
+        setendIndex(endIndex + 1);
+        setbeginIndex(beginIndex + 1);
+    }
+}
+
+const handlePrev = () => 
+{
+    if (beginIndex - 1 >= 0)
+    {
+        setendIndex(endIndex - 1);
+        setbeginIndex(beginIndex - 1);
+    }
+}
+
+return (
     <div className='matches-list'>
+        {matches.slice(beginIndex, endIndex).map((match, index) => (
+            <Match key={index} match={match} />
+        ))}
 
-        <div className="card">
-          <div className="card-content"></div>
-        </div>
-
-        <div className=" card">
-          <div className="card-content"></div>
-        </div>
-
-        <div className=" card">
-          <div className="card-content"></div>
-        </div>
-
-        <div className="next swiper-button-next"></div>
-        <div className="prev swiper-button-prev"></div>
+        <div className="next swiper-button-next" onClick={handleNext}></div>
+        <div className="prev swiper-button-prev" onClick={handlePrev}></div>
 
     </div>
   );
 };
 
-// export default YourComponent;
-
-
-
-
-// const ListMatch = () => {
-    
-//     const matches = [
-//         {
-//             player1: { name: 'Player 1', image: image2 },
-//             player2: { name: 'Player 2', image: image2 },
-//             result: '3 : 1'
-//         },
-//         {
-//             player1: { name: 'Player 1', image: image2 },
-//             player2: { name: 'Player 2', image: image2 },
-//             result: '3 : 1'
-//         },
-//         {
-//             player1: { name: 'Player 1', image: image2 },
-//             player2: { name: 'Player 2', image: image2 },
-//             result: '3 : 1'
-//         },
-//         {
-//             player1: { name: 'Player 1', image: image2 },
-//             player2: { name: 'Player 2', image: image2 },
-//             result: '3 : 1'
-//         },
-//         // Add more match data as needed
-//     ];
-      
-//     return (
-
-//         <div className='matches-list'>
-//             <div className='carousel'>
-//             <i id="left" className="fa-solid fa-angle-left"></i>
-//                 <img src={im1} alt="im1" draggable="false"/>
-//                 <img src={im2} alt="im2" draggable="false"/>
-//                 <img src={im3} alt="im3" draggable="false"/>
-//                 <img src={im4} alt="im4" draggable="false"/>
-//                 <img src={im1} alt="im1" draggable="false"/>
-//                 <i id="right" className="fa-solid fa-angle-right"></i>
-//             </div>
-//             {/* {matches.map((match, index) => (
-//                 <Match key={index} match={match} /> ))} */}
-//         </div>
-//     )
-// }
 
 export default ListMatch
