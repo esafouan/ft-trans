@@ -46,11 +46,12 @@ const Punk = () => {
           
 
             <Infos/>
-            {/* <Progressbar /> */}
+            
+            <Progressbar />
 
-            {/* <Friends /> */}
+            <Friends />
 
-            {/* <ListMatch /> */}
+            <ListMatch />
 
 
         </div>

@@ -19,11 +19,6 @@
     grid-row-gap: 0px;
 }
 
-
-
-
-
-
 .lvl{
     grid-area: 1 / 2 / 2 / 4;
     display: grid;

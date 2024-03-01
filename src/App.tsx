@@ -8,6 +8,7 @@ import Avatar from './component/Avatar/Avatar';
 import MenuBar from './component/menubar/menubar';
 import CanvasAnimation from './component/Canvas/canvas'
 import Punk from './component/PunkProfile/Punk';
+import Chat from './component/MyChat/Chat';
 
 
 
@@ -20,6 +21,7 @@ function App()
           <Routes>
             <Route path="/" element={<Login />}/>
             <Route path="/Home" element={<Punk />}/>
+            <Route path="/Chat" element={<Chat />}/>
           </Routes>
         </Router> 
       </div>
