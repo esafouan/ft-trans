@@ -41,19 +41,25 @@ const My_profile = () => {
             <p>  </p>
         </div>
 
-        <div className ='left-elements'>
-            <div className ="content-sidebar">
-
-                <div className ="content-messages">
-
-                 
-                </div>
-
+        <div className ='discussions'>    
+            <div className="discussion message-active"> 
+            
+                 <div className='amis-image'>
+                   
+                        <img />
+                   
+                    <div className='on-off'></div>
+                 </div>
+            
+                 <div className='amis-infos'> 
+                    <p className='amis-name'></p>
+                    <p className='last-message'></p>
+                 </div>
+            
             </div>
         </div>
 
-
-  </div>
+    </div>
   )
 }
 

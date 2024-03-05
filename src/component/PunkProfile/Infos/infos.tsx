@@ -7,7 +7,7 @@ const Infos = () => {
   //   console.log(ENV.VITE_SOME_KEY); // "123"
   //   console.log(ENV.DB_PASSWORD); // undefined
 
-  const [profileData, setProfileData] = useState({ name: "", image: "" });
+  const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -16,12 +16,14 @@ const Infos = () => {
 
         const instance = axios.create({
           withCredentials: true,
-          baseURL: "http://10.14.55.85:3000/api",
+          baseURL: "http://localhost:3000/api",
         });
         instance
           .get("/auth/user")
           .then((res) => {
-            console.log(res);
+            const dat = res.data;
+
+            setProfileData(dat);
           })
           .catch((err) => {
             console.log(err.response);
@@ -32,23 +34,32 @@ const Infos = () => {
     };
     getData();
   }, []);
-
+  
+  (profileData && console.log(profileData));
   return (
+
+   
     <div className="player-infos">
-      <div className="ImgProfile">
-        <img src={profileData.image} />
-      </div>
-
-      <div className="name">
-        <p> {profileData.name} </p>
-      </div>
-
-      <div className="edit-profile">
-        <div className="edit">
-          <p> Edit profile </p>
+    {profileData ? (
+      <>
+        <div className="ImgProfile">
+          <img src={profileData.avatar} alt="Profile" />
         </div>
-      </div>
-    </div>
+        <div className="name">
+          <p>{profileData.login}</p>
+        </div>
+        <div className="edit-profile">
+          <div className="edit">
+            <p>Edit profile</p>
+          </div>
+        </div>
+      </>
+    ) : (
+      <p>Loading...</p>
+    )}
+  </div>
+   
+
   );
 };
 
