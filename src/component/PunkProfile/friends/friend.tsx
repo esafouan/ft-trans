@@ -103,7 +103,7 @@ const Blockedfriend = ( { image, name }) => {
 
 const Friends = () => {
   const [myFriends, setMyFriends] = useState(null);
-  const [selectedOption, setSelectedOption] = useState('friends'); // State to track the selected option
+  // const [selectedOption, setSelectedOption] = useState('friends'); // State to track the selected option
 
   useEffect(() => {
     const getFriends = async () => {
@@ -117,18 +117,19 @@ const Friends = () => {
     getFriends();
   }, []);
 
-  const handleSelectionChange = (option) => {
-    setSelectedOption(option);
-  };
+  // const handleSelectionChange = (option) => {
+  //   setSelectedOption(option);
+  // };
 
   return (
     <div className='friends-container'>
       {myFriends ? (
         <>
-          <div className='selection'>
+          {/* <div className='selection'>
             <div className={`fr ${selectedOption === 'friends' ? 'selected' : ''}`} onClick={() => handleSelectionChange('friends')}>Friends</div>
             <div className={`blocked ${selectedOption === 'blocked' ? 'selected' : ''}`} onClick={() => handleSelectionChange('blocked')}>Blocked</div>
-          </div>
+            <div className={`padding ${selectedOption === 'padding' ? 'selected' : ''}`} onClick={() => handleSelectionChange('padding')}>padding</div>
+          </div> */}
 
           <div className='search-friend'>
             <input className="searchInput" type='text' placeholder='Search for a friend...' />
@@ -136,15 +137,10 @@ const Friends = () => {
           </div>
 
           <div className='friends-list'>
-            {selectedOption === 'friends' && myFriends ? (
+            {myFriends ? (
               myFriends.map((friend, index) => (
-                <Friend key={index} image={friend.avatar} name={friend.login} FriendId={friend.id} />
-              ))
-            ) : selectedOption === 'blocked' ? (
-              <p>Blocked friends list</p>
-            ) : (
-              <p>Please select an option</p>
-            )}
+                <Friend key={index} image={friend.avatar} name={friend.login} FriendId={friend.id} /> ))
+            ) : ( <p> No friends </p>)}
           </div>
         </>
       ) : (<p>Loading...</p>)

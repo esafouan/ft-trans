@@ -1,78 +1,54 @@
-/* Match.css */
-/* #{
 
-    color : #E2F1E6;
-    color : #175929;
-    color: #418C55;
-    color: #7EBF90;
-    color: #033310;
-} */
+.matches-list-container{
+  grid-area: 2 / 1 / 3 / 2;
+  display: grid;
+  grid-template-columns: 1fr ;
+  grid-template-rows: 0.2fr 1fr;
+  justify-items: center; 
+  align-items: center; 
+  position: relative;
 
-/* MatchesList.css */
-/* .matches-list {
-    display: flex;
-    flex-direction: column;
-    grid-area: 2 / 2 / 3 / 4;
-    background: rgba(250, 247, 247, 0.1);
-    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    overflow-x: hidden;
-    max-height: 41vh;
-    border: 1px solid rgba(171, 185, 45, 0.2);
-    border-radius: 5px;
-    border-right: 1px solid rgba(171, 185, 45, 0.2);
-    border-bottom: 1px solid rgba(171, 185, 45, 0.2);
-    z-index: 10;
-    backdrop-filter: blur(25px);
-} */
-/* MainComponent.css */
+}
 
-
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 200px; /* Adjust as needed */
-    padding: 0 20px; /* Adjust as needed */
-  }
-  
-  
+.title-history{
+  grid-area: 1 / 1 / 2 / 2; 
+  text-align: center;
+  top: 45%;
+  position: absolute;
+  font-size: x-large;
+}
 
 
 .matches-list {
-    grid-area: 2 / 2 / 3 / 4;
-    position: relative;  
-    display: flex;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    padding: 70px 0px 0px 30px;
+  grid-area: 2 / 1 / 3 / 2; 
+  position: relative;  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* .swiper{
-    width: 950px;
-}
-*/
 .card {
     position: relative;
     height: 30vh;
     width: 15vw ;
-    background: #045a25;
+    background: rgba(234, 235, 206, 0.3);
     border-radius: 20px;
-
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    
+    margin: 6% 0% 0% 18%;
+
   }
 
-  .next {
+.next {
     position: absolute;
-    right: 2px;
+    /* right: -0.5%; */
     color: aliceblue;
-  }
+    top: 43.5%;
+}
 
-  .prev
-  {
-    position: absolute;
-    color: aliceblue;
-    left: 2px;
-  }
+.prev
+{
+  position: absolute;
+  /* left: -0.5%; */
+  color: aliceblue;
+  top: 43.5%;
+}

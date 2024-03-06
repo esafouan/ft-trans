@@ -81,14 +81,23 @@ const handlePrev = () =>
 }
 
 return (
-    <div className='matches-list'>
-        {matches.slice(beginIndex, endIndex).map((match, index) => (
-            <Match key={index} match={match} />
-        ))}
 
-        <div className="next swiper-button-next" onClick={handleNext}></div>
-        <div className="prev swiper-button-prev" onClick={handlePrev}></div>
 
+    <div className='matches-list-container'>
+        
+        <div className='title-history'>
+            <p>List Matches</p>
+        </div>
+
+        <div className='matches-list'>
+            {matches.slice(beginIndex, endIndex).map((match, index) => (
+                <Match key={index} match={match} />
+            ))}
+
+            <div className="next swiper-button-next" onClick={handleNext}></div>
+            <div className="prev swiper-button-prev" onClick={handlePrev}></div>
+
+        </div>
     </div>
   );
 };

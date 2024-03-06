@@ -1,10 +1,46 @@
-.player-infos 
+.profile-container 
 {
-    grid-area: 1 / 1 / 3 / 2;
-    background-color: rgba(0,0,0,0.2);
+    grid-area: 1 / 1 / 2 / 2;
+    display: grid;
+    grid-template-columns: 0.3fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}    
+
+
+/* .div1 {  }
+.div2 { grid-area: 1 / 1 / 2 / 2; }  */
+
+.new-game-container{
+    grid-area: 1 / 2 / 2 / 3;
+   
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 0.2fr 0.3fr 1fr;
+    grid-template-rows: 1fr 0.5fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.new-game {
+    grid-area: 1 / 1 / 2 / 2;
+    /* background-color: blueviolet; */
+    background-image: url("src/assets/tettet.jpeg");
+    object-fit: cover;
+    
+}
+
+.stats { 
+    grid-area: 2 / 1 / 3 / 2; 
+}
+    
+
+.player-infos 
+{
+    grid-area: 1 / 1 / 2 / 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 0.5fr 0.5fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 }
@@ -15,19 +51,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
 }
 
 .ImgProfile img { 
-    content: "";
     position: absolute;
-    width: 11vw;
-    height: 19vh;
-    border-radius: 50px;
+    width:150px;
+    height: 150px;
+    border-radius: 50%;
     text-align: center;
-    /* left: calc(50% - 95px); */
-    /* top: 15.5px; */
-    border: 2px solid rgba(235, 223, 223, 0.5); 
+    border: 2px solid rgba(235, 223, 223, 0.5);   
+    object-fit: cover;
 }
 
 .name {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./infos.css";
 
-const ENV = import.meta.env;
+
 const Infos = () => {
   //   console.log(ENV.VITE_SOME_KEY); // "123"
   //   console.log(ENV.DB_PASSWORD); // undefined
@@ -38,25 +38,32 @@ const Infos = () => {
   (profileData && console.log(profileData));
   return (
 
-   
-    <div className="player-infos">
-    {profileData ? (
-      <>
-        <div className="ImgProfile">
-          <img src={profileData.avatar} alt="Profile" />
-        </div>
-        <div className="name">
-          <p>{profileData.login}</p>
-        </div>
-        <div className="edit-profile">
-          <div className="edit">
-            <p>Edit profile</p>
-          </div>
-        </div>
-      </>
-    ) : (
-      <p>Loading...</p>
-    )}
+   <div className="profile-container">
+      <div className="player-infos">
+        {profileData ? (
+          <>
+            <div className="ImgProfile">
+              <img src={profileData.avatar} alt="Profile" />
+            </div>
+            <div className="name">
+              <p>{profileData.login}</p>
+            </div>
+            <div className="edit-profile">
+              <div className="edit">
+                <p>Edit profile</p>
+              </div>
+            </div>
+          </>
+        ) : (
+          <p>Loading...</p>
+          )}
+      </div>
+
+      <div className="new-game-container">
+        <div className="new-game"></div>
+        <div className="stats"></div>
+      </div>
+      
   </div>
    
 
