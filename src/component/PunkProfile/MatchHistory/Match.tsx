@@ -17,7 +17,7 @@ const Match = ({match}) => {
     return (
         <div className='match'>
             <div className=" card">
-                <div className="card-content"></div>
+                <div className="card-content">{match.result}</div>
             </div>
         </div>
     )
@@ -86,7 +86,7 @@ return (
     <div className='matches-list-container'>
         
         <div className='title-history'>
-            <p>List Matches</p>
+            {/* <p>List Matches</p> */}
         </div>
 
         <div className='matches-list'>

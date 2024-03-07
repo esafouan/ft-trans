@@ -25,15 +25,20 @@
 .new-game {
     grid-area: 1 / 1 / 2 / 2;
     position: relative;
-    /* object-fit: cover; */
+    border-radius: 10px;
+    /* background: linear-gradient(11deg,  rgb(109, 65, 8), rgba(189, 133, 69, 0.699)  100%); */
+    background: rgba(51, 45, 40, 0.2);
+    
+
+    height: 84%;
     
 }
 .myPl {
-    width: auto;
+    width: 50%;
     height: auto;
     position: absolute;
     right: 0%;
-
+    top: 6%;
 }
 
 .wlcom {

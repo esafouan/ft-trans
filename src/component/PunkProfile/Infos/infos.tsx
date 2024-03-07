@@ -43,14 +43,14 @@ const Infos = () => {
               <div className="ImgProfile">
                 <img src={profileData.avatar} alt="Profile" />
               </div>
-              <div className="name">
+              {/* <div className="name">
                 <p>{profileData.login}</p>
               </div>
               <div className="edit-profile">
                 <div className="edit">
                   <p>Edit profile</p>
-                </div>
-              </div>
+                </div> */}
+              {/* </div> */}
             </>
           ) : (
             <p>Loading...</p>
@@ -60,9 +60,9 @@ const Infos = () => {
         <div className="new-game-container">
           <div className="new-game">
             <img className="myPl" src={pl}  />
-            <p className="wlcom"> Welcom ! </p>
+            {/* <p className="wlcom"> Welcom ! </p>
             <p className="ready">Are you ready for a new game ?</p>
-            <div className="start-button">New game</div>
+            <div className="start-button">New game</div> */}
           </div>
           <div className="stats"></div>
         </div>

@@ -31,10 +31,11 @@
     position: relative;
     height: 30vh;
     width: 15vw ;
-    background: rgba(234, 235, 206, 0.3);
+    background: #563e27;
     border-radius: 20px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
     margin: 6% 0% 0% 18%;
+    background-image: url("src/assets/9105979_26146-ai.svg");
 
   }
 
