@@ -17,7 +17,7 @@ const Match = ({match}) => {
     return (
         <div className='match'>
             <div className=" card">
-                <div className="card-content">{match.result}</div>
+                <div className="card-content"></div>
             </div>
         </div>
     )

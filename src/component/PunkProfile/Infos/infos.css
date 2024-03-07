@@ -24,12 +24,46 @@
 
 .new-game {
     grid-area: 1 / 1 / 2 / 2;
-    /* background-color: blueviolet; */
-    background-image: url("src/assets/tettet.jpeg");
-    object-fit: cover;
+    position: relative;
+    /* object-fit: cover; */
     
 }
+.myPl {
+    width: auto;
+    height: auto;
+    position: absolute;
+    right: 0%;
 
+}
+
+.wlcom {
+    position: absolute;
+    color: rgb(184, 184, 184);
+    
+    top: 30%;
+    font-size: x-large;
+}
+.ready {
+    position: absolute;
+    color: rgb(184, 184, 184);
+    top: 50%;
+    font-size: x-large;
+}
+
+
+.start-button {
+    position: absolute;
+    color: rgb(211, 211, 211);
+    top: 70%;
+    left: 10%;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    background: linear-gradient(11deg, rgb(141, 132, 132) 0%, rgb(230, 165, 81) 100%);
+    font-size: large;
+    padding: 5px 10px 5px 10px;
+    cursor: pointer;
+}
 .stats { 
     grid-area: 2 / 1 / 3 / 2; 
 }
@@ -66,10 +100,9 @@
 
 .name {
     grid-area: 2 / 1 / 3 / 2;
- 
-     display: flex;
-     justify-content: center;
-     align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 
 }
