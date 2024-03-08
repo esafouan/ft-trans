@@ -17,7 +17,15 @@ const Match = ({match}) => {
     return (
         <div className='match'>
             <div className=" card">
-                <div className="card-content">{match.result}</div>
+                <div className="my-content">
+                    <img className="card-img" src={match.player1.image}/>
+                    <p className='my-card-res'>{match.player1.result}</p>
+                </div>
+                <div className="component-content">
+                    <img className="card-img" src={match.player2.image}/>
+                    <p className='com-card-res'>{match.player2.result}</p>
+                    
+                </div>
             </div>
         </div>
     )
@@ -27,33 +35,33 @@ const ListMatch = () => {
 
 const matches = [
     {
-        player1: { name: 'Player 1', image: image2 },
-        player2: { name: 'Player 2', image: image2 },
+        player1: { name: 'Player 1', image: image2, result : "0" },
+        player2: { name: 'Player 2', image: image2 , result : "10" },
         result: '1'
     },
     {
-        player1: { name: 'Player 1', image: image2 },
-        player2: { name: 'Player 2', image: image2 },
+        player1: { name: 'Player 1', image: image2 , result : "6"},
+        player2: { name: 'Player 2', image: image2 , result : "2"},
         result: '2'
     },
     {
-        player1: { name: 'Player 1', image: image2 },
-        player2: { name: 'Player 2', image: image2 },
+        player1: { name: 'Player 1', image: image2 , result : "3"},
+        player2: { name: 'Player 2', image: image2 , result : "8"},
         result: '3'
     },
     {
-        player1: { name: 'Player 1', image: image2 },
-        player2: { name: 'Player 2', image: image2 },
+        player1: { name: 'Player 1', image: image2 , result : "7"},
+        player2: { name: 'Player 2', image: image2 , result : "7"},
         result: '4'
     },
     {
-        player1: { name: 'Player 1', image: image2 },
-        player2: { name: 'Player 2', image: image2 },
+        player1: { name: 'Player 1', image: image2 , result : "6"},
+        player2: { name: 'Player 2', image: image2 , result : "5"},
         result: '5'
     },
     {
-        player1: { name: 'Player 1', image: image2 },
-        player2: { name: 'Player 2', image: image2 },
+        player1: { name: 'Player 1', image: image2 , result : "5"},
+        player2: { name: 'Player 2', image: image2 , result : "10"},
         result: '6'
     },
     // Add more match data as needed

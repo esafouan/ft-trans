@@ -2,4 +2,35 @@
 .menuB {
     grid-area: 1 / 1 / 2 / 2;
     background-color: rgba(0, 0, 0, 0.1);
+    font-family: "Inter", sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
+
+.Menu-container {
+    position: absolute;
+    text-align: center;
+	background-color: #05043e;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border-radius: 10px;
+	box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
+    height: 90%;
+    width: 30%;
+    left: 10%;
+}
+
+.icon {
+    color: #FFF;
+	font-size: medium;
+    width: 2vw;
+    height: auto;
+}
+
+

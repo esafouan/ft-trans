@@ -28,15 +28,56 @@
 }
 
 .card {
-    position: relative;
-    height: 30vh;
-    width: 15vw ;
-    background: #563e27;
-    border-radius: 20px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    margin: 6% 0% 0% 18%;
-    background-image: url("src/assets/9105979_26146-ai.svg");
+      position: relative;
+      height: 30vh;
+      width: 15vw;
+      background: rgba(22, 89, 83,0.1);
+        background-image: none;
+      border-radius: 20px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      margin: 6% 0% 0% 18%;
+      background-image: url("src/assets/9105979_26146-ai-svg.svg");
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      border: 1px solid #8BD9D1;
+    
+  }
 
+  .my-content{
+    grid-area: 1 / 1 / 2 / 2;
+    position: relative;
+  }
+
+  .component-content{
+    grid-area: 1 / 2 / 2 / 3; 
+    position: relative;
+    
+  }  
+
+  .card-img{
+    position: absolute;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    top: 15%;
+    left: 33%;
+    border: 1px solid white;
+  }
+  .com-card-res{
+    position: absolute;
+    top: 58%;
+    left: 48%;
+    font-size: x-large;
+    color: aliceblue;
+    
+  }
+  .my-card-res {
+    position: absolute;
+    top: 58%;
+    left: 40%;
+    font-size: x-large;
+    color: aliceblue;
   }
 
 .next {

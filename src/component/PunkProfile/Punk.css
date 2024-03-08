@@ -6,7 +6,8 @@
     grid-template-rows: 1fr;
     grid-column-gap: 5px;
     grid-row-gap: 5px;
-    background: linear-gradient(11deg, rgba(233, 137, 27, 0.699) 0%, rgb(0, 0, 0) 100%);
+
+    background: #0D1526;
 }
 
 
