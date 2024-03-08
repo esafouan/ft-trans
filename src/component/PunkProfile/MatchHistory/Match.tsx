@@ -94,7 +94,7 @@ return (
     <div className='matches-list-container'>
         
         <div className='title-history'>
-            {/* <p>List Matches</p> */}
+            <p>List Matches</p>
         </div>
 
         <div className='matches-list'>

@@ -5,32 +5,52 @@
     font-family: "Inter", sans-serif;
     line-height: 1.5;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     position: relative;
+
 }
 
 .Menu-container {
     position: absolute;
     text-align: center;
-	background-color: #05043e;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	border-radius: 10px;
+	background-color:rgba(22, 89, 83, 0.5);;
+    display: flex;
+    flex-direction: column;
 	box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
     height: 90%;
     width: 30%;
     left: 10%;
+    top: 5%;
+}
+
+/* .icon-container{
+    position: relative;
+} */
+.logo {
+}
+
+.icon-profile {
+    /* position: absolute; */ 
+}
+.not-set{
+    justify-content: flex-end;
+    display: flex;
+
+    flex-direction: column;
+    gap: 47px;
+}
+.icons-cont{
+    display: flex;
+    flex-direction: column;
+    gap: 30px
 }
 
 .icon {
+    position: relative;
     color: #FFF;
 	font-size: medium;
     width: 2vw;
     height: auto;
+    left:13%
 }
 
 

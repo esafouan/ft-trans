@@ -16,6 +16,7 @@
   top: 45%;
   position: absolute;
   font-size: x-large;
+  color: white;
 }
 
 
@@ -31,11 +32,11 @@
       position: relative;
       height: 30vh;
       width: 15vw;
-      background: rgba(22, 89, 83,0.1);
-        background-image: none;
+      background-image: none;
       border-radius: 20px;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
       margin: 6% 0% 0% 18%;
+      background: rgba(22, 89, 83,0.1);
       background-image: url("src/assets/9105979_26146-ai-svg.svg");
       display: grid;
       grid-template-columns: 1fr 1fr;

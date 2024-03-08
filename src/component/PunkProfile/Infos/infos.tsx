@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./infos.css";
-import pl from "../../../assets/MonPlayer.svg"
-
+import pl from "../../../assets/logo1.svg"
+import pl1 from "../../../assets/MonPlayer.svg"
+// src/assets/MonPlayer.svg
 const Infos = () => {
 
 
@@ -47,9 +48,9 @@ const Infos = () => {
                 <p>{profileData.login}</p>
               </div>
               <div className="edit-profile">
-                <div className="edit">
+                {/* <div className="edit">
                   <p>Edit profile</p>
-                </div> 
+                </div>  */}
               </div>
             </>
           ) : (
@@ -59,10 +60,13 @@ const Infos = () => {
 
         <div className="new-game-container">
           <div className="new-game">
-            {/* <img className="myPl" src={pl}  /> */}
-            <p className="wlcom"> Welcome ! </p>
-            <p className="ready">Are you ready for a new game ?</p>
-            <div className="start-button">New game</div>
+            <img className="myPl" src={pl}  />
+            {/* <img className="myPl1" src={pl1}  /> */}
+            <div>
+              <p className="wlcom"> Welcome ! </p>
+              <p className="ready">Are you ready for a new game ?</p>
+              <div className="start-button">New game</div>
+            </div>
           </div>
           <div className="stats"></div>
         </div>
