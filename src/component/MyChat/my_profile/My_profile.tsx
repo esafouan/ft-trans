@@ -5,29 +5,6 @@ import Blocked from "./Blocked/Blocked";
 import Padding from "./Padding/Padding";
 import Rooms from "./rooms/Rooms";
 
-const MessagesList = () => {
-  return (
-    <div className="content-messages-list">
-      {/* <a href="#" data-conversation="#conversation-1"> */}
-
-      <img className="content-message-image" alt="" />
-
-      <span className="content-message-info">
-        <span className="content-message-name">Someone</span>
-        <span className="content-message-text">
-          Lorem ipsum dolor sit amet consectetur.
-        </span>
-      </span>
-
-      <span className="content-message-more">
-        <span className="content-message-unread">5</span>
-        <span className="content-message-time">12:30</span>
-      </span>
-
-      {/* </a> */}
-    </div>
-  );
-};
 
 const My_profile = () => {
 
@@ -40,8 +17,6 @@ const [optionSelected, SetOption] = useState('friends');
 const HandleSetOption = (option : any) => {
     SetOption(option);
 }
-
-
 
 
 

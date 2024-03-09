@@ -11,17 +11,16 @@ const Chat = () => {
 
           <My_profile />
 
-          {/* <Messages /> */}
+          <Messages />
 
-          {/* <div className='OtherProfile'>
-                <div className="otherImgProfile">
-                    <img />
-                </div>
-
-                <div className="Othername">
-                    <p>  </p>
-                </div>
-          </div> */}
+          <div className='OtherProfile'>
+            <div className="Otherimg">
+              <img />
+            </div>
+            <div className="Othername">
+              <p> Saad </p>
+            </div>
+          </div>
 
         </div>
 
