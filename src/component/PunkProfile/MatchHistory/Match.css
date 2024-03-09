@@ -65,17 +65,19 @@
     left: 33%;
     border: 1px solid white;
   }
+
   .com-card-res{
     position: absolute;
-    top: 58%;
+    top: 55%;
     left: 48%;
     font-size: x-large;
     color: aliceblue;
     
   }
+  
   .my-card-res {
     position: absolute;
-    top: 58%;
+    top: 55%;
     left: 40%;
     font-size: x-large;
     color: aliceblue;

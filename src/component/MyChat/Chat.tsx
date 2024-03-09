@@ -11,7 +11,8 @@ const Chat = () => {
 
           <My_profile />
 
-          <Messages />
+          {/* <Messages /> */}
+
           {/* <div className='OtherProfile'>
                 <div className="otherImgProfile">
                     <img />
@@ -21,9 +22,11 @@ const Chat = () => {
                     <p>  </p>
                 </div>
           </div> */}
+
         </div>
 
         <MenuBar/>
+
     </div>
   )
   

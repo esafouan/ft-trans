@@ -1,7 +1,6 @@
 
 .menuB {
     grid-area: 1 / 1 / 2 / 2;
-    background-color: rgba(0, 0, 0, 0.1);
     font-family: "Inter", sans-serif;
     line-height: 1.5;
     min-height: 100vh;
@@ -12,7 +11,7 @@
 .Menu-container {
     position: absolute;
     text-align: center;
-	background-color:rgba(22, 89, 83, 0.5);;
+	background-color:rgba(22, 89, 83, 0.3);;
     display: flex;
     flex-direction: column;
 	box-shadow: 0 10px 50px 0 rgba(5, 4, 62, 0.25);
@@ -20,25 +19,24 @@
     width: 30%;
     left: 10%;
     top: 5%;
+    padding-bottom: 5px;
+    border-radius: 5px;
 }
 
-/* .icon-container{
+.logo > img {
     position: relative;
-} */
-.logo {
+    bottom: 30%;
 }
 
-.icon-profile {
-    /* position: absolute; */ 
-}
-.not-set{
+
+.not-set {
     justify-content: flex-end;
     display: flex;
 
     flex-direction: column;
     gap: 47px;
 }
-.icons-cont{
+.icons-cont {
     display: flex;
     flex-direction: column;
     gap: 30px
@@ -48,9 +46,14 @@
     position: relative;
     color: #FFF;
 	font-size: medium;
-    width: 2vw;
+    width: 1vw;
     height: auto;
-    left:13%
+    padding: 6px 16px 6px 17px;
+    border-radius: 5px;
 }
 
-
+.icon:hover {
+    background: rgba(29, 242, 182, 0.5);
+    transition: 1s ease;
+    cursor: pointer;
+}

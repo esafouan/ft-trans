@@ -9,8 +9,6 @@
 }    
 
 
-/* .div1 {  }
-.div2 { grid-area: 1 / 1 / 2 / 2; }  */
 
 .new-game-container{
     grid-area: 1 / 2 / 2 / 3;
@@ -27,7 +25,6 @@
     position: relative;
     border-radius: 10px;
     /* background: linear-gradient(11deg,  rgb(109, 65, 8), rgba(189, 133, 69, 0.699)  100%); */
-    background: rgba(51, 45, 40, 0.2);
     margin-top: 4%;
     height: 84%;
     background: rgba(22, 89, 83,0.1);
@@ -107,7 +104,7 @@
     height: 100px;
     border-radius: 50%;
     text-align: center;
-    border: 2px solid rgba(255, 255, 255, 1);   
+    border: 2px solid #8BD9D1; 
     object-fit: cover;
 }
 

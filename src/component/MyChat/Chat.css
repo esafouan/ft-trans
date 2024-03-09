@@ -1,15 +1,14 @@
 .chat-container {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 0.1fr;
+    grid-template-columns: 0.1fr 1fr;
+    grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    background: rgb(39, 75, 83);
-    background: linear-gradient(11deg, rgb(75, 158, 119) 0%, rgba(16,61,4,1) 100%);
+    background: #0D1526;
 }
 
 .chat {
-    grid-area: 1 / 1 / 2 / 2;
+    grid-area: 1 / 2 / 2 / 3; 
     display: grid;
     grid-template-columns: 0.5fr 1fr 0.5fr;
     grid-template-rows: 1fr;
