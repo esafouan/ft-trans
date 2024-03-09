@@ -1,5 +1,9 @@
 import{ React , useState} from "react";
 import "./My_profile.css";
+import Friends_discusion from "./Friends-discusion/friends";
+import Blocked from "./Blocked/Blocked";
+import Padding from "./Padding/Padding";
+import Rooms from "./rooms/Rooms";
 
 const MessagesList = () => {
   return (
@@ -135,27 +139,18 @@ return (
       </div>
 
       <div className="discussions">
-        {
-            
-            <div className="discussion message-active">
-                    
-                <div className="amis-image">
-                    <img />
-                </div>
-
-                <div className="amis-infos">
-                    <p className="amis-name"><p>Saad</p></p>
-                    <p className="last-message">feen cv kolche mzn?</p>
-                </div>
-
-                    <div className="amis-status">online</div>
-            </div> 
-
-        }
-     
+        
+        { optionSelected === 'friends' ? (
+          <Friends_discusion />
+        ) : optionSelected === 'rooms' ? (
+          <Rooms />
+        ) : optionSelected === 'blocked' ? (
+            <Blocked />
+        ) : optionSelected === 'padding' ? (
+          <Padding />
+        ) : null }
+        
       </div>
-
-      
 
     </div>
   );

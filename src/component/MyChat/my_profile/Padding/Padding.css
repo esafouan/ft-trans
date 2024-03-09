@@ -1,0 +1,38 @@
+.amis-stat {
+    grid-area: 1 / 3 / 2 / 4; 
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding: 3px 7px 3px 7px;
+    font-size: small;
+    justify-items: center;
+    align-items: center;
+}
+
+.amis-stat .accept {
+    grid-area: 1 / 1 / 2 / 2; 
+    background: #14720b;
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    place-items: center;
+    padding: 2px 6px 2px 6px ;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+}
+
+.amis-stat .reject {
+    background: #8d1c08;
+    grid-area: 2 / 1 / 3 / 2;
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    place-items: center;
+    padding: 2px 10px 2px 10px ;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+
+}
