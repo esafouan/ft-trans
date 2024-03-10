@@ -62,7 +62,7 @@
 .text .friend-stat {
     grid-area: 2 / 1 / 3 / 2; 
     color: rgb(172, 171, 171);
-   
+   font-size: 13px;
 }
 
   

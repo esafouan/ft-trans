@@ -1,34 +1,28 @@
-import React from 'react'
+import React from "react";
 import MenuBar from "../PunkProfile/MenuBar/MenuBar";
-import "./Chat.css"
-import My_profile from './my_profile/My_profile';
-import Messages from './Messages/Messages';
+import "./Chat.css";
+import My_profile from "./my_profile/My_profile";
+import Messages from "./Messages/Messages";
+import PingIcon from "../../assets/pingIcon.svg"
+import FriendInfo from "./InfosPart/friendInfos/FriendInfo";
+
+
 const Chat = () => {
   return (
-    <div className='chat-container'>
+    <div className="chat-container">
+      <div className="chat">
+        <My_profile />
 
-        <div className='chat'>
+        <Messages />
+        <div className="OtherProfile">
 
-          <My_profile />
-
-          <Messages />
-
-          <div className='OtherProfile'>
-            <div className="Otherimg">
-              <img />
-            </div>
-            <div className="Othername">
-              <p> Saad </p>
-            </div>
-          </div>
-
+          <FriendInfo />
         </div>
+      </div>
 
-        <MenuBar/>
-
+      <MenuBar />
     </div>
-  )
-  
-}
+  );
+};
 
-export default Chat
+export default Chat;
