@@ -12,6 +12,7 @@
     border-radius: 50%; /* Make it a circle */
     border: 2px solid #418C55;
     overflow: hidden;
+    object-fit: cover;
 }
 
 .amis-infos

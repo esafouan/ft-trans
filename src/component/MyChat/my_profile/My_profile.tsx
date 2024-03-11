@@ -7,7 +7,7 @@ import Rooms from "./rooms/Rooms";
 import axios from "axios";
 
 
-const My_profile = ({OnSelect}) => {
+const My_profile = ({OnSelect, UserSelceted}) => {
 
 
 
@@ -39,73 +39,69 @@ const HandleSetOption = (option : any) => {
 
   ////// Friends fetching data //////
 // {
-  const FriendsDataInterface = [
-    {
-      id: 1,
-      username: 'Hamid',
-      avatar: '',
-      status : 'online',
-      lastMessage : 'helllo'
-    } ,
-    {
-      id: 2,
-      username: 'Ali',
-      avatar: '',
-      status : 'Offline',
-      lastMessage : 'good luck'
-    },
+
+  // const FriendsDataInterface = [
+  //   {
+  //     id: 1,
+  //     username: 'Hamid',
+  //     avatar: '',
+  //     status : 'online',
+  //     lastMessage : 'helllo'
+  //   } ,
+  //   {
+  //     id: 2,
+  //     username: 'Ali',
+  //     avatar: '',
+  //     status : 'Offline',
+  //     lastMessage : 'good luck'
+  //   },
     
-    {
-      id: 3,
-      username: 'Farid',
-      avatar: '',
-      status : 'online',
-      lastMessage : 'hhhhhhhhhh'
-    }
-  ];
-  
-  // const [FrinedsData, SetFriendsData] = useState(null);
-  // useEffect(() => {
-  //   const getFriendsData = async () => {
-  //     try{
-  //       const resp = await axios.get('', {withCredentials:true});
-  //       SetFriendsData(resp);
-  //     }
-  //     catch(error){
-  //       console.log(error);
-  //     }
+  //   {
+  //     id: 3,
+  //     username: 'Farid',
+  //     avatar: '',
+  //     status : 'online',
+  //     lastMessage : 'hhhhhhhhhh'
   //   }
-  //   getFriendsData()
-  // }, []);
-// }
+  // ];
+  
+  const [FrinedsData, SetFriendsData] = useState(null);
+
+  useEffect(() => {
+    const getFriendsData = async () => {
+      try{
+        const resp = await axios.get('http://localhost:3000/api/friends/isaccepted', {withCredentials:true});
+        SetFriendsData(resp.data);
+      }
+      catch(error){
+        console.log(error);
+      }
+    }
+    getFriendsData()
+  }, []);
+
   /////////////////////
 
   ////// Rooms fetching data //////
 // {
-//   const RoomsDataInterface = {
-//     id: 0,
-//     Roomname: '',
-//     avatar: '',
-//     status : '',
-//     lastMessage : '',
-//     // LastMessagetime : '',
-//   };
 
-//   const [RoomData, SetRoomData] = useState(null);
 
-//   useEffect(() => {
+  const [RoomData, SetRoomData] = useState(null);
 
-//     const getRoomData = async () => {
-//       try {
-//         const resp = await axios.get('', {withCredentials: true})
-//         SetRoomData(resp);
-//       }
-//       catch(error) {
-//         console.log(error);
-//       }
-//     }
-//     getRoomData();
-//   }, [])
+  useEffect(() => {
+
+    const getRoomData = async () => {
+      try {
+        const resp = await axios.get('http://localhost:3000/api/room/listjoinedrooms', {withCredentials: true})
+        SetRoomData(resp.data);
+      }
+      catch(error) {
+        console.log(error);
+      }
+    }
+    getRoomData();
+  }, [])
+
 // }
   /////////////////////
 
@@ -150,7 +146,6 @@ const HandleSetOption = (option : any) => {
 //   }, [])
 // }
 /////////////////////
-
 
 return (
     <div className="Myprofile">
@@ -247,20 +242,24 @@ return (
 
       <div className="discussions">
         
-        { optionSelected === 'friends'? (
+        { FrinedsData && optionSelected === 'friends'? (
           <Friends_discusion
             onSelect={OnSelect}
-            friendsData={FriendsDataInterface}
+            friendsData={FrinedsData}
+            userSelect={UserSelceted}
           />
         ) : optionSelected === 'rooms' ? (
-          <Rooms/>
+          <Rooms 
+            onSelect={OnSelect}
+            Roomsdata={RoomData}
+          />
         ) : optionSelected === 'blocked' ? (
             <Blocked />
         ) : optionSelected === 'padding' ? (
           <Padding />
         ) : null }
         
-      </div>
+      </div> 
 
     </div>
   );

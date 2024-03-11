@@ -8,19 +8,31 @@ import FriendInfo from "./InfosPart/friendInfos/FriendInfo";
 
 
 const Chat = () => {
-  const [ID, Setid] = useState(null);
+  const [ID, Setid] = useState(-1);
   const handleId = (id) => {
     Setid(id);
   }
 
+  const [User, SetUser] = useState(null);
 
+
+  const handleUser = (user) => {
+    SetUser(user);
+  }
 
   return (
     <div className="chat-container">
       <div className="chat">
-        <My_profile OnSelect={handleId}/>
+        
+        <My_profile 
+          OnSelect={handleId}
+          UserSelceted={handleUser} 
+          />
 
-        <Messages id={ID}/>
+        <Messages 
+          Id={ID} 
+          user={User}
+        />
 
         {/* <div className="OtherProfile">
           <FriendInfo />

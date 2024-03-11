@@ -1,84 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Messages.css"
-const Messages = ({id}) => {
+import axios from 'axios';
+
+const Messages = ({Id, user}) => {
 
 //id is convertation id
 
-  console.log(id);  
+const [MessagesData, SetMessages] = useState(null);     
 
-    
+
+    useEffect(() => {
+        const getMessages  = async () => {
+            try {
+                    console.log("heeeee = " , Id);
+                    if (Id >= 0) {
+                        const resp = await axios.post('http://localhost:3000/api/chat/getconversation',{id: Id},  {withCredentials: true})
+                        SetMessages(resp.data);
+                    }
+                    else {
+                        SetMessages (null);
+                    }
+                }
+                catch(error){
+                    console.log(error)
+                }
+            }
+            getMessages();
+       }
+       , [Id]);
+
+   
+    (MessagesData && console.log(MessagesData))
 
   return (
     <div className='messages-container'>
 
         <div className= 'headPart'> 
+            {
+                user && 
+                <>
+                    <div className="img-cont">
+                        <img  src={user.avatar}/>
+                    </div >
 
-            <div className="img-cont">
-                <img  />
-            </div >
-
-            <div className="text">
-                <p className='friend-nm'>Saad</p>
-                <p className='friend-stat'>online</p>
-            </div>
+                    <div className="text">
+                        <p className='friend-nm'>{user.login}</p>
+                        {/* <p className='friend-stat'>online</p> */}
+                    </div>
+                </>
+            }
 
         </div>
-
 
         <div className= 'midlePart'> 
             
             <div className="new-chat">
-                <div className="time">
-                    Today at 11:41
-                </div>
 
-                <div className="message parker">
-                    Hey, man! What' up, Mr hhh&nbsp;👋
-                </div>
-                <div className="message parker">
-                    Hey, man! What' up, Mr Stark?&nbsp;👋
-                </div>
+            
+            { MessagesData && MessagesData.map((message) => (
+                    <div
+                        key={message.id}
+                        className={`message ${message.senderId === Id ? 'parker' : 'stark'}`}>
+                    {message.content}
+                    </div>
+                ))}
 
-                <div className="message stark">
-                    Kid, where'd you come from? 
-                </div>
-                <div className="message parker">
-                    Hey, man! What' up, Mr Stark?&nbsp;👋
-                </div>
-
-                <div className="message stark">
-                    Kid, where'd you come from? 
-                </div>      <div className="message parker">
-                    Hey, man! What' up, Mr Stark?&nbsp;👋
-                </div>
-
-                <div className="message stark">
-                    Kid, where'd you come from? 
-                </div>      <div className="message parker">
-                    Hey, man! What' up, Mr Stark?&nbsp;👋
-                </div>
-
-                <div className="message stark">
-                    Kid, where'd you come from? 
-                </div>      <div className="message parker">
-                    Hey, man! What' up, Mr Stark?&nbsp;👋
-                </div>
-
-                <div className="message stark">
-                    Kid, where'd you come from? 
-                </div>      <div className="message parker">
-                    Hey, man! What' up, Mr Stark?&nbsp;👋
-                </div>
-
-                <div className="message stark">
-                    Kid, where'd you come from? 
-                </div>      <div className="message parker">
-                    Hey, man! What' up, Mr Stark?&nbsp;👋
-                </div>
-
-                <div className="message stark">
-                    Kid, where'd you come from? 
-                </div>
             
             </div>
         

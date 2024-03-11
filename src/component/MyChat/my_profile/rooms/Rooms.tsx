@@ -1,6 +1,11 @@
 import React from 'react'
 import "./Rooms.css"
-const Rooms = () => {
+const Rooms = ({Roomsdata, onSelect}) => {
+  // console.log(Roomsdata);
+  console.log("heeeere");
+  
+  onSelect(-1);
+
   return (
     <div className="discussion message-active">
                 
