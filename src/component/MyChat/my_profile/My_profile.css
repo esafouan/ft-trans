@@ -144,3 +144,11 @@
     border: 1px solid #8BD9D1;
 }
 
+.message-active {
+    cursor: pointer;
+    width: 100%;
+    background: rgba(139, 217, 209, 0.3);
+    padding-left: 10px;
+    transition: 0.5s ease;
+    border: 1px solid #8BD9D1;
+}

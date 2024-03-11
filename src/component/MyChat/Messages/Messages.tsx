@@ -1,6 +1,13 @@
 import React from 'react'
 import "./Messages.css"
-const Messages = () => {
+const Messages = ({id}) => {
+
+//id is convertation id
+
+  console.log(id);  
+
+    
+
   return (
     <div className='messages-container'>
 

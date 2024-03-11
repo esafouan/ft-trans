@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MenuBar from "../PunkProfile/MenuBar/MenuBar";
 import "./Chat.css";
 import My_profile from "./my_profile/My_profile";
@@ -8,16 +8,23 @@ import FriendInfo from "./InfosPart/friendInfos/FriendInfo";
 
 
 const Chat = () => {
+  const [ID, Setid] = useState(null);
+  const handleId = (id) => {
+    Setid(id);
+  }
+
+
+
   return (
     <div className="chat-container">
       <div className="chat">
-        <My_profile />
+        <My_profile OnSelect={handleId}/>
 
-        <Messages />
-        <div className="OtherProfile">
+        <Messages id={ID}/>
 
+        {/* <div className="OtherProfile">
           <FriendInfo />
-        </div>
+        </div> */}
       </div>
 
       <MenuBar />

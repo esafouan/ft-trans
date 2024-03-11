@@ -11,7 +11,6 @@ const Blocked = () => {
 
         <div className="amis-infos">
             <p className="amis-name"><p>Saad</p></p>
-            <p className="last-message">feen cv kolche mzn?</p>
         </div>
 
         <div className="amis-status unblock">Unblock</div>

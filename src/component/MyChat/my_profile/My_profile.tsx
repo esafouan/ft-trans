@@ -1,23 +1,155 @@
-import{ React , useState} from "react";
+import{ React , useEffect, useState} from "react";
 import "./My_profile.css";
 import Friends_discusion from "./Friends-discusion/friends";
 import Blocked from "./Blocked/Blocked";
 import Padding from "./Padding/Padding";
 import Rooms from "./rooms/Rooms";
+import axios from "axios";
 
 
-const My_profile = () => {
+const My_profile = ({OnSelect}) => {
 
 
 
 const [optionSelected, SetOption] = useState('friends');
 
-
-
 const HandleSetOption = (option : any) => {
     SetOption(option);
 }
 
+  ////// prorfile fetching data //////
+  // {
+//   const [Myprofile, Setprofile] = useState(null);
+//   useEffect (
+//   () =>  {
+//     const getProfielData = async ()  => {
+
+//       try {
+//         const resp = await axios.get('http://localhost:3000/api/auth/user', {withCredentials: true})
+//         Setprofile(resp.data); 
+//       }
+//       catch (error) {
+//         console.error(error);
+//       }
+//     }
+//     getProfielData();
+//   }, []);
+  // }
+  /////////////////////
+
+  ////// Friends fetching data //////
+// {
+  const FriendsDataInterface = [
+    {
+      id: 1,
+      username: 'Hamid',
+      avatar: '',
+      status : 'online',
+      lastMessage : 'helllo'
+    } ,
+    {
+      id: 2,
+      username: 'Ali',
+      avatar: '',
+      status : 'Offline',
+      lastMessage : 'good luck'
+    },
+    
+    {
+      id: 3,
+      username: 'Farid',
+      avatar: '',
+      status : 'online',
+      lastMessage : 'hhhhhhhhhh'
+    }
+  ];
+  
+  // const [FrinedsData, SetFriendsData] = useState(null);
+  // useEffect(() => {
+  //   const getFriendsData = async () => {
+  //     try{
+  //       const resp = await axios.get('', {withCredentials:true});
+  //       SetFriendsData(resp);
+  //     }
+  //     catch(error){
+  //       console.log(error);
+  //     }
+  //   }
+  //   getFriendsData()
+  // }, []);
+// }
+  /////////////////////
+
+  ////// Rooms fetching data //////
+// {
+//   const RoomsDataInterface = {
+//     id: 0,
+//     Roomname: '',
+//     avatar: '',
+//     status : '',
+//     lastMessage : '',
+//     // LastMessagetime : '',
+//   };
+
+//   const [RoomData, SetRoomData] = useState(null);
+
+//   useEffect(() => {
+
+//     const getRoomData = async () => {
+//       try {
+//         const resp = await axios.get('', {withCredentials: true})
+//         SetRoomData(resp);
+//       }
+//       catch(error) {
+//         console.log(error);
+//       }
+//     }
+//     getRoomData();
+//   }, [])
+// }
+  /////////////////////
+
+
+   ////// Blocked fetching data //////
+// {
+//   const [BlokcedData, SetBlokcedData] = useState(null);
+
+//   useEffect(() => {
+
+//     const getBlokcedData = async () => {
+//       try {
+//         const resp = await axios.get('', {withCredentials: true})
+//         SetBlokcedData(resp);
+//       }
+//       catch(error) {
+//         console.log(error);
+//       }
+//     }
+//     getBlokcedData();
+//   }, [])
+// }
+  /////////////////////
+
+  ////// Padding fetching data //////
+// {
+//   const [PaddingData, SetPaddingData] = useState(null);
+
+//   useEffect(() => {
+
+//     const getPaddingData = async () => {
+//       try 
+//       {
+//         const resp = await axios.get('', {withCredentials: true})
+//         SetPaddingData(resp);
+//       }
+//       catch(error) {
+//         console.log(error);
+//       }
+//     }
+//     getPaddingData();
+//   }, [])
+// }
+/////////////////////
 
 
 return (
@@ -27,7 +159,7 @@ return (
         <img />
       </div>
       <div className="myname">
-        <p> mahdi</p>
+        <p> mahdi </p>
       </div>
 
       <div className="selections">
@@ -115,10 +247,13 @@ return (
 
       <div className="discussions">
         
-        { optionSelected === 'friends' ? (
-          <Friends_discusion />
+        { optionSelected === 'friends'? (
+          <Friends_discusion
+            onSelect={OnSelect}
+            friendsData={FriendsDataInterface}
+          />
         ) : optionSelected === 'rooms' ? (
-          <Rooms />
+          <Rooms/>
         ) : optionSelected === 'blocked' ? (
             <Blocked />
         ) : optionSelected === 'padding' ? (
