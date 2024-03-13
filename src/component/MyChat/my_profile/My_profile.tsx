@@ -7,7 +7,7 @@ import Rooms from "./rooms/Rooms";
 import axios from "axios";
 
 
-const My_profile = ({OnSelect, UserSelceted}) => {
+const My_profile = ({OnSelect, UserSelceted, Profile}) => {
 
 
 
@@ -146,16 +146,51 @@ const HandleSetOption = (option : any) => {
 //   }, [])
 // }
 /////////////////////
+const [profileData, setProfileData] = useState(null);
+    
+useEffect(() => {
+  const getData = async () => {
+    console.log("heyy")
+    try {
+      // Set Axios default configuration to include credentials
+      const instance = axios.create({
+        withCredentials: true,
+        baseURL: "http://localhost:3000/api",
+      });
+      instance
+        .get("/auth/user")
+        .then((res) => {
+          const dat = res.data;
+          
+          setProfileData(dat);
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+      } catch (error) {
+        console.error("Error fetching player data:", error);
+      }
+  };
+  getData();
+}, []);
+
+
+profileData && Profile(profileData);
 
 return (
     <div className="Myprofile">
+      {
+        profileData && 
+        <>
+        <div className="myImgProfile">
+          <img src={profileData.avatar}/>
+        </div>
+        <div className="myname">
+          <p>{profileData.login} </p>
+        </div>
+        </>
+      }
 
-      <div className="myImgProfile">
-        <img />
-      </div>
-      <div className="myname">
-        <p> mahdi </p>
-      </div>
 
       <div className="selections">
 

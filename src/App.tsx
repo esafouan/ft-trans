@@ -1,4 +1,4 @@
-import React, { Profiler } from 'react';
+import React from 'react';
 
 import {BrowserRouter as Router , Routes, Route } from "react-router-dom";
 
@@ -9,6 +9,7 @@ import MenuBar from './component/menubar/menubar';
 import CanvasAnimation from './component/Canvas/canvas'
 import Punk from './component/PunkProfile/Punk';
 import Chat from './component/MyChat/Chat';
+
 
 
 

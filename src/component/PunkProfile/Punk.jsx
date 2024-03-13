@@ -11,12 +11,16 @@ import im2 from '../../assets/last.jpg'
 import im3 from '../../assets/test1.png'
 import im4 from '../../assets/test2.jpg'
 
+import { useSocket }  from "../../component/Socket"
 
 const images = [im1, im2, im3, im4];
 
 
 const Punk = () => {
+  const socket = useSocket();
 
+  console.log(socket.id);
+  
   return (
     <div className='profile'>
 

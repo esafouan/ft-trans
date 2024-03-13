@@ -4,7 +4,6 @@ import axios from 'axios';
 import CanvasAnimation from '../Canvas/canvas'
 import ProfileImage from './Profileimage/ProfileImage'
 // import Friends from './Freinds/Friends'
-
 import ListMatch from './MatchHistory/Match';
 
 

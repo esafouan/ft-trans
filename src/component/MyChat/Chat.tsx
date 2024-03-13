@@ -20,6 +20,12 @@ const Chat = () => {
     SetUser(user);
   }
 
+  const [MyProfile, SetProfile] = useState(null);
+
+
+  const handleProfile = (profile) => {
+    SetProfile(profile);
+  }
   return (
     <div className="chat-container">
       <div className="chat">
@@ -27,11 +33,13 @@ const Chat = () => {
         <My_profile 
           OnSelect={handleId}
           UserSelceted={handleUser} 
+          Profile={handleProfile}
           />
 
         <Messages 
           Id={ID} 
           user={User}
+          profile={MyProfile}
         />
 
         {/* <div className="OtherProfile">

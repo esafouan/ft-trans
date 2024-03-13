@@ -1,6 +1,7 @@
 import React from "react";
 import "./MenuBar.css";
 import logo from"../../../assets/logoPIngpong.svg"
+import { Link } from 'react-router-dom';
 const MenuBar = () => {
   return (
     <div className="menuB">
@@ -9,7 +10,7 @@ const MenuBar = () => {
           <div className="logo"><img src={logo}/></div>
 
           <div className="icons-cont">
-
+          <Link to="/Home">
             <div className="icon  icon-profile">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +28,7 @@ const MenuBar = () => {
                 <path d="M17 14h.352a3 3 0 0 1 2.976 2.628l.391 3.124A2 2 0 0 1 18.734 22H5.266a2 2 0 0 1-1.985-2.248l.39-3.124A3 3 0 0 1 6.649 14H7" />
               </svg>
             </div>
-
+            </Link>
             <div className="icon  icon-game">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +46,7 @@ const MenuBar = () => {
                 <path d="M9 5l1 2h4l1-2" />
               </svg>
             </div>
-
+            <Link to="/chat">
             <div className="icon  icon-chat">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +64,7 @@ const MenuBar = () => {
                 <path d="M14 19c-1.236 0-2.598.5-3.841 1.145-1.998 1.037-2.997 1.556-3.489 1.225-.492-.33-.399-1.355-.212-3.404L6.5 17.5" />
               </svg>
             </div>
-
+            </Link>
           </div>
 
 
