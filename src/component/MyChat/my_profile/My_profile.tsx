@@ -1,200 +1,171 @@
-import{ React , useEffect, useState} from "react";
+import { React, useEffect, useState } from "react";
 import "./My_profile.css";
 import Friends_discusion from "./Friends-discusion/friends";
 import Blocked from "./Blocked/Blocked";
 import Padding from "./Padding/Padding";
 import Rooms from "./rooms/Rooms";
 import axios from "axios";
+import MyData from "./myProfileInfos/MyData";
 
+const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
+  const [optionSelected, SetOption] = useState("friends");
 
-const My_profile = ({OnSelect, UserSelceted, Profile}) => {
-
-
-
-const [optionSelected, SetOption] = useState('friends');
-
-const HandleSetOption = (option : any) => {
+  const HandleSetOption = (option: any) => {
     SetOption(option);
-}
-
+  };
   ////// prorfile fetching data //////
   // {
-//   const [Myprofile, Setprofile] = useState(null);
-//   useEffect (
-//   () =>  {
-//     const getProfielData = async ()  => {
+  // const [Myprofile, Setprofile] = useState(null);
+  // useEffect (
+  // () =>  {
+  //   const getProfielData = async ()  => {
 
-//       try {
-//         const resp = await axios.get('http://localhost:3000/api/auth/user', {withCredentials: true})
-//         Setprofile(resp.data); 
-//       }
-//       catch (error) {
-//         console.error(error);
-//       }
-//     }
-//     getProfielData();
-//   }, []);
+  //     try {
+  //       const resp = await axios.get('http://localhost:3000/api/auth/user', {withCredentials: true})
+  //       Setprofile(resp.data);
+  //     }
+  //     catch (error) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   getProfielData();
+  // }, []);
   // }
   /////////////////////
 
   ////// Friends fetching data //////
-// {
 
-  // const FriendsDataInterface = [
-  //   {
-  //     id: 1,
-  //     username: 'Hamid',
-  //     avatar: '',
-  //     status : 'online',
-  //     lastMessage : 'helllo'
-  //   } ,
-  //   {
-  //     id: 2,
-  //     username: 'Ali',
-  //     avatar: '',
-  //     status : 'Offline',
-  //     lastMessage : 'good luck'
-  //   },
-    
-  //   {
-  //     id: 3,
-  //     username: 'Farid',
-  //     avatar: '',
-  //     status : 'online',
-  //     lastMessage : 'hhhhhhhhhh'
-  //   }
-  // ];
-  
   const [FrinedsData, SetFriendsData] = useState(null);
-
   useEffect(() => {
     const getFriendsData = async () => {
-      try{
-        const resp = await axios.get('http://localhost:3000/api/friends/isaccepted', {withCredentials:true});
+      try {
+        const resp = await axios.get(
+          "http://localhost:3000/api/friends/isaccepted",
+          { withCredentials: true }
+        );
         SetFriendsData(resp.data);
-      }
-      catch(error){
+      } catch (error) {
         console.log(error);
       }
-    }
-    getFriendsData()
+    };
+    getFriendsData();
   }, []);
 
   /////////////////////
-
   ////// Rooms fetching data //////
-// {
-
-
   const [RoomData, SetRoomData] = useState(null);
 
   useEffect(() => {
-
     const getRoomData = async () => {
       try {
-        const resp = await axios.get('http://localhost:3000/api/room/listjoinedrooms', {withCredentials: true})
+        const resp = await axios.get(
+          "http://localhost:3000/api/room/listjoinedrooms",
+          { withCredentials: true }
+        );
         SetRoomData(resp.data);
-      }
-      catch(error) {
+      } catch (error) {
         console.log(error);
       }
-    }
+    };
     getRoomData();
-  }, [])
+  }, []);
 
-// }
   /////////////////////
+  ////// Blocked fetching data //////
+  // {
+  //   const [BlokcedData, SetBlokcedData] = useState(null);
 
+  //   useEffect(() => {
 
-   ////// Blocked fetching data //////
-// {
-//   const [BlokcedData, SetBlokcedData] = useState(null);
-
-//   useEffect(() => {
-
-//     const getBlokcedData = async () => {
-//       try {
-//         const resp = await axios.get('', {withCredentials: true})
-//         SetBlokcedData(resp);
-//       }
-//       catch(error) {
-//         console.log(error);
-//       }
-//     }
-//     getBlokcedData();
-//   }, [])
-// }
+  //     const getBlokcedData = async () => {
+  //       try {
+  //         const resp = await axios.get('', {withCredentials: true})
+  //         SetBlokcedData(resp);
+  //       }
+  //       catch(error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //     getBlokcedData();
+  //   }, [])
+  // }
   /////////////////////
 
   ////// Padding fetching data //////
-// {
-//   const [PaddingData, SetPaddingData] = useState(null);
+  // {
+  //   const [PaddingData, SetPaddingData] = useState(null);
 
-//   useEffect(() => {
+  //   useEffect(() => {
 
-//     const getPaddingData = async () => {
-//       try 
-//       {
-//         const resp = await axios.get('', {withCredentials: true})
-//         SetPaddingData(resp);
-//       }
-//       catch(error) {
-//         console.log(error);
-//       }
-//     }
-//     getPaddingData();
-//   }, [])
-// }
-/////////////////////
-const [profileData, setProfileData] = useState(null);
-    
-useEffect(() => {
-  const getData = async () => {
-    console.log("heyy")
-    try {
-      // Set Axios default configuration to include credentials
-      const instance = axios.create({
-        withCredentials: true,
-        baseURL: "http://localhost:3000/api",
-      });
-      instance
-        .get("/auth/user")
-        .then((res) => {
-          const dat = res.data;
-          
-          setProfileData(dat);
-        })
-        .catch((err) => {
-          console.log(err.response);
+  //     const getPaddingData = async () => {
+  //       try
+  //       {
+  //         const resp = await axios.get('', {withCredentials: true})
+  //         SetPaddingData(resp);
+  //       }
+  //       catch(error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //     getPaddingData();
+  //   }, [])
+  // }
+  /////////////////////
+
+  const [profileData, setProfileData] = useState(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      console.log("heyy");
+      try {
+        // Set Axios default configuration to include credentials
+        const instance = axios.create({
+          withCredentials: true,
+          baseURL: "http://localhost:3000/api",
         });
+        instance
+          .get("/auth/user")
+          .then((res) => {
+            const dat = res.data;
+
+            setProfileData(dat);
+          })
+          .catch((err) => {
+            console.log(err.response);
+          });
       } catch (error) {
         console.error("Error fetching player data:", error);
       }
-  };
-  getData();
-}, []);
+    };
+    getData();
+  }, []);
 
+  const [pandding, SetPanding] = useState(null);
 
-profileData && Profile(profileData);
+  useEffect( () => {
+    const getData = async () =>{
+      try {
+        const resp = await axios.get('http://localhost:3000/api/friends/notaccepted', {withCredentials:true}); 
+        SetPanding(resp.data)
+      }   
+      catch(error){
+        console.log(error);
+      } 
+    } 
+    getData();
+  }, [])
 
-return (
+  return (
     <div className="Myprofile">
-      {
-        profileData && 
-        <>
-        <div className="myImgProfile">
-          <img src={profileData.avatar}/>
-        </div>
-        <div className="myname">
-          <p>{profileData.login} </p>
-        </div>
-        </>
-      }
-
+      <MyData profileData={profileData}/>
 
       <div className="selections">
-
-        <div className={`select section-friends ${optionSelected === 'friends' ? 'selected' : ''}`} onClick={() => HandleSetOption('friends')}>
+        <div
+          className={`select section-friends ${
+            optionSelected === "friends" ? "selected" : ""
+          }`}
+          onClick={() => HandleSetOption("friends")}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="36"
@@ -214,7 +185,12 @@ return (
           </svg>
         </div>
 
-        <div className={`select section-rooms ${optionSelected === 'rooms' ? 'selected' : ''}`} onClick={() => HandleSetOption('rooms')}>
+        <div
+          className={`select section-rooms ${
+            optionSelected === "rooms" ? "selected" : ""
+          }`}
+          onClick={() => HandleSetOption("rooms")}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="36"
@@ -234,9 +210,15 @@ return (
             <path d="M4 14h-.306a2 2 0 0 0-1.973 1.671l-.333 2A2 2 0 0 0 3.361 20H7" />
             <path d="M20 14h.306a2 2 0 0 1 1.973 1.671l.333 2A2 2 0 0 1 20.639 20H17" />
           </svg>
+
         </div>
 
-        <div className={`select section-blocked ${optionSelected === 'blocked' ? 'selected' : ''}`} onClick={() => HandleSetOption('blocked')}>
+        <div
+          className={`select section-blocked ${
+            optionSelected === "blocked" ? "selected" : ""
+          }`}
+          onClick={() => HandleSetOption("blocked")}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="36"
@@ -255,7 +237,12 @@ return (
           </svg>
         </div>
 
-        <div className={`select section-padding ${optionSelected === 'padding' ? 'selected' : ''}`} onClick={() => HandleSetOption('padding')}>
+        <div
+          className={`select section-padding ${
+            optionSelected === "padding" ? "selected" : ""
+          }`}
+          onClick={() => HandleSetOption("padding")}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="36"
@@ -271,31 +258,29 @@ return (
             <circle cx="12" cy="12" r="10" />
             <path d="M15 16l-2.414-2.414A2 2 0 0 1 12 12.172V6" />
           </svg>
-        </div>
 
+        </div>
       </div>
 
       <div className="discussions">
-        
-        { FrinedsData && optionSelected === 'friends'? (
+        {FrinedsData && optionSelected === "friends" ? (
           <Friends_discusion
             onSelect={OnSelect}
             friendsData={FrinedsData}
             userSelect={UserSelceted}
           />
-        ) : optionSelected === 'rooms' ? (
-          <Rooms 
+        ) : optionSelected === "rooms" ? (
+          <Rooms
             onSelect={OnSelect}
             Roomsdata={RoomData}
+            userSelect={UserSelceted}
           />
-        ) : optionSelected === 'blocked' ? (
-            <Blocked />
-        ) : optionSelected === 'padding' ? (
-          <Padding />
-        ) : null }
-        
-      </div> 
-
+        ) : optionSelected === "blocked" ? (
+          <Blocked />
+        ) : optionSelected === "padding" && pandding? (
+          <Padding pandding={pandding}/>
+        ) : null}
+      </div>
     </div>
   );
 };

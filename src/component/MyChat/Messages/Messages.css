@@ -1,7 +1,6 @@
 .messages-container 
 {
     grid-area: 1 / 2 / 2 / 3;
- 
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 0.1fr 1fr 0.1fr;
@@ -14,9 +13,24 @@
     background: rgba(22, 89, 83,0.1);
     border: 1px solid #8BD9D1;
     overflow: hidden;
+    position: relative;
+    
 }
 
-
+.No-conv
+{
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    background: rgba(43, 158, 148, 0.1);
+    border: 1px solid #8BD9D1;
+    height: fit-content;
+    width: fit-content;
+    padding: 3%;
+    border-radius: 5px;
+}
 .headPart {
     grid-area: 1 / 1 / 2 / 2;
     display: grid;

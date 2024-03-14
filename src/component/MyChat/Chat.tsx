@@ -42,9 +42,12 @@ const Chat = () => {
           profile={MyProfile}
         />
 
-        {/* <div className="OtherProfile">
-          <FriendInfo />
-        </div> */}
+        <div className="OtherProfile">
+          <FriendInfo 
+            user={User}
+            profile={MyProfile}
+          />
+        </div>
       </div>
 
       <MenuBar />

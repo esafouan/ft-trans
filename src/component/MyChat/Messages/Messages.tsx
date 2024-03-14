@@ -35,46 +35,51 @@ const [MessagesData, SetMessages] = useState(null);
 
   return (
     <div className='messages-container'>
+        {
+          (Id >= 0) ? (
+            <>
+                <div className= 'headPart'> 
+                    {
+                        user && 
+                        <>
+                            <div className="img-cont">
+                                <img  src={user.avatar}/>
+                            </div >
 
-        <div className= 'headPart'> 
-            {
-                user && 
-                <>
-                    <div className="img-cont">
-                        <img  src={user.avatar}/>
-                    </div >
+                            <div className="text">
+                                <p className='friend-nm'>{user.login}</p>
+                                {/* <p className='friend-stat'>online</p> */}
+                            </div>
+                        </>
+                    }
 
-                    <div className="text">
-                        <p className='friend-nm'>{user.login}</p>
-                        {/* <p className='friend-stat'>online</p> */}
+                </div>
+
+                <div className= 'midlePart'> 
+                    
+                    <div className="new-chat">
+
+                    
+                    { MessagesData && MessagesData.map((message) => (
+                            <div
+                                key={message.id}
+                                className={`message ${message.senderId === Id ? 'parker' : 'stark'}`}>
+                            {message.content}
+                            </div>
+                        ))}
+
+                    
                     </div>
-                </>
-            }
-
-        </div>
-
-        <div className= 'midlePart'> 
-            
-            <div className="new-chat">
-
-            
-            { MessagesData && MessagesData.map((message) => (
-                    <div
-                        key={message.id}
-                        className={`message ${message.senderId === Id ? 'parker' : 'stark'}`}>
-                    {message.content}
-                    </div>
-                ))}
-
-            
-            </div>
-        
-        </div>
-        
-        <Input
-            User={user} 
-            Profile={profile}
-        />
+                
+                </div>
+                
+                <Input
+                    User={user} 
+                    Profile={profile}
+                />
+            </>
+          ) : (<div className='No-conv'> <p> Select New Conversation Please </p> </div>)
+        }
 
     </div>
   )

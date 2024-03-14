@@ -1,26 +1,49 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./FriendInfo.css"
+import axios from 'axios';
 
-const FriendInfo = () => {
-    return (
-        <>
+const FriendInfo = ({user ,profile}) => {
+    
+  const handleBlock = async (userid : number) => {
+        try {
+            const resp = await axios.post('http://localhost:3000/api/friends/block', {id: userid}, {withCredentials:true});
+        }
+        catch (error){
+            console.log(error);
+        }
+  }
+
+  const handleUnfriend = async (userid : number) => {
+    try {
+        const resp = await axios.post('http://localhost:3000/api/friends/unfriend', {id: userid}, {withCredentials:true});
+    }
+    catch (error){
+        console.log(error);
+    }
+}
+
+  return (
+    <>
+       {user 
+        ? (<>
             <div className="other-title">
               <p>Infos</p>
             </div>
-  
+
             <div className="Otherimg">
-              <img />
+              <img src={user.avatar}/>
             </div>
-  
+
             <div className="Othername">
-              <p> Saad </p>
+              <p> {user.login} </p>
             </div>
-  
+
             <div className="other-options">
               
               <div className="friend-options">
-                <div className="opt block-option">
-                 
+                
+                <div className="opt block-option" onClick={() => handleBlock(user.id)}>
+                  
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="36"
@@ -38,7 +61,8 @@ const FriendInfo = () => {
                   </svg>
                 
                 </div>
-                <div className="opt unfriend-option">
+
+                <div className="opt unfriend-option" onClick={() => handleUnfriend(user.id)}>
                   
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -57,10 +81,11 @@ const FriendInfo = () => {
                     <path d="M21 18l-3-3m3 0l-3 3" />
                   
                   </svg>
-               
+                
                 </div>
+
                 <div className="opt play-option">
-  
+
                   <svg fill="#ffffff" height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                     viewBox="0 0 297 297" xml:space="preserve">
                   <g>
@@ -72,17 +97,18 @@ const FriendInfo = () => {
                       c4.607-0.362,9.171-0.989,13.673-1.865L36.525,100.857C35.649,105.359,35.022,109.923,34.66,114.53z"/>
                   </g>
                   </svg>
-  
+
                 </div>
               </div>
-  
+
               {/* handle adding new Friend */}
-  
+
               <div className="add-new-friend"></div>
-  
+
             </div>
-  
-        </>
+          </>) 
+        : ( <div className='no-info'><p>No informations</p></div>)}
+     </>
     )
   }
 
