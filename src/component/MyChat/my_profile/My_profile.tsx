@@ -139,7 +139,7 @@ useEffect(() => {
     getData();
   }, [boolpending])
 
-
+  
   return (
     <div className="Myprofile">
       <MyData profileData={profileData}/>
@@ -263,9 +263,18 @@ useEffect(() => {
         ) : optionSelected === "blocked" ? (
           <Blocked 
             Blocked={BlockedData}
-            setboolblock={setboolblock}/>
+            setboolblock={setboolblock}
+            userSelect={UserSelceted}
+            onSelect={OnSelect}
+
+            />
         ) : optionSelected === "padding" && pandding? (
-          <Padding pandding={pandding}/>
+          <Padding 
+            pandding={pandding}
+            userSelect={UserSelceted}
+            onSelect={OnSelect}
+
+            />
         ) : null}
       </div>
     </div>

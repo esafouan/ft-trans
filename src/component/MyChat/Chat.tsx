@@ -26,7 +26,8 @@ const Chat = () => {
   const handleProfile = (profile) => {
     SetProfile(profile);
   }
-  
+ 
+ 
   return (
     <div className="chat-container">
       <div className="chat">
@@ -47,6 +48,8 @@ const Chat = () => {
           <FriendInfo 
             user={User}
             profile={MyProfile}
+            OnSelect={handleId}
+            UserSelceted={handleUser} 
           />
         </div>
       </div>

@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import "./FriendInfo.css"
 import axios from 'axios';
 
-const FriendInfo = ({user ,profile}) => {
-    
+const FriendInfo = ({user ,profile,OnSelect,UserSelceted}) => {
+
   const handleBlock = async (userid : number) => {
         try {
             const resp = await axios.post('http://localhost:3000/api/friends/block', {id: userid}, {withCredentials:true});
-        }
+            UserSelceted(null);
+            OnSelect(-1);
+          }
         catch (error){
             console.log(error);
         }
@@ -15,7 +17,9 @@ const FriendInfo = ({user ,profile}) => {
 
   const handleUnfriend = async (userid : number) => {
     try {
-        const resp = await axios.post('http://localhost:3000/api/friends/unfriend', {id: userid}, {withCredentials:true});
+      const resp = await axios.post('http://localhost:3000/api/friends/unfriend', {id: userid}, {withCredentials:true});
+      UserSelceted(null);
+      OnSelect(-1);
     }
     catch (error){
         console.log(error);
@@ -24,7 +28,7 @@ const FriendInfo = ({user ,profile}) => {
 
   return (
     <>
-       {user 
+       {user
         ? (<>
             <div className="other-title">
               <p>Infos</p>

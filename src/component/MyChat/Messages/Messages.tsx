@@ -12,7 +12,7 @@ const Messages = ({Id, user, profile}) => {
 
 //id is convertation id
 
-const [MessagesData, SetMessages] = useState(null);     
+const [MessagesData, SetMessages] = useState([]);     
 
 const socket = useSocket();
 
@@ -26,7 +26,7 @@ const socket = useSocket();
                         SetMessages(resp.data);
                     }
                     else {
-                        SetMessages (null);
+                        SetMessages ([]);
                     }
                 }
                 catch(error){
@@ -62,11 +62,11 @@ const socket = useSocket();
     const handleNewMessage = (newMessage) =>{
         SetMessages((prevMessages) => [...prevMessages, { content: newMessage, sender: user.login }]);
     }
-    MessagesData && console.log("messages -> ",MessagesData);
+
   return (
     <div className='messages-container'>
         {
-          (Id >= 0) ? (
+           (Id >= 0) ? (
             <>
                 <div className= 'headPart'> 
                     {
@@ -89,7 +89,7 @@ const socket = useSocket();
                     
                     <div className="new-chat">
                     
-                    { MessagesData && MessagesData.map((message) => (
+                    { MessagesData.length > 0 && MessagesData.map((message) => (
                             <div
                                 key={message.id}
                                 className={`message ${message.senderId === Id ? 'parker' : 'stark'}`}>

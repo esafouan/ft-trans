@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "./Padding.css"
 import axios from 'axios';
-const Padding = ({pandding}) => {
+const Padding = ({pandding, onSelect, userSelect}) => {
 
  
-
+   onSelect(-1);
+    userSelect(null);
   const handleAccept = async (friend) => {
     try {
         console.log("id frine = ", friend.id)
