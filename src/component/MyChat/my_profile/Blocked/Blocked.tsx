@@ -1,21 +1,42 @@
 import React from 'react'
 import "./Blocked.css"
+import axios from 'axios'
 
-const Blocked = () => {
+const Blocked = ({Blocked, setboolblock}) => {
+
+
+  Blocked && console.log("blocked friend = ", Blocked)
+ const handleUnblock = async (friendId : number) => {
+  try {
+      const res = await axios.post('http://localhost:3000/api/friends/unblock', {id: friendId}, { withCredentials: true })
+      setboolblock((prevIsBool) => prevIsBool + 1);
+  }  
+  catch (error) {
+      console.log(error);
+  }
+ }
+
   return (
-    <div className="discussion message-active">
-                
-        <div className="amis-image">
-            <img />
+    <>
+    {
+      Blocked && Blocked.map((friend) => (
+
+        <div className="discussion-blocked" key={friend.id}>
+                    
+            <div className="amis-image">
+                <img src={friend.avatar}/>
+            </div>
+    
+            <div className="amis-infos">
+                <p className="amis-name"><p>{friend.login}</p></p>
+            </div>
+    
+            <div className="amis-status unblock" onClick={() => handleUnblock(friend.id)}>Unblock</div>
+    
         </div>
-
-        <div className="amis-infos">
-            <p className="amis-name"><p>Saad</p></p>
-        </div>
-
-        <div className="amis-status unblock">Unblock</div>
-
-    </div>
+      ))
+    }
+    </>
   )
 }
 

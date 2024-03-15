@@ -3,27 +3,24 @@ import "./Input.css"
 
 import { useSocket }  from "../../../Socket"
 
-const Input = ({User, Profile}) => {
+const Input = ({User, Profile, addNewMessage}) => {
 
     const [message, setMessage] = useState('');
     const socket =  useSocket();
-    
 
-    
     const sendMessage = () => {
         console.log(socket.id);
         console.log("ProfileData =  ",Profile )
         console.log("User =  ", User )
-        if (message.trim() !== ''  ) {
+
+        if (message.trim() !== '' ) {
             
-          Profile && User && socket.emit('message', {from: Profile.login , fromid: Profile.id, to: User.id, content: message });
+            Profile && User && socket.emit('message', {from: Profile.login , fromid: Profile.id, to: User.id, content: message });
+            addNewMessage(message);
             setMessage('');
         }
     }
 
-    const handleChange = (e) => {
-        setMessage(e.target.value)
-    }
     
 
   return (
@@ -32,7 +29,8 @@ const Input = ({User, Profile}) => {
             <input 
                 className="inputPart__input " 
                 placeholder="Type a message..."
-                onChange={handleChange}
+                value={message}
+                onChange={(e) =>setMessage(e.target.value)}
             />
             <button className="send-message-button" onClick={sendMessage}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-reactid="1036">

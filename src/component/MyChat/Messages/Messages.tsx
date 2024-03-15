@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react'
 import "./Messages.css"
 import axios from 'axios';
 import Input from "./inputPart/Input"
+import { useSocket } from '../../Socket';
+
+
+
+
 
 const Messages = ({Id, user, profile}) => {
 
@@ -9,11 +14,13 @@ const Messages = ({Id, user, profile}) => {
 
 const [MessagesData, SetMessages] = useState(null);     
 
+const socket = useSocket();
 
     useEffect(() => {
         const getMessages  = async () => {
-            try {
-                    console.log("heeeee = " , Id);
+                try 
+                {
+                        console.log("heeeee = " , Id);
                     if (Id >= 0) {
                         const resp = await axios.post('http://localhost:3000/api/chat/getconversation',{id: Id},  {withCredentials: true})
                         SetMessages(resp.data);
@@ -29,10 +36,33 @@ const [MessagesData, SetMessages] = useState(null);
             getMessages();
        }
        , [Id]);
-
-   
-    (MessagesData && console.log(MessagesData))
-
+       
+       useEffect(() => {
+        const handleMessage = (message) => {
+            console.log("ss = " ,message);
+          
+          
+            SetMessages((prevMessages) => [
+              ...prevMessages,
+              { content: message.con, sender: message.from,senderId:message.id },
+            ]);
+          
+          
+        };
+    
+      socket?.on('message', handleMessage);
+      
+    
+      // Clean up the message listener when component unmounts
+      return () => {
+        socket?.off('message', handleMessage);
+      };
+    }, [socket]);
+    
+    const handleNewMessage = (newMessage) =>{
+        SetMessages((prevMessages) => [...prevMessages, { content: newMessage, sender: user.login }]);
+    }
+    MessagesData && console.log("messages -> ",MessagesData);
   return (
     <div className='messages-container'>
         {
@@ -58,7 +88,6 @@ const [MessagesData, SetMessages] = useState(null);
                 <div className= 'midlePart'> 
                     
                     <div className="new-chat">
-
                     
                     { MessagesData && MessagesData.map((message) => (
                             <div
@@ -76,6 +105,7 @@ const [MessagesData, SetMessages] = useState(null);
                 <Input
                     User={user} 
                     Profile={profile}
+                    addNewMessage={handleNewMessage}
                 />
             </>
           ) : (<div className='No-conv'> <p> Select New Conversation Please </p> </div>)

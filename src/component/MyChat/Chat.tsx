@@ -26,6 +26,7 @@ const Chat = () => {
   const handleProfile = (profile) => {
     SetProfile(profile);
   }
+  
   return (
     <div className="chat-container">
       <div className="chat">

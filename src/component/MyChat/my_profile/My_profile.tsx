@@ -6,32 +6,32 @@ import Padding from "./Padding/Padding";
 import Rooms from "./rooms/Rooms";
 import axios from "axios";
 import MyData from "./myProfileInfos/MyData";
+import { useSocket } from "../../Socket";
 
 const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
   const [optionSelected, SetOption] = useState("friends");
-
+  const [boolblock,setboolblock] = useState(0);
+  const [boolpending,setboolpending] = useState(0);
+  const socket = useSocket();
   const HandleSetOption = (option: any) => {
     SetOption(option);
   };
-  ////// prorfile fetching data //////
-  // {
-  // const [Myprofile, Setprofile] = useState(null);
-  // useEffect (
-  // () =>  {
-  //   const getProfielData = async ()  => {
 
-  //     try {
-  //       const resp = await axios.get('http://localhost:3000/api/auth/user', {withCredentials: true})
-  //       Setprofile(resp.data);
-  //     }
-  //     catch (error) {
-  //       console.error(error);
-  //     }
-  //   }
-  //   getProfielData();
-  // }, []);
-  // }
-  /////////////////////
+  useEffect(() => {
+    
+  socket?.on('block', ()=> setboolblock((prevIsBool) => prevIsBool + 1));
+
+  return () => {
+    socket?.off('block');
+
+  };
+}, [socket]);
+useEffect(() => {
+  socket?.on('friendRequestReceived', ()=> setboolpending((prevIsBool) => prevIsBool + 1));
+  return () => {
+    socket?.off('friendRequestReceived');
+  };
+}, [socket]);
 
   ////// Friends fetching data //////
 
@@ -49,7 +49,7 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
       }
     };
     getFriendsData();
-  }, []);
+  }, [boolblock,boolpending]);
 
   /////////////////////
   ////// Rooms fetching data //////
@@ -72,45 +72,25 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
 
   /////////////////////
   ////// Blocked fetching data //////
-  // {
-  //   const [BlokcedData, SetBlokcedData] = useState(null);
+  
+    const [BlockedData, SetBlockedData] = useState(null);
 
-  //   useEffect(() => {
-
-  //     const getBlokcedData = async () => {
-  //       try {
-  //         const resp = await axios.get('', {withCredentials: true})
-  //         SetBlokcedData(resp);
-  //       }
-  //       catch(error) {
-  //         console.log(error);
-  //       }
-  //     }
-  //     getBlokcedData();
-  //   }, [])
-  // }
+    useEffect(() => {
+      const getBlokcedData = async () => {
+        try {
+            const resp = await axios.get('http://localhost:3000/api/friends/blockedlist', {withCredentials: true})
+            SetBlockedData(resp.data);
+        }
+        catch(error) {
+          console.log(error);
+        }
+      }
+      getBlokcedData();
+    }, [boolblock])
+  
   /////////////////////
 
-  ////// Padding fetching data //////
-  // {
-  //   const [PaddingData, SetPaddingData] = useState(null);
 
-  //   useEffect(() => {
-
-  //     const getPaddingData = async () => {
-  //       try
-  //       {
-  //         const resp = await axios.get('', {withCredentials: true})
-  //         SetPaddingData(resp);
-  //       }
-  //       catch(error) {
-  //         console.log(error);
-  //       }
-  //     }
-  //     getPaddingData();
-  //   }, [])
-  // }
-  /////////////////////
 
   const [profileData, setProfileData] = useState(null);
 
@@ -140,6 +120,10 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
     getData();
   }, []);
 
+
+
+  (profileData && Profile(profileData)); //fill user data
+
   const [pandding, SetPanding] = useState(null);
 
   useEffect( () => {
@@ -153,7 +137,8 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
       } 
     } 
     getData();
-  }, [])
+  }, [boolpending])
+
 
   return (
     <div className="Myprofile">
@@ -276,7 +261,9 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
             userSelect={UserSelceted}
           />
         ) : optionSelected === "blocked" ? (
-          <Blocked />
+          <Blocked 
+            Blocked={BlockedData}
+            setboolblock={setboolblock}/>
         ) : optionSelected === "padding" && pandding? (
           <Padding pandding={pandding}/>
         ) : null}

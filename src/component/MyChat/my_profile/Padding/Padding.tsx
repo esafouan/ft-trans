@@ -18,7 +18,8 @@ const Padding = ({pandding}) => {
   return (
      <>
       {
-       pandding && pandding.size > 0 ? pandding.map((friend) => (
+        // handle size of 
+       pandding ? pandding.map((friend) => (
         
         <div className="discussion-pandding">
           <div className="amis-image">
