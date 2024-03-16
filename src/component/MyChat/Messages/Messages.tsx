@@ -35,20 +35,20 @@ const socket = useSocket();
             }
             getMessages();
        }
-       , [Id]);
+    , [Id]);
        
-       useEffect(() => {
-        const handleMessage = (message) => {
-            console.log("ss = " ,message);
-          
-          
-            SetMessages((prevMessages) => [
-              ...prevMessages,
-              { content: message.con, sender: message.from,senderId:message.id },
-            ]);
-          
-          
-        };
+    useEffect(() => {
+    const handleMessage = (message) => {
+        console.log("ss = " ,message);
+        
+        
+        SetMessages((prevMessages) => [
+            ...prevMessages,
+            { content: message.con, sender: message.from,senderId:message.id },
+        ]);
+        
+        
+    };
     
       socket?.on('message', handleMessage);
       
@@ -62,6 +62,8 @@ const socket = useSocket();
     const handleNewMessage = (newMessage) =>{
         SetMessages((prevMessages) => [...prevMessages, { content: newMessage, sender: user.login }]);
     }
+
+    
 
   return (
     <div className='messages-container'>

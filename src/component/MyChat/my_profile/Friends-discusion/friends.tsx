@@ -1,8 +1,9 @@
 import { useState } from "react"
 import React  from 'react'
 import "./friends.css"
-
-const Friends_discusion = ({onSelect, friendsData ,userSelect}) => {
+// MessagebyId={MessagebyId}
+// setMessageById={setMessagebyId}
+const Friends_discusion = ({onSelect, friendsData ,userSelect,  MessagebyId, SetNotifs, setMessageById}) => {
 
   const [selectedFriendId, setSelectedFriendId] = useState(null);
   // console.log(friendsData);
@@ -10,7 +11,10 @@ const Friends_discusion = ({onSelect, friendsData ,userSelect}) => {
     setSelectedFriendId(friendId);
     onSelect(friendId);
     userSelect(friend);
+    MessagebyId[friendId] = 0;
+    
   };
+
 
   return (
     <div>
@@ -28,7 +32,7 @@ const Friends_discusion = ({onSelect, friendsData ,userSelect}) => {
 
             {/* <p className="last-message">{friend.lastMessage}</p> */}
           </div>
-          {/* <div className="amis-status">{friend.status}</div> */}
+          {friend.id !== selectedFriendId && MessagebyId[friend.id] > 0 && <div className="amis-status">{MessagebyId[friend.id]}</div>}
         </div>
       ))}
     </div>

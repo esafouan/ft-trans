@@ -13,9 +13,58 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
   const [boolblock,setboolblock] = useState(0);
   const [boolpending,setboolpending] = useState(0);
   const socket = useSocket();
+
+  
+  
+  const [Notifs, SetNotifs] = useState([]);
+  const [countByType, setCountByType] = useState({});
+  const [MessagebyId, setMessageById] = useState({});
+
+
   const HandleSetOption = (option: any) => {
+    if (option == "padding") {
+      SetNotifs((prevNotifs) => prevNotifs.filter(notif => notif.type === "message"));
+      socket.emit('notif', {type:"pending"});
+      setCountByType({});
+    }
     SetOption(option);
   };
+  useEffect(() => {
+    const fetchNotifs = async () =>{
+
+      const resp = await axios.get('http://localhost:3000/api/chat/notifications', {withCredentials:true})
+      SetNotifs(resp.data);
+
+    }
+    fetchNotifs();
+  }, []);
+
+  useEffect(() => {
+    let newCountByType = {};
+    let newMessageById = {};
+
+    Notifs.forEach(notif => {
+      const {type} = notif;
+      if(optionSelected !== "padding")
+        newCountByType[type] = (newCountByType[type] || 0) + 1;
+      //need to add all message
+    });
+
+    setCountByType(newCountByType);
+    setMessageById(newMessageById);
+    // return SetNotifs([]);
+  }, [Notifs]);
+
+
+  useEffect(() => {
+
+      socket?.on('notif', (type) => {
+      console.log(type);
+      SetNotifs(prevNotifs => [...prevNotifs , {type: type.type , id: type.id}])});
+    return () => {
+      socket?.off('notif');
+    };
+  }, [socket]);
 
   useEffect(() => {
     
@@ -25,17 +74,19 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
     socket?.off('block');
 
   };
-}, [socket]);
-useEffect(() => {
-  socket?.on('friendRequestReceived', ()=> setboolpending((prevIsBool) => prevIsBool + 1));
-  return () => {
-    socket?.off('friendRequestReceived');
-  };
-}, [socket]);
+  }, [socket]);
 
-  ////// Friends fetching data //////
+  useEffect(() => {
+    socket?.on('friendRequestReceived', ()=> setboolpending((prevIsBool) => prevIsBool + 1));
+    return () => {
+      socket?.off('friendRequestReceived');
+    };
+  }, [socket]);
+
+    ////// Friends fetching data //////
 
   const [FrinedsData, SetFriendsData] = useState(null);
+
   useEffect(() => {
     const getFriendsData = async () => {
       try {
@@ -51,8 +102,8 @@ useEffect(() => {
     getFriendsData();
   }, [boolblock,boolpending]);
 
-  /////////////////////
-  ////// Rooms fetching data //////
+    /////////////////////
+    ////// Rooms fetching data //////
   const [RoomData, SetRoomData] = useState(null);
 
   useEffect(() => {
@@ -70,28 +121,25 @@ useEffect(() => {
     getRoomData();
   }, []);
 
-  /////////////////////
-  ////// Blocked fetching data //////
-  
-    const [BlockedData, SetBlockedData] = useState(null);
+    /////////////////////
+    ////// Blocked fetching data //////
+    
+  const [BlockedData, SetBlockedData] = useState(null);
 
-    useEffect(() => {
-      const getBlokcedData = async () => {
-        try {
-            const resp = await axios.get('http://localhost:3000/api/friends/blockedlist', {withCredentials: true})
-            SetBlockedData(resp.data);
-        }
-        catch(error) {
-          console.log(error);
-        }
+  useEffect(() => {
+    const getBlokcedData = async () => {
+      try {
+          const resp = await axios.get('http://localhost:3000/api/friends/blockedlist', {withCredentials: true})
+          SetBlockedData(resp.data);
       }
-      getBlokcedData();
-    }, [boolblock])
+      catch(error) {
+        console.log(error);
+      }
+    }
+    getBlokcedData();
+  }, [boolblock])
   
   /////////////////////
-
-
-
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
@@ -120,10 +168,7 @@ useEffect(() => {
     getData();
   }, []);
 
-
-
   (profileData && Profile(profileData)); //fill user data
-
   const [pandding, SetPanding] = useState(null);
 
   useEffect( () => {
@@ -139,18 +184,15 @@ useEffect(() => {
     getData();
   }, [boolpending])
 
-  
+ 
+
   return (
     <div className="Myprofile">
       <MyData profileData={profileData}/>
 
       <div className="selections">
-        <div
-          className={`select section-friends ${
-            optionSelected === "friends" ? "selected" : ""
-          }`}
-          onClick={() => HandleSetOption("friends")}
-        >
+        <div className={`select section-friends ${ optionSelected === "friends" ? "selected" : ""}`}
+          onClick={() => HandleSetOption("friends")}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="36"
@@ -168,6 +210,8 @@ useEffect(() => {
             <path d="M21.64 18.691l-.494-3.154A3 3 0 0 0 18.182 13h-2.364a3 3 0 0 0-2.964 2.537l-.493 3.154A2 2 0 0 0 14.337 21h5.326a2 2 0 0 0 1.976-2.309z" />
             <circle cx="17" cy="6" r="3" />
           </svg>
+
+         
         </div>
 
         <div
@@ -243,7 +287,7 @@ useEffect(() => {
             <circle cx="12" cy="12" r="10" />
             <path d="M15 16l-2.414-2.414A2 2 0 0 1 12 12.172V6" />
           </svg>
-
+          {optionSelected !== "padding" && countByType["pending"] > 0 && ( <span className="Notification">{countByType["pending"]}</span>)}
         </div>
       </div>
 
@@ -253,6 +297,9 @@ useEffect(() => {
             onSelect={OnSelect}
             friendsData={FrinedsData}
             userSelect={UserSelceted}
+            MessagebyId={MessagebyId}
+            SetNotifs={SetNotifs}
+            setMessageById={setMessageById}
           />
         ) : optionSelected === "rooms" ? (
           <Rooms

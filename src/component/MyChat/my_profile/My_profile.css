@@ -73,6 +73,13 @@
     grid-area: 1 / 4 / 2 / 5;
 }
 
+.Notification {
+    width: fit-content;
+    height: fit-content;
+    background: black;
+    border-radius: 50%;
+    padding: 0% 15% 0% 15%;
+}
                    /* /////////////////////////////// */
 
 
