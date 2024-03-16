@@ -6,7 +6,6 @@
     grid-template-rows: 1fr;
     padding-left: 10px;
 
-
 }
 
 .add-container{
@@ -187,10 +186,10 @@
 }
 
 .new{
-    width: 25%;
+    width: 1vw;
     display: grid;
     place-items: center;
-    height: 50%;
+    height: 2vh;
 }
 
 .new:hover{

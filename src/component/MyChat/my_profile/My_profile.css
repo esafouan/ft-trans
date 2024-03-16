@@ -6,8 +6,9 @@
     grid-template-rows: 0.3fr 0.1fr 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    margin: 47px 0px 0px 0px;
+    margin: 5vh 0vh 0vh 0vh;
     height: 90vh;
+    width: 21vw;
     border-radius: 5px;
     padding: 0px 10px 0px 0px;
     background: rgb(175, 185, 185, 0.2);
@@ -31,12 +32,10 @@
     border-top: 1px solid #8BD9D1;
 }
 
-.select svg {
-    width: 30px;
-}
+
 
 .select  {
-    width: 30px;
+    width: 2vw;
     display: grid;
     place-items: center;
     color: white;
