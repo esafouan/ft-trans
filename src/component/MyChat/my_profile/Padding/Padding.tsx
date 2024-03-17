@@ -15,6 +15,16 @@ const Padding = ({pandding, onSelect, userSelect}) => {
         console.error( error);
     }
 };
+
+const handleReject = async (friend) => {
+  try {
+      console.log("id frine = ", friend.id)
+      const response = await axios.post('http://localhost:3000/api/friends/rejectrequest', {id: friend.id}, { withCredentials: true });
+  } catch (error) {
+      console.error( error);
+  }
+};
+
   pandding && console.log("pandding =", pandding);
 
   return (
@@ -33,7 +43,7 @@ const Padding = ({pandding, onSelect, userSelect}) => {
           </div>
 
           <div className="amis-stat"> 
-              <div className="reject" >reject</div>
+              <div className="reject" onClick={() => handleReject(friend)} >reject</div>
               <div className='accept' onClick={() => handleAccept(friend)}>accept</div>
           </div>
           </div>

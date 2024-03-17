@@ -41,7 +41,7 @@ const MyData = ({profileData}) => {
     const handleRoomCreat = async (e) => {
         e.preventDefault();
         //send to backend
-        const resp = await axios.post('http://localhost:3000/api/room/room', {roomname: RoomName ,type : roomType, password : roomPassword}, {withCredentials:true});
+        const resp = await axios.post('http://localhost:3000/api/room/createroom', {roomname: RoomName ,type : roomType, password : roomPassword}, {withCredentials:true});
 
         setShowAddRoomForm(false);
         setRoomName("");

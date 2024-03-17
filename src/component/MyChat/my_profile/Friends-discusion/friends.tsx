@@ -1,19 +1,48 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import React  from 'react'
 import "./friends.css"
+import { useSocket } from "../../../Socket";
 // MessagebyId={MessagebyId}
 // setMessageById={setMessagebyId}
-const Friends_discusion = ({onSelect, friendsData ,userSelect,  MessagebyId, SetNotifs, setMessageById}) => {
+const Friends_discusion = ({onSelect, friendsData ,userSelect, SetNotifs, Notifs}) => {
 
   const [selectedFriendId, setSelectedFriendId] = useState(null);
   // console.log(friendsData);
+  const socket = useSocket();
+  const [MesagesById, SetMessagesById] = useState({});
   const handleFriendClick = (friend , friendId) => {
     setSelectedFriendId(friendId);
     onSelect(friendId);
     userSelect(friend);
-    MessagebyId[friendId] = 0;
-    
+    SetMessagesById((...prevMessagesById) => prevMessagesById.filter(notif => notif.senderid !== friendId));
+    SetNotifs((prevNotifs) => prevNotifs.filter(notif => notif.senderid !== friendId));
+    socket.emit('notif',{type:"message",senderid: friendId})
   };
+
+  useEffect(() => {
+    let CountMessages = {};
+  
+    Notifs.forEach(notif => {
+      const type = notif.type;
+      const id = notif.senderid;
+      console.log("notif ", notif);
+      if (type === "message" && id !== selectedFriendId)
+        CountMessages[id] = (CountMessages[id] || 0) + 1;
+
+    });
+    SetMessagesById(CountMessages);
+
+  }, [Notifs]);
+
+//   useEffect(() => {
+
+//     socket?.on('notifmessage', (payload) => {
+//     console.log("payload : ",payload);
+//     SetNotifs(prevNotifs => [...prevNotifs , {type: payload.type , senderid: payload.senderid}])});
+//   return () => {
+//     socket?.off('notifmessage');
+//   };
+// }, [socket]);
 
 
   return (
@@ -32,7 +61,7 @@ const Friends_discusion = ({onSelect, friendsData ,userSelect,  MessagebyId, Set
 
             {/* <p className="last-message">{friend.lastMessage}</p> */}
           </div>
-          {friend.id !== selectedFriendId && MessagebyId[friend.id] > 0 && <div className="amis-status">{MessagebyId[friend.id]}</div>}
+          {friend.id !== selectedFriendId && MesagesById[friend.id] > 0 && <div className="amis-status">{MesagesById[friend.id]}</div>}
         </div>
       ))}
     </div>

@@ -18,17 +18,17 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
   
   const [Notifs, SetNotifs] = useState([]);
   const [countByType, setCountByType] = useState({});
-  const [MessagebyId, setMessageById] = useState({});
 
 
   const HandleSetOption = (option: any) => {
     if (option == "padding") {
       SetNotifs((prevNotifs) => prevNotifs.filter(notif => notif.type === "message"));
-      socket.emit('notif', {type:"pending"});
+      socket.emit('notif', {type:"pending",senderid:0});
       setCountByType({});
     }
     SetOption(option);
   };
+
   useEffect(() => {
     const fetchNotifs = async () =>{
 
@@ -41,26 +41,25 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
 
   useEffect(() => {
     let newCountByType = {};
-    let newMessageById = {};
-
+  
     Notifs.forEach(notif => {
       const {type} = notif;
+
       if(optionSelected !== "padding")
         newCountByType[type] = (newCountByType[type] || 0) + 1;
       //need to add all message
     });
-
     setCountByType(newCountByType);
-    setMessageById(newMessageById);
-    // return SetNotifs([]);
+
   }, [Notifs]);
 
 
   useEffect(() => {
 
-      socket?.on('notif', (type) => {
-      console.log(type);
-      SetNotifs(prevNotifs => [...prevNotifs , {type: type.type , id: type.id}])});
+      socket?.on('notif', (payload) => {
+        
+        SetNotifs(prevNotifs => [...prevNotifs , {type: payload.type , senderid: payload.senderid}])
+      });
     return () => {
       socket?.off('notif');
     };
@@ -104,6 +103,14 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
 
     /////////////////////
     ////// Rooms fetching data //////
+    const [brodcast, Setbrodcast] = useState(0);
+    useEffect(() => {
+      socket?.on('brodcast', ()=> Setbrodcast((prevIsBool) => prevIsBool + 1))
+    return () => {
+      socket?.off('brodcast');
+    };
+  }, [socket]);
+
   const [RoomData, SetRoomData] = useState(null);
 
   useEffect(() => {
@@ -119,8 +126,24 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
       }
     };
     getRoomData();
-  }, []);
+  }, [brodcast]);
 
+  const [NotRoomsdata ,SetNotRoomsdata] = useState(null);
+
+  useEffect(() => {
+    const getRoomData = async () => {
+      try {
+        const resp = await axios.get(
+          "http://localhost:3000/api/room/listnotjoinedrooms",
+          { withCredentials: true }
+        );
+        SetNotRoomsdata(resp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getRoomData();
+  }, [brodcast]);
     /////////////////////
     ////// Blocked fetching data //////
     
@@ -184,11 +207,12 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
     getData();
   }, [boolpending])
 
- 
+
 
   return (
     <div className="Myprofile">
-      <MyData profileData={profileData}/>
+      <MyData profileData={profileData}
+      />
 
       <div className="selections">
         <div className={`select section-friends ${ optionSelected === "friends" ? "selected" : ""}`}
@@ -297,15 +321,17 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
             onSelect={OnSelect}
             friendsData={FrinedsData}
             userSelect={UserSelceted}
-            MessagebyId={MessagebyId}
             SetNotifs={SetNotifs}
-            setMessageById={setMessageById}
+            Notifs={Notifs}
           />
         ) : optionSelected === "rooms" ? (
           <Rooms
             onSelect={OnSelect}
             Roomsdata={RoomData}
+            SetRoomData={SetRoomData}
             userSelect={UserSelceted}
+            NotRoomsdata={NotRoomsdata}
+            SetNotRoomsdata={SetNotRoomsdata}
           />
         ) : optionSelected === "blocked" ? (
           <Blocked 
