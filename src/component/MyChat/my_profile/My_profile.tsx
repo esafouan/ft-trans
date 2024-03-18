@@ -21,6 +21,8 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
 
 
   const HandleSetOption = (option: any) => {
+    OnSelect(-1);
+    UserSelceted(null);
     if (option == "padding") {
       SetNotifs((prevNotifs) => prevNotifs.filter(notif => notif.type === "message"));
       socket.emit('notif', {type:"pending",senderid:0});
@@ -104,12 +106,24 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
     /////////////////////
     ////// Rooms fetching data //////
     const [brodcast, Setbrodcast] = useState(0);
+
     useEffect(() => {
       socket?.on('brodcast', ()=> Setbrodcast((prevIsBool) => prevIsBool + 1))
+  
     return () => {
       socket?.off('brodcast');
+
     };
   }, [socket]);
+  useEffect(() => {
+    
+    socket?.on('newmember', ()=> {console.log("heeereeee");
+      Setbrodcast((prevIsBool) => prevIsBool + 1)})
+  return () => {
+   
+    socket?.off('newmember');
+  };
+}, [socket]);
 
   const [RoomData, SetRoomData] = useState(null);
 
@@ -121,6 +135,7 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
           { withCredentials: true }
         );
         SetRoomData(resp.data);
+
       } catch (error) {
         console.log(error);
       }
@@ -167,7 +182,6 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
 
   useEffect(() => {
     const getData = async () => {
-      console.log("heyy");
       try {
         // Set Axios default configuration to include credentials
         const instance = axios.create({
@@ -207,7 +221,7 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
     getData();
   }, [boolpending])
 
-
+  RoomData && console.log("data",RoomData);
 
   return (
     <div className="Myprofile">
@@ -324,12 +338,12 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
             SetNotifs={SetNotifs}
             Notifs={Notifs}
           />
-        ) : optionSelected === "rooms" ? (
+        ) : (RoomData || NotRoomsdata) && optionSelected === "rooms" ? (
           <Rooms
             onSelect={OnSelect}
             Roomsdata={RoomData}
             SetRoomData={SetRoomData}
-            userSelect={UserSelceted}
+            RoomSelect={UserSelceted}
             NotRoomsdata={NotRoomsdata}
             SetNotRoomsdata={SetNotRoomsdata}
           />

@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import "./MyData.css"
 import axios from "axios";
+import { useSocket } from "../../../Socket";
 
 
 const MyData = ({profileData}) => {
@@ -20,6 +21,7 @@ const MyData = ({profileData}) => {
     //room name
     const [RoomName, setRoomName] = useState("");
 
+    const socket = useSocket();
     const handleAddFriendClick = () => {
         setShowAddFriendForm(true);
     };
@@ -42,7 +44,7 @@ const MyData = ({profileData}) => {
         e.preventDefault();
         //send to backend
         const resp = await axios.post('http://localhost:3000/api/room/createroom', {roomname: RoomName ,type : roomType, password : roomPassword}, {withCredentials:true});
-
+        socket.emit('newroom');
         setShowAddRoomForm(false);
         setRoomName("");
     };

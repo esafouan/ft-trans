@@ -21,8 +21,8 @@ function App()
           {/* <CanvasAnimation /> */}
           <Routes>
             <Route path="/" element={<Login />}/>
-            <Route path="/Home" element={<Punk />}/>
-            <Route path="/Chat" element={<Chat />}/>
+            <Route path="/Home" element={<Punk />} />
+            <Route path="/Chat" element={<Chat />} />
           </Routes>
         </Router> 
       </div>

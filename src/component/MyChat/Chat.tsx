@@ -5,6 +5,7 @@ import My_profile from "./my_profile/My_profile";
 import Messages from "./Messages/Messages";
 import PingIcon from "../../assets/pingIcon.svg"
 import FriendInfo from "./InfosPart/friendInfos/FriendInfo";
+import RoomInfo from "./InfosPart/roomInfos/OwnerInfos/OwnerInfo";
 
 
 const Chat = () => {
@@ -45,11 +46,19 @@ const Chat = () => {
         />
 
         <div className="OtherProfile">
-          <FriendInfo 
+          
+          {/* <FriendInfo 
             user={User}
             profile={MyProfile}
             OnSelect={handleId}
             UserSelceted={handleUser} 
+          /> */}
+
+          <RoomInfo 
+            profile={MyProfile}
+            room={User}
+            OnSelect={handleId}
+            RoomSelceted={handleUser} 
           />
         </div>
       </div>
