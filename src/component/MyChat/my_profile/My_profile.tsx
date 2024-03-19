@@ -8,8 +8,7 @@ import axios from "axios";
 import MyData from "./myProfileInfos/MyData";
 import { useSocket } from "../../Socket";
 
-const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
-  const [optionSelected, SetOption] = useState("friends");
+const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetOption}) => {
   const [boolblock,setboolblock] = useState(0);
   const [boolpending,setboolpending] = useState(0);
   const socket = useSocket();
@@ -17,12 +16,14 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
   
   
   const [Notifs, SetNotifs] = useState([]);
+  const [RoomNotifs, SetRoomNotifs] = useState([]);
   const [countByType, setCountByType] = useState({});
 
 
   const HandleSetOption = (option: any) => {
-    OnSelect(-1);
+    
     UserSelceted(null);
+    RoomSelceted(null);
     if (option == "padding") {
       SetNotifs((prevNotifs) => prevNotifs.filter(notif => notif.type === "message"));
       socket.emit('notif', {type:"pending",senderid:0});
@@ -42,6 +43,16 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
   }, []);
 
   useEffect(() => {
+    const fetchNotifs = async () =>{
+
+      const resp = await axios.get('http://localhost:3000/api/room/roomnotifications', {withCredentials:true})
+      SetRoomNotifs(resp.data);
+
+    }
+    fetchNotifs();
+  }, []);
+
+  useEffect(() => {
     let newCountByType = {};
   
     Notifs.forEach(notif => {
@@ -55,6 +66,7 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
 
   }, [Notifs]);
 
+  RoomNotifs && console.log("room notifs = " ,RoomNotifs)
 
   useEffect(() => {
 
@@ -115,10 +127,14 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
 
     };
   }, [socket]);
+
+  //
   useEffect(() => {
     
-    socket?.on('newmember', ()=> {console.log("heeereeee");
+    socket?.on('newmember', ()=> {
+      console.log("heeereeee");
       Setbrodcast((prevIsBool) => prevIsBool + 1)})
+ 
   return () => {
    
     socket?.off('newmember');
@@ -221,7 +237,7 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
     getData();
   }, [boolpending])
 
-  RoomData && console.log("data",RoomData);
+
 
   return (
     <div className="Myprofile">
@@ -325,6 +341,7 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
             <circle cx="12" cy="12" r="10" />
             <path d="M15 16l-2.414-2.414A2 2 0 0 1 12 12.172V6" />
           </svg>
+
           {optionSelected !== "padding" && countByType["pending"] > 0 && ( <span className="Notification">{countByType["pending"]}</span>)}
         </div>
       </div>
@@ -332,7 +349,7 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
       <div className="discussions">
         {FrinedsData && optionSelected === "friends" ? (
           <Friends_discusion
-            onSelect={OnSelect}
+        
             friendsData={FrinedsData}
             userSelect={UserSelceted}
             SetNotifs={SetNotifs}
@@ -340,27 +357,24 @@ const My_profile = ({ OnSelect, UserSelceted, Profile }) => {
           />
         ) : (RoomData || NotRoomsdata) && optionSelected === "rooms" ? (
           <Rooms
-            onSelect={OnSelect}
             Roomsdata={RoomData}
             SetRoomData={SetRoomData}
-            RoomSelect={UserSelceted}
+            RoomSelect={RoomSelceted}
             NotRoomsdata={NotRoomsdata}
             SetNotRoomsdata={SetNotRoomsdata}
+            RoomNotifs={RoomNotifs} 
+            SetRoomNotifs={SetRoomNotifs}
           />
         ) : optionSelected === "blocked" ? (
           <Blocked 
             Blocked={BlockedData}
             setboolblock={setboolblock}
             userSelect={UserSelceted}
-            onSelect={OnSelect}
-
             />
         ) : optionSelected === "padding" && pandding? (
           <Padding 
             pandding={pandding}
             userSelect={UserSelceted}
-            onSelect={OnSelect}
-
             />
         ) : null}
       </div>

@@ -4,7 +4,7 @@ import "./friends.css"
 import { useSocket } from "../../../Socket";
 // MessagebyId={MessagebyId}
 // setMessageById={setMessagebyId}
-const Friends_discusion = ({onSelect, friendsData ,userSelect, SetNotifs, Notifs}) => {
+const Friends_discusion = ({friendsData ,userSelect, SetNotifs, Notifs}) => {
 
   const [selectedFriendId, setSelectedFriendId] = useState(null);
   // console.log(friendsData);
@@ -12,11 +12,9 @@ const Friends_discusion = ({onSelect, friendsData ,userSelect, SetNotifs, Notifs
   const [MesagesById, SetMessagesById] = useState({});
   const handleFriendClick = (friend , friendId) => {
     setSelectedFriendId(friendId);
-    onSelect(friendId);
     userSelect(friend);
     SetMessagesById((...prevMessagesById) => prevMessagesById.filter(notif => notif.senderid !== friendId));
     SetNotifs((prevNotifs) => prevNotifs.filter(notif => notif.senderid !== friendId));
-    socket.emit('notif',{type:"message",senderid: friendId})
   };
 
   useEffect(() => {

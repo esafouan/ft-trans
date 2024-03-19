@@ -3,72 +3,93 @@ import "./Messages.css"
 import axios from 'axios';
 import Input from "./inputPart/Input"
 import { useSocket } from '../../Socket';
+import Profile from '../../Profile/Profile';
 
 
 
 
 
-const Messages = ({Id, user, profile}) => {
+const Messages = ({optionSelected ,room, user, profile}) => {
 
 //id is convertation id
 
-const [MessagesData, SetMessages] = useState([]);     
 
-const socket = useSocket();
+    const socket = useSocket();
+    /////// friends messages ///////
+    const [MessagesData, SetMessages] = useState([]);
+    const [FetchMessages, SetFetch] = useState(0);
+    const [MessagesRoom, SetMessagesRoom] = useState([]);
+    const [FetchMessagesRoom, SetFetchRoom] = useState(0);
 
     useEffect(() => {
         const getMessages  = async () => {
-                try 
-                {
-                        console.log("heeeee = " , Id);
-                    if (Id >= 0) {
-                        const resp = await axios.post('http://localhost:3000/api/chat/getconversation',{id: Id},  {withCredentials: true})
-                        SetMessages(resp.data);
-                    }
-                    else {
-                        SetMessages ([]);
-                    }
+            try 
+            {
+                if (user) {
+                    const resp = await axios.post('http://localhost:3000/api/chat/getconversation',{id: user.id},  {withCredentials: true})
+                    SetMessages(resp.data);
+                    socket.emit('notif',{type:"message",senderid: user.id})
                 }
-                catch(error){
-                    console.log(error)
+                else {
+                    SetMessages ([]);
                 }
             }
-            getMessages();
+            catch(error){
+                console.log(error)
+            }
+        }
+        getMessages();
        }
-    , [Id]);
+    , [user, FetchMessages]);
        
     useEffect(() => {
-    const handleMessage = (message) => {
-        console.log("ss = " ,message);
-        
-        
-        SetMessages((prevMessages) => [
-            ...prevMessages,
-            { content: message.con, sender: message.from,senderId:message.id },
-        ]);
-        
-        
-    };
-    
-      socket?.on('message', handleMessage);
-      
-    
-      // Clean up the message listener when component unmounts
+        socket?.on('message', ()=> {
+            SetFetch((prevIsBool) => prevIsBool + 1)
+            
+    });
       return () => {
-        socket?.off('message', handleMessage);
+        socket?.off('message');
       };
     }, [socket]);
     
-    const handleNewMessage = (newMessage) =>{
-        SetMessages((prevMessages) => [...prevMessages, { content: newMessage, sender: user.login }]);
-    }
+    useEffect(() => {
+        const getMessages  = async () => {
+            try 
+            {
+                if (room) {
+                    const resp = await axios.post('http://localhost:3000/api/chat/getroomconversation',{roomname: room.name},  {withCredentials: true})
+                    SetMessagesRoom(resp.data);
+                    socket.emit('roomnotif', room.name)
+                }
+                else {
+                    SetMessagesRoom ([]);
+                }
+            }
+            catch(error){
+                console.log(error)
+            }
+        }
+        getMessages();
+       }
+    , [room, FetchMessagesRoom]);
+       
+    useEffect(() => {
+        socket?.on('roomchat', ()=> {
+            SetFetchRoom((prevIsBool) => prevIsBool + 1)
+            
+    });
+      return () => {
+        socket?.off('roomchat');
+      };
+    }, [socket]);
 
-    
+    MessagesRoom && console.log("room messages", MessagesRoom);
 
   return (
     <div className='messages-container'>
+        
         {
-           (Id >= 0) ? (
+           (user) ? (
             <>
                 <div className= 'headPart'> 
                     {
@@ -93,11 +114,13 @@ const socket = useSocket();
                     
                     { MessagesData.length > 0 && MessagesData.map((message) => (
                             <div
-                                key={message.id}
-                                className={`message ${message.senderId === Id ? 'parker' : 'stark'}`}>
+                                key={message.senderId}
+                                className={`message ${message.senderId === user.id ? 'parker' : 'stark'}`}>
                             {message.content}
                             </div>
-                        ))}
+                        ))
+                    
+                    }
 
                     
                     </div>
@@ -106,11 +129,57 @@ const socket = useSocket();
                 
                 <Input
                     User={user} 
+                    Room={room} 
                     Profile={profile}
-                    addNewMessage={handleNewMessage}
+                    // addNewMessage={handleNewMessage}
                 />
             </>
-          ) : (<div className='No-conv'> <p> Select New Conversation Please </p> </div>)
+          ) : (room) ? (
+            <>
+                <div className= 'headPart'> 
+                    {
+                        room && 
+                        <>
+                            <div className="img-cont">
+                                <img  />
+                            </div >
+
+                            <div className="text">
+                                <p className='friend-nm'>{room.name}</p>
+                                {/* <p className='friend-stat'>online</p> */}
+                            </div>
+                        </>
+                    }
+
+                </div>
+
+                <div className= 'midlePart'> 
+                    
+                    <div className="new-chat">
+                    
+                    { MessagesRoom.length > 0 && MessagesRoom.map((message) => (
+                            <div
+                                key={message.senderId }
+                                className={`message ${message.senderId !== profile.id ? 'parker' : 'stark'}`}>
+                            {message.content}
+                            </div>
+                        ))
+                    
+                    }
+
+                    
+                    </div>
+                
+                </div>
+                
+                <Input
+                    User={user}
+                    Room={room} 
+                    Profile={profile}
+                    // addNewMessage={handleNewMessage}
+                />
+            </>
+          ): (<div className='No-conv'> <p> Select New Conversation Please </p> </div>)
         }
 
     </div>

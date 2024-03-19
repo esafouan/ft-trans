@@ -3,20 +3,18 @@ import "./Input.css"
 
 import { useSocket }  from "../../../Socket"
 
-const Input = ({User, Profile, addNewMessage}) => {
+const Input = ({User, Profile, Room}) => {
 
     const [message, setMessage] = useState('');
     const socket =  useSocket();
 
     const sendMessage = () => {
-        console.log(socket.id);
-        console.log("ProfileData =  ",Profile )
-        console.log("User =  ", User )
-
+       
         if (message.trim() !== '' ) {
             
             Profile && User && socket.emit('message', {from: Profile.login , fromid: Profile.id, to: User.id, content: message });
-            addNewMessage(message);
+            // fromid:string; roomname: string; content: string 
+            Profile && Room && socket.emit('roommessage', { fromid: Profile.id, roomname: Room.name , content: message });
             setMessage('');
         }
     }

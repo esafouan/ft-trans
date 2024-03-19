@@ -2,11 +2,10 @@ import React from 'react'
 import "./Blocked.css"
 import axios from 'axios'
 
-const Blocked = ({Blocked, setboolblock, onSelect, userSelect}) => {
+const Blocked = ({Blocked, setboolblock,  userSelect}) => {
 
-  onSelect(-1);
+ 
   userSelect(null);
-  Blocked && console.log("blocked friend = ", Blocked)
  const handleUnblock = async (friendId : number) => {
   try {
       const res = await axios.post('http://localhost:3000/api/friends/unblock', {id: friendId}, { withCredentials: true })

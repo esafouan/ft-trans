@@ -3,8 +3,8 @@ import "./Padding.css"
 import axios from 'axios';
 
 
-const Padding = ({pandding, onSelect, userSelect}) => {
-  onSelect(-1);
+const Padding = ({pandding,  userSelect}) => {
+
   userSelect(null);
 
   const handleAccept = async (friend) => {

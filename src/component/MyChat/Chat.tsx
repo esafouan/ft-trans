@@ -9,16 +9,17 @@ import RoomInfo from "./InfosPart/roomInfos/OwnerInfos/OwnerInfo";
 
 
 const Chat = () => {
-  const [ID, Setid] = useState(-1);
-  const handleId = (id) => {
-    Setid(id);
-  }
+ 
 
   const [User, SetUser] = useState(null);
+  const [Room, SetRoom] = useState(null);
 
 
   const handleUser = (user) => {
     SetUser(user);
+  }
+  const handleRoom = (room) => {
+    SetRoom(room);
   }
 
   const [MyProfile, SetProfile] = useState(null);
@@ -27,6 +28,8 @@ const Chat = () => {
   const handleProfile = (profile) => {
     SetProfile(profile);
   }
+  const [optionSelected, SetOption] = useState("friends");
+  
  
  
   return (
@@ -34,32 +37,42 @@ const Chat = () => {
       <div className="chat">
         
         <My_profile 
-          OnSelect={handleId}
+
           UserSelceted={handleUser} 
+          RoomSelceted={handleRoom} 
           Profile={handleProfile}
+          optionSelected={optionSelected} 
+          SetOption={SetOption}
+          
           />
 
         <Messages 
-          Id={ID} 
+          optionSelected={optionSelected} 
           user={User}
+          room={Room}
           profile={MyProfile}
         />
 
         <div className="OtherProfile">
-          
-          {/* <FriendInfo 
-            user={User}
-            profile={MyProfile}
-            OnSelect={handleId}
-            UserSelceted={handleUser} 
-          /> */}
+          {
+            optionSelected === "friends" ? (
 
-          <RoomInfo 
-            profile={MyProfile}
-            room={User}
-            OnSelect={handleId}
-            RoomSelceted={handleUser} 
-          />
+              <FriendInfo 
+              user={User}
+              profile={MyProfile}
+            
+              UserSelceted={handleUser} 
+            />
+            ) : optionSelected === "rooms" ? (
+              <RoomInfo 
+              profile={MyProfile}
+              room={Room}
+
+              RoomSelceted={handleRoom} 
+              />)
+              : (null)
+       
+          }
         </div>
       </div>
 

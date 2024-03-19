@@ -3,7 +3,7 @@ import "./OwnerInfo.css"
 
 
 
-const RoomInfo = ({profile, room, OnSelect, RoomSelceted}) => {
+const RoomInfo = ({profile, room, RoomSelceted}) => {
  
 
   const [memberSelected, SetMember] = useState(null);
