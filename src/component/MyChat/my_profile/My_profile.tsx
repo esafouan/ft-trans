@@ -8,7 +8,8 @@ import axios from "axios";
 import MyData from "./myProfileInfos/MyData";
 import { useSocket } from "../../Socket";
 
-const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetOption}) => {
+
+const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetOption, SetMessages,SetMessagesRoom}) => {
   const [boolblock,setboolblock] = useState(0);
   const [boolpending,setboolpending] = useState(0);
   const [fetchRoomNotif,SetFetchRoomNotif] = useState(0);
@@ -48,6 +49,7 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
 
       const resp = await axios.get('http://localhost:3000/api/room/roomnotifications', {withCredentials:true})
       SetRoomNotifs(resp.data);
+      RoomNotifs && console.log("room motifs = ",RoomNotifs)
 
     }
     fetchNotifs();
@@ -83,7 +85,9 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
 
   useEffect(() => {
 
-    socket?.on('notifroommessage', () => SetFetchRoomNotif((prevIsBool) => prevIsBool +1 ));
+    socket?.on('notifroommessage', () => SetFetchRoomNotif((prevIsBool) => {
+      console.log("heeeeere fetch")
+    prevIsBool +1 }));
     
     return () => {
       socket?.off('notifroommessage');
@@ -365,6 +369,7 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
             userSelect={UserSelceted}
             SetNotifs={SetNotifs}
             Notifs={Notifs}
+            SetMessages={SetMessages}
           />
         ) : (RoomData || NotRoomsdata) && optionSelected === "rooms" ? (
           <Rooms
@@ -375,6 +380,7 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
             SetNotRoomsdata={SetNotRoomsdata}
             RoomNotifs={RoomNotifs} 
             SetRoomNotifs={SetRoomNotifs}
+            SetMessagesRoom={SetMessagesRoom}
           />
         ) : optionSelected === "blocked" ? (
           <Blocked 

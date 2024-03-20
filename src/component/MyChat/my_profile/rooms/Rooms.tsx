@@ -3,7 +3,7 @@ import "./Rooms.css"
 import { useSocket } from '../../../Socket';
 import axios from "axios";
 
-const Rooms = ({Roomsdata, SetRoomData,  RoomSelect, NotRoomsdata, SetNotRoomsdata, RoomNotifs, SetRoomNotifs }) => {
+const Rooms = ({Roomsdata, SetRoomData,  RoomSelect, NotRoomsdata, SetNotRoomsdata, RoomNotifs, SetRoomNotifs , SetMessagesRoom}) => {
 
 
   const socket = useSocket();
@@ -23,18 +23,13 @@ const Rooms = ({Roomsdata, SetRoomData,  RoomSelect, NotRoomsdata, SetNotRoomsda
     const handleroomClick = (room , roomId) => {
       if( selectedroom && room.name !== selectedroom.name)
         socket?.emit('chatroomdeselected', selectedroom.name);
+      SetMessagesRoom(null);
       setSelectedroom(room);
       RoomSelect(room);
       socket?.emit('notifroom', room.name);
       socket?.emit('chatroomselected', room.name);
     };
     
-
-
-
-
-
-
     if (selectedroom && Roomsdata) {
       // Find the updated room data by matching the id with the selected room
       const updatedRoom = Roomsdata.find(room => room.id === selectedroom.id);
