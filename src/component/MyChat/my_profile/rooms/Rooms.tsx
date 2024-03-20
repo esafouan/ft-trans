@@ -16,30 +16,25 @@ const Rooms = ({Roomsdata, SetRoomData,  RoomSelect, NotRoomsdata, SetNotRoomsda
     socket?.emit("newmemberinroom", {name: room.roomname, password: ''});
   }
 
-  // useEffect(() => {
-  //   let CountMessages = {};
-  
-  //   RoomNotifs.forEach(notif => {
-  //     const type = notif.type;
-  //     const id = notif.senderid;
-  //     console.log("notif ", notif);
-  //     if (type === "roommessage" && id !== selectedFriendId)
-  //       CountMessages[id] = (CountMessages[id] || 0) + 1;
-
-  //   });
-  //   SetMessagesById(CountMessages);
-
-  // }, [RoomNotifs]);
 
   const [selectedroom, setSelectedroom] = useState(null);
 
 
-
     const handleroomClick = (room , roomId) => {
+      if( selectedroom && room.name !== selectedroom.name)
+        socket?.emit('chatroomdeselected', selectedroom.name);
       setSelectedroom(room);
       RoomSelect(room);
+      socket?.emit('notifroom', room.name);
+      socket?.emit('chatroomselected', room.name);
     };
     
+
+
+
+
+
+
     if (selectedroom && Roomsdata) {
       // Find the updated room data by matching the id with the selected room
       const updatedRoom = Roomsdata.find(room => room.id === selectedroom.id);
@@ -47,31 +42,36 @@ const Rooms = ({Roomsdata, SetRoomData,  RoomSelect, NotRoomsdata, SetNotRoomsda
         RoomSelect(updatedRoom); 
       }
     }
-    if (selectedroom != null)
-      socket?.emit('chatroomselected', selectedroom.name);
+   
+      
 
   return (
     <div className='roomsContainer'>
       <div className="joined_room">
-      {
-        Roomsdata && Roomsdata.map((room) => 
-        (
+        {Roomsdata && Roomsdata.map((room) => (
           <div 
             className={`discussion ${selectedroom != null && room.id === selectedroom.id ? 'message-active' : ''}`}
-            onClick={() => handleroomClick(room ,room.id)} 
+            onClick={() => handleroomClick(room, room.id)} 
           >
-              <div className="amis-image">
-                  <img />
+            <div className="amis-image">
+              <img />
+            </div>
+
+            <div className="amis-infos">
+              <p className="amis-name"><p>{room.name}</p></p>
+              {/* <p className="last-message">room.lastMessage</p> */}
+            </div>
+
+            {RoomNotifs && (
+              (selectedroom && room.name !== selectedroom.name) || 
+              (RoomNotifs.find(notification => notification.roomname === room.name)?.count > 0)
+            ) && (
+              <div className="amis-status">
+                {RoomNotifs.find(notification => notification.roomname === room.name)?.count}
               </div>
-    
-              <div className="amis-infos">
-                  <p className="amis-name"><p>{room.name}</p></p>
-                  {/* <p className="last-message">room.lastMessage</p> */}
-              </div>
-        
-              </div>
-        ))
-      }
+            )}
+          </div>
+        ))}
       </div>
       <div className="notjoined_room">
       {

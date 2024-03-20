@@ -11,6 +11,7 @@ import { useSocket } from "../../Socket";
 const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetOption}) => {
   const [boolblock,setboolblock] = useState(0);
   const [boolpending,setboolpending] = useState(0);
+  const [fetchRoomNotif,SetFetchRoomNotif] = useState(0);
   const socket = useSocket();
 
   
@@ -50,7 +51,7 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
 
     }
     fetchNotifs();
-  }, []);
+  }, [fetchRoomNotif]);
 
   useEffect(() => {
     let newCountByType = {};
@@ -66,7 +67,7 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
 
   }, [Notifs]);
 
-  RoomNotifs && console.log("room notifs = " ,RoomNotifs)
+  // RoomNotifs && console.log("room notifs = " ,RoomNotifs)
 
   useEffect(() => {
 
@@ -76,6 +77,16 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
       });
     return () => {
       socket?.off('notif');
+    };
+  }, [socket]);
+ 
+
+  useEffect(() => {
+
+    socket?.on('notifroommessage', () => SetFetchRoomNotif((prevIsBool) => prevIsBool +1 ));
+    
+    return () => {
+      socket?.off('notifroommessage');
     };
   }, [socket]);
 
@@ -132,7 +143,6 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
   useEffect(() => {
     
     socket?.on('newmember', ()=> {
-      console.log("heeereeee");
       Setbrodcast((prevIsBool) => prevIsBool + 1)})
  
   return () => {
@@ -236,6 +246,7 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
     } 
     getData();
   }, [boolpending])
+
 
 
 

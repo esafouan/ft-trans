@@ -10,6 +10,7 @@ const Friends_discusion = ({friendsData ,userSelect, SetNotifs, Notifs}) => {
   // console.log(friendsData);
   const socket = useSocket();
   const [MesagesById, SetMessagesById] = useState({});
+
   const handleFriendClick = (friend , friendId) => {
     setSelectedFriendId(friendId);
     userSelect(friend);
@@ -23,7 +24,7 @@ const Friends_discusion = ({friendsData ,userSelect, SetNotifs, Notifs}) => {
     Notifs.forEach(notif => {
       const type = notif.type;
       const id = notif.senderid;
-      console.log("notif ", notif);
+  
       if (type === "message" && id !== selectedFriendId)
         CountMessages[id] = (CountMessages[id] || 0) + 1;
 
