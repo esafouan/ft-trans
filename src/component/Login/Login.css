@@ -67,3 +67,46 @@
   font-weight: bold; 
   font-family: 'Cyber', sans-serif;
 }
+
+.wfa-container
+{
+  background: #0D1526;
+  position: relative;
+}
+
+.wfa{
+  position: absolute;
+  top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  width: 35vw;
+  height: 35vh;
+  border-radius: 5px;
+  border: 2px solid #8BD9D1;
+}
+
+.wfa .h11 {
+  position: absolute;
+  font-size: x-large;
+  color: #8BD9D1;
+  left: 23%;
+  top: 10%;
+}
+
+.wfa .input {
+  position: absolute;
+  border-radius: 5px;
+  border: 2px solid #8BD9D1;
+  height: 2vh;
+  width: 12vw;
+  top: 41%;
+  left: 34%;
+}
+.wfa > Button{
+  width: fit-content;
+  height: fit-content;
+  top: 67%;
+  left: 49%;
+  position: absolute;
+  padding: 1vh;
+}

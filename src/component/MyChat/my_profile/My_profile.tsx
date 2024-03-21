@@ -9,7 +9,7 @@ import MyData from "./myProfileInfos/MyData";
 import { useSocket } from "../../Socket";
 
 
-const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetOption, SetMessages,SetMessagesRoom}) => {
+const My_profile = ({ RoomSelceted, selectedroom, UserSelceted, Profile , optionSelected, SetOption, SetMessages,SetMessagesRoom}) => {
   const [boolblock,setboolblock] = useState(0);
   const [boolpending,setboolpending] = useState(0);
   const [fetchRoomNotif,SetFetchRoomNotif] = useState(0);
@@ -26,6 +26,8 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
     
     UserSelceted(null);
     RoomSelceted(null);
+    if(selectedroom)
+      socket?.emit('chatroomdeselected', selectedroom.name);
     if (option == "padding") {
       SetNotifs((prevNotifs) => prevNotifs.filter(notif => notif.type === "message"));
       socket.emit('notif', {type:"pending",senderid:0});
@@ -46,7 +48,7 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
 
   useEffect(() => {
     const fetchNotifs = async () =>{
-
+      console.log("ssss");
       const resp = await axios.get('http://localhost:3000/api/room/roomnotifications', {withCredentials:true})
       SetRoomNotifs(resp.data);
       RoomNotifs && console.log("room motifs = ",RoomNotifs)
@@ -85,9 +87,8 @@ const My_profile = ({ RoomSelceted, UserSelceted, Profile , optionSelected, SetO
 
   useEffect(() => {
 
-    socket?.on('notifroommessage', () => SetFetchRoomNotif((prevIsBool) => {
-      console.log("heeeeere fetch")
-    prevIsBool +1 }));
+    socket?.on('notifroommessage', () => SetFetchRoomNotif((prevIsBool) => prevIsBool +1 ));
+
     
     return () => {
       socket?.off('notifroommessage');

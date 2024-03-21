@@ -57,3 +57,91 @@
     transition: 1s ease;
     cursor: pointer;
 }
+
+
+
+
+
+
+/* ///modal/// */
+.modal {
+    /* display: none; Hide modal by default */
+    position: fixed; /* Position the modal */
+    z-index: 1; /* Make sure it appears on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scrolling if needed */
+    background-color: rgba(0,0,0,0.4); /* Black background with transparency */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    max-width: 598px;
+    border-radius: 10px;
+    width: 50vw;
+    height: 50vh;
+    position: relative;
+  }
+  .modal-content > h1 {
+    color: black;
+  position: absolute;
+  top: 10%;
+  }
+  .modal-content > p {
+    color: black;
+    position: absolute;
+    top: 20%;
+  }
+  .enable{
+    color: red;
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    top: 30%;
+    left: 45%;
+  }
+  .Qr {
+    width: 10vw;
+    height: 18vh;
+    position: absolute;
+    top: 40%;
+    left: 36%;
+  }
+  /* Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    width: fit-content;
+    height: fit-content;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .input-code
+  {
+    position: absolute;
+    width: 10vw;
+    height: 2vh;
+    top: 80%;
+    left: 36%;
+  }
+  
+ .saveBut{
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    top: 90%;
+ }

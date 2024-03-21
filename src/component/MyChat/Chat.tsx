@@ -110,7 +110,8 @@ const Chat = () => {
         <My_profile 
 
           UserSelceted={handleUser} 
-          RoomSelceted={handleRoom} 
+          RoomSelceted={handleRoom}
+          selectedroom={Room}
           Profile={handleProfile}
           optionSelected={optionSelected} 
           SetOption={SetOption}

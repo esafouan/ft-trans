@@ -2,7 +2,7 @@ import React from 'react';
 
 import {BrowserRouter as Router , Routes, Route } from "react-router-dom";
 
-import {Login} from "./component/Login/Login"
+import {Login , TwoFa} from "./component/Login/Login"
 import './App.css';
 import Avatar from './component/Avatar/Avatar';
 import MenuBar from './component/menubar/menubar';
@@ -21,6 +21,7 @@ function App()
           {/* <CanvasAnimation /> */}
           <Routes>
             <Route path="/" element={<Login />}/>
+            <Route path="/2fa" element={<TwoFa />}/>
             <Route path="/Home" element={<Punk />} />
             <Route path="/Chat" element={<Chat />} />
           </Routes>
