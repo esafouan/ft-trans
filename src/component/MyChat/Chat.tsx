@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MenuBar from "../PunkProfile/MenuBar/MenuBar";
 import "./Chat.css";
 import My_profile from "./my_profile/My_profile";
@@ -53,21 +53,17 @@ const Chat = () => {
     }
   , [User, FetchMessages]);
    
-  useEffect(() => {
-      socket?.on('message', ()=> {
-          SetFetch((prevIsBool) => prevIsBool + 1)
-          
-      });
-      return () => {
-          socket?.off('message');
-      };
-  }, [socket]);
-
-  //id is convertation id
+    useEffect(() => {
+        socket?.on('message', ()=> {
+            SetFetch((prevIsBool) => prevIsBool + 1)
+            
+        });
+        return () => {
+            socket?.off('message');
+        };
+    }, [socket]);
 
 
-   
-    /////// friends messages ///////
   
 
     const [MessagesRoom, SetMessagesRoom] = useState(null);

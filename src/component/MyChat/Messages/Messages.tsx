@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import "./Messages.css"
 import axios from 'axios';
 import Input from "./inputPart/Input"
@@ -10,6 +10,11 @@ import Profile from '../../Profile/Profile';
 
 const Messages = ({optionSelected ,room, user, profile, MessagesData, MessagesRoom}) => {
 
+    const messagesEndRef = useRef(null);
+
+    useEffect(() => {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [MessagesData]); 
 
   return (
 
@@ -60,7 +65,7 @@ const Messages = ({optionSelected ,room, user, profile, MessagesData, MessagesRo
             </>
           )
            : (room) ? (
-            <>
+            <> 
                 <div className= 'headPart'> 
                     {
                         room && 

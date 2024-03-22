@@ -9,12 +9,9 @@ import axios from 'axios';
 function App() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState('');
-  const [re, setRe] = useState(0);
 
-  const handleNavigateToHome = () => {
-    // Navigate to "/Home"
-    return <Navigate to="/Home" />;
-  };
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,18 +35,19 @@ function App() {
             (
               error === '2FA' 
               ? ( <>
-              <Route path="*" element={<Navigate to="/2fa" />} />  
-              <Route path="/2fa" element={<TwoFa  />} />
+               <Route path="*" element={<Navigate to="/2fa" />} />  
+                <Route path="/2fa" element={<TwoFa user={user} setError={setError}/>} />
               </>)
               : ( <>
-              <Route path="*" element={<Navigate to="/" />} /> 
-              <Route path="/" element={<Login />} />
+                <Route path="*" element={<Navigate to="/" />} /> 
+               <Route path="/" element={<Login user={user}/>} />
               </>)
-            ):
+            )
+            :
             (
               <>
-                <Route path="/2fa" element={<TwoFa  />} />
-                <Route path="/" element={<Login />} />
+                <Route path="/2fa" element={<TwoFa user={user} setError={setError}/>} />
+                <Route path="/" element={<Login user={user} />} />
                 <Route path="/Home" element={<Punk />} />
                 <Route path="/Chat" element={<Chat />} />
               </>

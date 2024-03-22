@@ -3,25 +3,30 @@ import './Login.css'
 import CanvasAnimation from '../Canvas/canvas'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 
 
-export const TwoFa = () => 
+export const TwoFa = ({user ,setError}) => 
 {
-  const navigate = useNavigate();
-  const [code, setcode] = useState('');
 
+  const [code, setcode] = useState('');
+  const [isVerified, setIsVerified] = useState(false);
+
+  if(user)
+    return <Navigate to="/Home" replace />;
   const saveData = async () => {
     const data = await axios.post('http://localhost:3000/api/2fa/authenticate', {twofa:code},{withCredentials: true})
     if(data.status == 200)
     {
-        console.log("1")
-        navigate("/Home");
-        console.log("2")
-
+      setError('');
+      setIsVerified(true);
     }
   }
+
+  if (isVerified)
+   return <Navigate to="/Home" replace />;
+
   return (
     <div className='wfa-container'>
       <div className='wfa'>
@@ -33,7 +38,9 @@ export const TwoFa = () =>
   )
 }
 
-export const Login = () => {
+export const Login = ({user}) => {
+  if(user)
+    return <Navigate to="/Home" replace />;
   return (
     <div className='cont'>
 
