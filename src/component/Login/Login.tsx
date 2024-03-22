@@ -16,8 +16,10 @@ export const TwoFa = () =>
     const data = await axios.post('http://localhost:3000/api/2fa/authenticate', {twofa:code},{withCredentials: true})
     if(data.status == 200)
     {
-      console.log(data);
+        console.log("1")
         navigate("/Home");
+        console.log("2")
+
     }
   }
   return (
