@@ -107,6 +107,7 @@ const Chat = () => {
 
           UserSelceted={handleUser} 
           RoomSelceted={handleRoom}
+          selectedUser={User}
           selectedroom={Room}
           Profile={handleProfile}
           optionSelected={optionSelected} 

@@ -9,7 +9,7 @@ import MyData from "./myProfileInfos/MyData";
 import { useSocket } from "../../Socket";
 
 
-const My_profile = ({ RoomSelceted, selectedroom, UserSelceted, Profile , optionSelected, SetOption, SetMessages,SetMessagesRoom}) => {
+const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Profile , optionSelected, SetOption, SetMessages,SetMessagesRoom}) => {
   const [boolblock,setboolblock] = useState(0);
   const [boolpending,setboolpending] = useState(0);
   const [fetchRoomNotif,SetFetchRoomNotif] = useState(0);
@@ -366,6 +366,7 @@ const My_profile = ({ RoomSelceted, selectedroom, UserSelceted, Profile , option
         
             friendsData={FrinedsData}
             userSelect={UserSelceted}
+            selectedUser={selectedUser}
             SetNotifs={SetNotifs}
             Notifs={Notifs}
             SetMessages={SetMessages}
@@ -373,6 +374,7 @@ const My_profile = ({ RoomSelceted, selectedroom, UserSelceted, Profile , option
         ) : (RoomData || NotRoomsdata) && optionSelected === "rooms" ? (
           <Rooms
             Roomsdata={RoomData}
+            selectedroom={selectedroom}
             SetRoomData={SetRoomData}
             RoomSelect={RoomSelceted}
             NotRoomsdata={NotRoomsdata}

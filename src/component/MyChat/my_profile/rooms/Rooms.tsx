@@ -3,7 +3,7 @@ import "./Rooms.css"
 import { useSocket } from '../../../Socket';
 import axios from "axios";
 
-const Rooms = ({Roomsdata, SetRoomData,  RoomSelect, NotRoomsdata, SetNotRoomsdata, RoomNotifs, SetRoomNotifs , SetMessagesRoom}) => {
+const Rooms = ({Roomsdata, SetRoomData, selectedroom, RoomSelect, NotRoomsdata, SetNotRoomsdata, RoomNotifs, SetRoomNotifs , SetMessagesRoom}) => {
 
 
   const socket = useSocket();
@@ -17,14 +17,12 @@ const Rooms = ({Roomsdata, SetRoomData,  RoomSelect, NotRoomsdata, SetNotRoomsda
   }
 
 
-  const [selectedroom, setSelectedroom] = useState(null);
-
-
     const handleroomClick = (room , roomId) => {
       if( selectedroom && room.name !== selectedroom.name)
         socket?.emit('chatroomdeselected', selectedroom.name);
-      SetMessagesRoom(null);
-      setSelectedroom(room);
+      if (selectedroom && selectedroom.name != room.name)
+        SetMessagesRoom(null);
+      // setSelectedroom(room);
       RoomSelect(room);
       socket?.emit('notifroom', room.name);
       socket?.emit('chatroomselected', room.name);
@@ -77,6 +75,7 @@ const Rooms = ({Roomsdata, SetRoomData,  RoomSelect, NotRoomsdata, SetNotRoomsda
                   <img />
               </div>
     
+
               <div className="amis-infos">
                   <p className="amis-name"><p>{room.roomname}</p></p>
                   {/* <p className="last-message">room.lastMessage</p> */}
