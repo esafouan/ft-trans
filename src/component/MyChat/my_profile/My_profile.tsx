@@ -13,10 +13,8 @@ const My_profile = ({ RoomSelceted, selectedroom, UserSelceted, Profile , option
   const [boolblock,setboolblock] = useState(0);
   const [boolpending,setboolpending] = useState(0);
   const [fetchRoomNotif,SetFetchRoomNotif] = useState(0);
+  
   const socket = useSocket();
-
-  
-  
   const [Notifs, SetNotifs] = useState([]);
   const [RoomNotifs, SetRoomNotifs] = useState([]);
   const [countByType, setCountByType] = useState({});

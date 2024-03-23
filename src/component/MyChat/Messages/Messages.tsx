@@ -41,20 +41,19 @@ const Messages = ({optionSelected ,room, user, profile, MessagesData, MessagesRo
 
                 <div className= 'midlePart' key={user.id} > 
                     
-                    <ul className="new-chat"  >
-                    
+                    <div className="new-chat"  >
                         { MessagesData && MessagesData.map((message) => (
                             
-                                <li
+                                <div
                                     key={message.senderId}
                                     className={`message ${message.senderId === user.id ? 'parker' : 'stark'}`}>
                                     {console.log(message.content, "user id = " , user.id)}
                                     {message.content}
-                                </li>
-                            ))
-                        
+                                </div>
+                            ))   
                         }
-                    </ul>
+                        <div className="nwestMessages" ref={messagesEndRef}></div>
+                    </div>
                 
                 </div>
                 

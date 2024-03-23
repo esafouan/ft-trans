@@ -10,7 +10,7 @@ const Friends_discusion = ({friendsData ,userSelect, SetNotifs, Notifs, SetMessa
   // console.log(friendsData);
   const socket = useSocket();
   const [MesagesById, SetMessagesById] = useState({});
-
+  
   const handleFriendClick = (friend , friendId) => {
     SetMessages(null);
     setSelectedFriendId(friendId);
@@ -34,15 +34,7 @@ const Friends_discusion = ({friendsData ,userSelect, SetNotifs, Notifs, SetMessa
 
   }, [Notifs]);
 
-//   useEffect(() => {
 
-//     socket?.on('notifmessage', (payload) => {
-//     console.log("payload : ",payload);
-//     SetNotifs(prevNotifs => [...prevNotifs , {type: payload.type , senderid: payload.senderid}])});
-//   return () => {
-//     socket?.off('notifmessage');
-//   };
-// }, [socket]);
 
 
   return (

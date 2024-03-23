@@ -12,9 +12,10 @@
     padding: 0px 10px 0px 0px;
     background: rgba(22, 89, 83,0.1);
     border: 1px solid #8BD9D1;
-    overflow: hidden;
+    overflow:hidden;
     position: relative;
-    
+    justify-items: center;
+    align-items: center;
 }
 
 .No-conv
@@ -40,6 +41,7 @@
     grid-row-gap: 0px;
     padding-left: 2%;
     border-bottom:  2px solid #8BD9D1;
+    min-height: 8vh;
 }
 
 .img-cont {
@@ -106,9 +108,9 @@
     box-shadow: 0 0 8rem 0 rgba(0, 0, 0, 0.1), 0rem 2rem 4rem -3rem rgba(0, 0, 0, 0.5);
     padding: 1rem;
     overflow-y: auto;
-    max-width: 50vw;
+    max-width: 43vw;
     max-height: 75.6vh;
-    scrollbar-width: none;
+    /* scrollbar-width: none; */
 }
 
 .time
@@ -134,67 +136,26 @@
     height: fit-content;
     max-width: 50%;
     word-wrap: break-word;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     box-shadow: 0 0 2rem rgba(0, 0, 0, 0.075), 0rem 1rem 1rem -1rem rgba(0, 0, 0, 0.1);
     font-size: small;
 }
-
+.nwestMessages{
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
 .parker{
 	margin: 0.5rem 1rem 0rem auto;
   	border-radius: 1.125rem 1.125rem 0 1.125rem;
-  	  background: rgba(22, 89, 83, 1); ;
-
+  	background: rgba(22, 89, 83, 1); ;
   	color: white;
 }
 
 
 
-.inputPart {
-    grid-area: 3 / 1 / 4 / 2;
-    position: relative;
-    background:rgba(29, 242, 182, 1);
-	border-radius: 12px;
-	padding: 0 10px;
-	height: 70%;
-    width: 97%;
-    left: 1%;
-    top :15%;
-}
 
-.inputPart__container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100%;
-
-}
-
-.inputPart .send-message-button {
-    background: rgb(15, 14, 14);
-    height: 30px;
-    min-width: 30px;
-    border-radius: 50%;
-    transition: 0.3s ease;
-    position: relative;
-    cursor: pointer;
-    width: 30px;
-    border: 0;
-    outline: none;
-    cursor: pointer;
-}
-  
-.inputPart__input {
-    width: 100%;
-    height: 100%;
-    outline: none;
-    position: relative;
-    color: rgb(0, 0, 0);
-    font-size: 13px;
-    background: transparent;
-    border: 0;
-    font-family: "Lato", sans-serif;
-    resize: none;
-}
 
 .send-message-button svg {
     stroke: #F9F9F9;

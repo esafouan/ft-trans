@@ -4,10 +4,11 @@
     background:rgba(29, 242, 182, 1);
 	border-radius: 12px;
 	padding: 0 10px;
-	height: 70%;
-    width: 97%;
-    left: 1%;
-    top :15%;
+    width: 40vw;
+    margin-top: -15px;
+    min-height: 6vh;
+    height : 6vh;
+    border: 2px solid white;
 }
 
 .inputPart__container {
