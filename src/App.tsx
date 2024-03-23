@@ -5,6 +5,7 @@ import './App.css';
 import Punk from './component/PunkProfile/Punk';
 import Chat from './component/MyChat/Chat';
 import axios from 'axios';
+import StartGame from './component/game/StartGame';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -49,7 +50,9 @@ function App() {
                 <Route path="/2fa" element={<TwoFa user={user} setError={setError}/>} />
                 <Route path="/" element={<Login user={user} />} />
                 <Route path="/Home" element={<Punk />} />
+                <Route path="/Game" element={<StartGame />} />
                 <Route path="/Chat" element={<Chat />} />
+
               </>
             )
 

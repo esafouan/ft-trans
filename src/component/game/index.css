@@ -1,0 +1,30 @@
+
+
+/* body {
+
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+} */
+
+body{
+  display: relative;
+  margin: 0;
+  padding: 0;
+
+}
+
+
+canvas{
+
+  /* background-image: url(room4.jpg); */
+  background-color: black;
+  background-size: cover;
+  background-position: center;
+  background-position: 0cqi;
+  height: 0%;
+  width: 0%;
+}
+
