@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./OwnerInfo.css"
 import "./owner.css"
+import AddFriendModal from '../../../../Modals/addfriend/addfriend'
 
 function OwnerOption (roleSelected : any) 
 {
@@ -103,32 +104,58 @@ function renderOptions(roleSelected : any, roomRole : any) {
 }
 
 
+
+
+const Owner = () => {
+  const [showAdd, setShowAdd] = useState(false);
+  const [friendName, setFriendName] = useState("");
+
+  const handleAddClick = () => {
+    setShowAdd(true);
+  };
+
+  const handleFormSubmit = async () => {
+    // Assuming you'll use axios here to send the request
+    console.log("Submitting", friendName);
+    // Close the modal and reset the form
+    setShowAdd(false);
+    setFriendName("");
+  };
+
+  const handleCancel = () => {
+    setShowAdd(false);
+    setFriendName(""); // Optionally reset the friendName on cancel
+  };
+
+  return (
+    <>
+      <div className='addowner own' onClick={handleAddClick}>add</div>
+      <div className='leaveowner own'>leave</div>
+
+      <AddFriendModal
+        show={showAdd}
+        friendName={friendName}
+        setFriendName={setFriendName}
+        onSubmit={handleFormSubmit}
+        onCancel={handleCancel}
+      />
+    </>
+  );
+};
+
+
+
+
+
 function MyOptions(roomRole : any) {
-  if (roomRole === 'admin') {
+  
+  if (roomRole === 'owner') 
+  {
     return(
-      <>
-        <div className='addowner own'>add</div>
-        <div className='leaveowner own'>leave</div>
-      </>
+      <Owner />
     )
   }
 
-  else if (roomRole === 'owner') {
-    return(
-      <>
-        <div className='addowner own'>add</div>
-        <div className='leaveowner own'>leave</div>
-      </>
-    )
-   //set owner  
-  } 
-
-  else if (roomRole === 'default') {
-    return(
-        <div className='leaveowner own'>leave</div>
-    )
-  }  
-  
 }
 
 const RoomInfo = ({profile, room, RoomSelceted}) => {

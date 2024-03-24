@@ -2,12 +2,13 @@ import { React, useEffect, useState } from "react";
 import "./MyData.css"
 import axios from "axios";
 import { useSocket } from "../../../Socket";
+import AddFriendModal from "../../../Modals/addfriend/addfriend";
 
 
 const MyData = ({profileData}) => {
 
     //stat of friend
-    const [showAddFriendForm, setShowAddFriendForm] = useState(false);
+    const [showAdd,   setShowAdd] = useState(false);
     //friend name
     const [friendName, setFriendName] = useState("");
     //show password of room
@@ -23,13 +24,14 @@ const MyData = ({profileData}) => {
 
     const socket = useSocket();
     const handleAddFriendClick = () => {
-        setShowAddFriendForm(true);
+          setShowAdd(true);
     };
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         
         const resp = await axios.post('http://localhost:3000/api/friends/sendrequest', {login: friendName}, {withCredentials:true});
-        setShowAddFriendForm(false);
+          setShowAdd(false);
         setFriendName("");
     };
     
@@ -48,10 +50,15 @@ const MyData = ({profileData}) => {
         setShowAddRoomForm(false);
         setRoomName("");
     };
-
+    const handleCancel = () => {
+        setShowAdd(false);
+        setFriendName(""); // Optionally reset the friendName on cancel
+      };
+    
     return (
         <div>
-            { profileData && !showAddFriendForm && !showAddRoomForm? (
+            { profileData && !showAdd ? (
+               
                 <div className="contain-img">
                     <div className="button-container">
                         <div className="new new-Friend" onClick={handleAddFriendClick}>
@@ -101,51 +108,17 @@ const MyData = ({profileData}) => {
                     </div>
                 </div>
                 </div>
-            ) : showAddFriendForm ? (
-                <div className="add-container">
-                    <input
-                        className="input-add"
-                        type="text"
-                        value={friendName}
-                        onChange={(e) => setFriendName(e.target.value)}
-                        placeholder="Enter friend's name"
-                    />
-                    <div className="butt-add">
-                        <div className="But submit-But" onClick={handleFormSubmit}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="36"
-                                height="36"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="ai ai-Check"
-                            >
-                                <path d="M4 12l6 6L20 6" />
-                            </svg>
-                        </div>
-                        <div className="But Cancel-But"
-                        onClick={() => setShowAddFriendForm(false)}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="36"
-                                height="36"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="ai ai-Cross"
-                            >
-                                <path d="M20 20L4 4m16 0L4 20" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
+                
+            ) :
+                showAdd ? (
+                <AddFriendModal
+                    show={showAdd}
+                    friendName={friendName}
+                    setFriendName={setFriendName}
+                    onSubmit={handleFormSubmit}
+                    onCancel={handleCancel}
+                    >
+                    </AddFriendModal>
             ) : showAddRoomForm ? (
                 <div className="room-container">
                     <input
