@@ -10,9 +10,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState('');
 
-
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -25,9 +22,8 @@ function App() {
     fetchData();
   }, []);
 
-  console.log("rrrr = " , error);
+
   return (
-    <div>
       <Router >
         <Routes>
           {
@@ -54,10 +50,8 @@ function App() {
             )
 
           }
-       
         </Routes>
       </Router>
-    </div>
   );
 }
 

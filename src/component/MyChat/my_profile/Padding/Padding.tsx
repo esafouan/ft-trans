@@ -9,7 +9,7 @@ const Padding = ({pandding,  userSelect}) => {
 
   const handleAccept = async (friend) => {
     try {
-        console.log("id frine = ", friend.id)
+       
         const response = await axios.post('http://localhost:3000/api/friends/acceptrequest', {id: friend.id}, { withCredentials: true });
     } catch (error) {
         console.error( error);
@@ -18,14 +18,13 @@ const Padding = ({pandding,  userSelect}) => {
 
 const handleReject = async (friend) => {
   try {
-      console.log("id frine = ", friend.id)
       const response = await axios.post('http://localhost:3000/api/friends/rejectrequest', {id: friend.id}, { withCredentials: true });
   } catch (error) {
       console.error( error);
   }
 };
 
-  pandding && console.log("pandding =", pandding);
+
 
   return (
      <>

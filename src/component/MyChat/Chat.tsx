@@ -73,7 +73,7 @@ const Chat = () => {
             try 
             {
                 if (Room) {
-                    console.log("go to fetch");
+                  
                     const resp = await axios.post('http://localhost:3000/api/chat/getroomconversation',{roomname: Room.name},  {withCredentials: true})
                     SetMessagesRoom(resp.data);
                     socket.emit('roomnotif', Room.name)
@@ -140,8 +140,7 @@ const Chat = () => {
               room={Room}
               RoomSelceted={handleRoom} 
               />)
-              : (null)
-       
+              : (null)       
           }
         </div>
       </div>

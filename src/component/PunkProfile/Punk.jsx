@@ -19,7 +19,6 @@ const images = [im1, im2, im3, im4];
 const Punk = () => {
   const socket = useSocket();
 
-  console.log(socket.id);
   
   return (
     <div className='profile'>
@@ -30,7 +29,7 @@ const Punk = () => {
             <Infos/>
 
         
-            <Friends />
+            {/* <Friends /> */}
           
 
             <ListMatch />

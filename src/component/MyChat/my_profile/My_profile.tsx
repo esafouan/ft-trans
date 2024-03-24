@@ -38,6 +38,8 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
     const fetchNotifs = async () =>{
 
       const resp = await axios.get('http://localhost:3000/api/chat/notifications', {withCredentials:true})
+      console.log("here 00")
+
       SetNotifs(resp.data);
 
     }
@@ -46,11 +48,8 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
 
   useEffect(() => {
     const fetchNotifs = async () =>{
-      console.log("ssss");
       const resp = await axios.get('http://localhost:3000/api/room/roomnotifications', {withCredentials:true})
       SetRoomNotifs(resp.data);
-      RoomNotifs && console.log("room motifs = ",RoomNotifs)
-
     }
     fetchNotifs();
   }, [fetchRoomNotif]);
@@ -69,13 +68,12 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
 
   }, [Notifs]);
 
-  // RoomNotifs && console.log("room notifs = " ,RoomNotifs)
 
   useEffect(() => {
 
       socket?.on('notif', (payload) => {
-        
         SetNotifs(prevNotifs => [...prevNotifs , {type: payload.type , senderid: payload.senderid}])
+        Notifs.length > 0 && console.log ("hey bro = " , Notifs);
       });
     return () => {
       socket?.off('notif');
@@ -363,7 +361,6 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
       <div className="discussions">
         {FrinedsData && optionSelected === "friends" ? (
           <Friends_discusion
-        
             friendsData={FrinedsData}
             userSelect={UserSelceted}
             selectedUser={selectedUser}

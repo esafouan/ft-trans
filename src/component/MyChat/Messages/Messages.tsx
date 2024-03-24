@@ -47,7 +47,6 @@ const Messages = ({optionSelected ,room, user, profile, MessagesData, MessagesRo
                                 <div
                                     key={message.senderId}
                                     className={`message ${message.senderId === user.id ? 'parker' : 'stark'}`}>
-                                    {console.log(message.content, "user id = " , user.id)}
                                     {message.content}
                                 </div>
                             ))   

@@ -34,7 +34,7 @@ const Infos = () => {
     getData();
   }, []);
   
-  (profileData && console.log(profileData));
+
 
   return (
     <div className="profile-container">

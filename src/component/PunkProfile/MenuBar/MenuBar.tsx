@@ -17,7 +17,7 @@ function Modal({ onClose , toggleTwoFactor , isTwoFactorEnabled}) {
         generateQrcode()
     }
   },[isTwoFactorEnabled])
-  Qr && console.log("QR = " , Qr);
+
   const [code , setcode] = useState('')
 
   const sendConde = async (code) =>
@@ -87,7 +87,7 @@ const MenuBar = () => {
   const handleModal = () =>
   {
     SetSettings(!Settings);
-    console.log("button clickeeeeeeeeeeed")
+  
   }
 
   return (
