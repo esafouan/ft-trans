@@ -32,28 +32,23 @@ function App() {
 
     socket?.on('error', ()=> {
       setError(error)
-      
-  });
-  return () => {
-      socket?.off('message');
-  };
-      // listen on event back end
-
       if (error) {
         setErrorMessage(error);
         setTimeout(() => {
           setErrorMessage('');
         }, 5000); // Display error for 5 seconds
       }
- 
-    return () => {
-  
-    };
-  }, []);
+      
+  });
+
+  return () => {
+      socket?.off('message');
+  };
+  }, [socket]);
 
   return (
       <Router >
-         {errorMessage && <div className="error-popup">{errorMessage}</div>}
+         {/* {<div className='error-container'><div className="error-popup">No friend exist </div></div>} */}
         <Routes>
           {
             error.length > 0 ?
