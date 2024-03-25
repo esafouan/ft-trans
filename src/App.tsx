@@ -6,6 +6,7 @@ import Punk from './component/PunkProfile/Punk';
 import Chat from './component/MyChat/Chat';
 import axios from 'axios';
 import StartGame from './component/game/StartGame';
+import { useSocket } from './component/Socket';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -24,8 +25,35 @@ function App() {
   }, []);
 
 
+  const [errorMessage, setErrorMessage] = useState('');
+  const socket = useSocket();
+
+  useEffect(() => {
+
+    socket?.on('error', ()=> {
+      setError(error)
+      
+  });
+  return () => {
+      socket?.off('message');
+  };
+      // listen on event back end
+
+      if (error) {
+        setErrorMessage(error);
+        setTimeout(() => {
+          setErrorMessage('');
+        }, 5000); // Display error for 5 seconds
+      }
+ 
+    return () => {
+  
+    };
+  }, []);
+
   return (
       <Router >
+         {errorMessage && <div className="error-popup">{errorMessage}</div>}
         <Routes>
           {
             error.length > 0 ?

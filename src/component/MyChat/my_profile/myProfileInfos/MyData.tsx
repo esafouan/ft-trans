@@ -23,16 +23,25 @@ const MyData = ({profileData}) => {
     const [RoomName, setRoomName] = useState("");
 
     const socket = useSocket();
+    
     const handleAddFriendClick = () => {
           setShowAdd(true);
     };
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        try{
+
+            const resp = await axios.post('http://localhost:3000/api/friends/sendrequest', {login: friendName}, {withCredentials:true});
+            setShowAdd(false);
+            setFriendName("");
+            console.log("response friends = ", resp.data)
+
+        }
+        catch(error){
+            console.log("error = ",error)
+        }
         
-        const resp = await axios.post('http://localhost:3000/api/friends/sendrequest', {login: friendName}, {withCredentials:true});
-          setShowAdd(false);
-        setFriendName("");
     };
     
     
