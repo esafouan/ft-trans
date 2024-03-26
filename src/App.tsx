@@ -29,26 +29,29 @@ function App() {
   const socket = useSocket();
 
   useEffect(() => {
+    const handleError = () => {
+      setErrorMessage("An error occurred.");
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 1000);
+    };
 
-    socket?.on('error', ()=> {
-      setError(error)
-      if (error) {
-        setErrorMessage(error);
-        setTimeout(() => {
-          setErrorMessage('');
-        }, 5000); // Display error for 5 seconds
-      }
-      
-  });
+    socket?.on('error', handleError);
 
-  return () => {
-      socket?.off('message');
-  };
+    return () => {
+      socket?.off('error', handleError);
+    };
   }, [socket]);
 
   return (
-      <Router >
-         {/* {<div className='error-container'><div className="error-popup">No friend exist </div></div>} */}
+    <Router>
+        {
+          errorMessage && (
+          <div className='error-container'>
+            <div className="error-popup">{errorMessage}</div>
+          </div>
+        )
+        }
         <Routes>
           {
             error.length > 0 ?
