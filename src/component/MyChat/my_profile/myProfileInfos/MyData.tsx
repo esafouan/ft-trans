@@ -1,28 +1,19 @@
 import { React, useEffect, useState } from "react";
 import "./MyData.css"
 import axios from "axios";
-import { useSocket } from "../../../Socket";
+
 import AddFriendModal from "../../../Modals/addfriend/addfriend";
+import Addroom from "../../../Modals/addroom/addroom";
 
 
 const MyData = ({profileData}) => {
 
     //stat of friend
     const [showAdd,   setShowAdd] = useState(false);
-    //friend name
     const [friendName, setFriendName] = useState("");
-    //show password of room
-    const [showPasswordInput, setShowPasswordInput] = useState(false);
-    //room passWord
-    const [roomPassword, setRoomPassword] = useState('');
-    //roomType
-    const [roomType, setRoomType] = useState('public');   
-    //stat of room
-    const [showAddRoomForm, setShowAddRoomForm] = useState(false);
-    //room name
-    const [RoomName, setRoomName] = useState("");
 
-    const socket = useSocket();
+
+    const [showAddRoomForm, setShowAddRoomForm] = useState(false);
     
     const handleAddFriendClick = () => {
           setShowAdd(true);
@@ -50,15 +41,6 @@ const MyData = ({profileData}) => {
     };
     
 
-
-    const handleRoomCreat = async (e) => {
-        e.preventDefault();
-        //send to backend
-        const resp = await axios.post('http://localhost:3000/api/room/createroom', {roomname: RoomName ,type : roomType, password : roomPassword}, {withCredentials:true});
-        socket.emit('newroom');
-        setShowAddRoomForm(false);
-        setRoomName("");
-    };
     const handleCancel = () => {
         setShowAdd(false);
         setFriendName(""); // Optionally reset the friendName on cancel
@@ -66,7 +48,9 @@ const MyData = ({profileData}) => {
     
     return (
         <div>
-            { profileData && !showAdd ? (
+            <>
+          
+            { profileData && (
                
                 <div className="contain-img">
                     <div className="button-container">
@@ -117,8 +101,9 @@ const MyData = ({profileData}) => {
                     </div>
                 </div>
                 </div>
-                
-            ) :
+                )
+            }
+            {
                 showAdd ? (
                 <AddFriendModal
                     show={showAdd}
@@ -129,108 +114,14 @@ const MyData = ({profileData}) => {
                     >
                     </AddFriendModal>
             ) : showAddRoomForm ? (
-                <div className="room-container">
-                    <input
-                        className="room-input"
-                        type="text"
-                        value={RoomName}
-                        onChange={(e) => setRoomName(e.target.value)}
-                        placeholder="Enter Room's name"
-                    />
-                    <div className="types">
-                        <div className="types-container">
-
-                            <label className="public-container">
-                                <input
-                                    type="radio"
-                                    value="public"
-                                    checked={roomType === "public"}
-                                    onChange={(e) => {
-                                        setRoomType(e.target.value);
-                                        setShowPasswordInput(false);
-                                    }}
-                                />
-                                <p>Public</p>
-                            </label>
-
-                            <label className="private-container">
-                                <input
-                                    type="radio"
-                                value="private"
-                                checked={roomType === "private"}
-                                onChange={(e) => {
-                                    setRoomType(e.target.value);
-                                    setShowPasswordInput(false);
-                                }}
-                                />
-                                <p>private</p>
-                            </label>   
-
-                            <label className="protected-container">
-                                <input
-                                type="radio"
-                                value="protected"
-                                checked={roomType === "protected"}
-                                onChange={(e) => {
-                                    setRoomType(e.target.value);
-                                    if (e.target.value === "protected") {
-                                        setShowPasswordInput(true);
-                                    } else {
-                                        setShowPasswordInput(false);
-                                    }
-                                }}
-                                />
-                                <p>protected</p>
-                            </label>
-
-                        </div>    
-                        {showPasswordInput && (
-                            <input
-                            className="password-container"
-                            type="password"
-                            value={roomPassword}
-                            onChange={(e) => setRoomPassword(e.target.value)}
-                            placeholder="Enter room password"
-                            />
-                        )}
-                    </div>
-                    <div className="room-butt">
-                        <div className="But submit-But" onClick={handleRoomCreat}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="36"
-                                height="36"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="ai ai-Check"
-                            >
-                                <path d="M4 12l6 6L20 6" />
-                            </svg>
-                        </div>
-                        <div className="But Cancel-But"
-                        onClick={() => setShowAddRoomForm(false)}>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="36"
-                                height="36"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="ai ai-Cross"
-                            >
-                                <path d="M20 20L4 4m16 0L4 20" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            ) : null}
+                <Addroom 
+                    setShowAddRoomForm={setShowAddRoomForm} 
+                    showAddRoomForm={showAddRoomForm} 
+                />
+            ) : null
+            }
+            
+            </>
         </div>
     )
 }

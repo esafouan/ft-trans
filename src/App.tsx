@@ -35,6 +35,7 @@ function App() {
         setErrorMessage('');
       }, 1000);
     };
+    
 
     socket?.on('error', handleError);
 

@@ -7,10 +7,12 @@ function AddFriendModal({ show, friendName, setFriendName, onSubmit, onCancel })
     if (!show) {
       return null;
     }
+
     const backdrop = {
         visible : {opacity: 1},
         hidden: {opacity: 0}
     }
+
     const modal = {
         hidden :{
             y :"-100vh",
@@ -23,7 +25,7 @@ function AddFriendModal({ show, friendName, setFriendName, onSubmit, onCancel })
     }
     
     return (
-        <AnimatePresence mode='wait'>
+        <AnimatePresence>
 
         <motion.div className="modal-backdrop"
             variants={backdrop}
