@@ -18,8 +18,10 @@ const Rooms = ({Roomsdata, SetRoomData, selectedroom, RoomSelect, NotRoomsdata, 
 
 
     const handleroomClick = (room , roomId) => {
-      if( selectedroom && room.name !== selectedroom.name)
+      if( selectedroom && room.name !== selectedroom.name){
+        SetMessagesRoom(null);
         socket?.emit('chatroomdeselected', selectedroom.name);
+      }
       if (selectedroom && selectedroom.name != room.name)
         SetMessagesRoom(null);
       // setSelectedroom(room);
@@ -41,6 +43,7 @@ const Rooms = ({Roomsdata, SetRoomData, selectedroom, RoomSelect, NotRoomsdata, 
   return (
     <div className='roomsContainer'>
       <div className="joined_room">
+
         {Roomsdata && Roomsdata.map((room) => (
           <div 
             className={`discussion ${selectedroom != null && room.id === selectedroom.id ? 'message-active' : ''}`}
@@ -56,17 +59,18 @@ const Rooms = ({Roomsdata, SetRoomData, selectedroom, RoomSelect, NotRoomsdata, 
             </div>
 
             {RoomNotifs && (
-              (selectedroom && room.name !== selectedroom.name) || 
+              (selectedroom && room.name !== selectedroom.name) &&
               (RoomNotifs.find(notification => notification.roomname === room.name)?.count > 0)
-            ) && (
+            ) ? (
               <div className="amis-status">
                 {RoomNotifs.find(notification => notification.roomname === room.name)?.count}
               </div>
-            )}
+            ) : (null)}
           </div>
         ))}
       </div>
       <div className="notjoined_room">
+      <p className='notjoind-title'>available rooms</p>
       {
         NotRoomsdata && NotRoomsdata.map((room) => 
         (

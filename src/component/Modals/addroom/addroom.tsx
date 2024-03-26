@@ -104,7 +104,7 @@ const Addroom = ({setShowAddRoomForm,showAddRoomForm}) => {
                     </label>
                 </div>
 
-                {/* {showPasswordInput && (
+                {showPasswordInput && (
                     <input
                     className="password-input"
                     type="password"
@@ -112,11 +112,11 @@ const Addroom = ({setShowAddRoomForm,showAddRoomForm}) => {
                     onChange={(e) => setRoomPassword(e.target.value)}
                     placeholder="Enter room password"
                     />
-                )} */}
-{/* 
-                <div className="room-butt">
+                )}
 
-                    <div className="But submit-But" onClick={handleRoomCreat}>
+                <div className="butt-room-modal">
+
+                    <div className="But-modalroom submit-But-modalroom" onClick={handleRoomCreat}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="36"
@@ -133,7 +133,7 @@ const Addroom = ({setShowAddRoomForm,showAddRoomForm}) => {
                         </svg>
                     </div>
 
-                    <div className="But Cancel-But"
+                    <div className="But-modalroom Cancel-But-modalroom"
                     onClick={() => setShowAddRoomForm(false)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +151,7 @@ const Addroom = ({setShowAddRoomForm,showAddRoomForm}) => {
                         </svg>
                     </div>
 
-                </div> */}
+                </div>
         
             </motion.div>
         </motion.div>

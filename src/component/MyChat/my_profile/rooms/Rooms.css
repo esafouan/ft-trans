@@ -1,3 +1,7 @@
+
+.discussionrooms{
+    overflow: hidden;
+}
 .roomsContainer {
     grid-area: 3 / 1 / 4 / 2;
     display: grid;
@@ -15,6 +19,8 @@
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 34vh; 
+    padding: 0% 3% 0% 0%;
+
     /* background-color: aliceblue; */
 }
 
@@ -23,6 +29,16 @@
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 34vh; 
-    /* background-color: rgb(28, 78, 122); */
+    padding: 0% 3% 0% 0%;
+    height: 30vh;
 }
 
+.notjoind-title{
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    color: white;
+    padding: 3%;
+    font-size: math;
+    letter-spacing: 1px;
+}

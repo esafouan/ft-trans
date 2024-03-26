@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./OwnerInfo.css"
 import "./owner.css"
 import AddFriendModal from '../../../../Modals/addfriend/addfriend'
+import SetOwnerModal from '../../../../Modals/Setowner/setowner'
 
 function OwnerOption (roleSelected : any) 
 {
@@ -109,28 +110,43 @@ function renderOptions(roleSelected : any, roomRole : any) {
 const Owner = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [friendName, setFriendName] = useState("");
+  const [showSetOwner, setShowSetOwner] = useState(false);
 
   const handleAddClick = () => {
     setShowAdd(true);
   };
 
+  const handleLeaveClick = () => {
+    setShowSetOwner(true);
+  };
+
   const handleFormSubmit = async () => {
-    // Assuming you'll use axios here to send the request
-    console.log("Submitting", friendName);
-    // Close the modal and reset the form
+   
+    //join group request
+
+    setShowAdd(false);
+    setFriendName("");
+  };
+
+  const handleLeaveSubmit = async () => {
+   
+    //Leave group request
+
     setShowAdd(false);
     setFriendName("");
   };
 
   const handleCancel = () => {
     setShowAdd(false);
-    setFriendName(""); // Optionally reset the friendName on cancel
+    setFriendName("");
+    setShowSetOwner(false);
+
   };
 
   return (
     <>
       <div className='addowner own' onClick={handleAddClick}>add</div>
-      <div className='leaveowner own'>leave</div>
+      <div className='leaveowner own' onClick={handleLeaveClick}>leave</div>
 
       <AddFriendModal
         show={showAdd}
@@ -139,6 +155,15 @@ const Owner = () => {
         onSubmit={handleFormSubmit}
         onCancel={handleCancel}
       />
+
+      <SetOwnerModal
+          show={showSetOwner}
+          friendName={friendName}
+          setFriendName={setFriendName}
+          onSubmit={handleLeaveSubmit}
+          onCancel={handleCancel}
+      />
+
     </>
   );
 };

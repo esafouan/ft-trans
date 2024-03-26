@@ -358,7 +358,7 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
         </div>
       </div>
 
-      <div className="discussions">
+      <div className="discussions discussionrooms">
         {FrinedsData && optionSelected === "friends" ? (
           <Friends_discusion
             friendsData={FrinedsData}
