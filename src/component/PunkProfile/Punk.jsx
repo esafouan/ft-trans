@@ -29,7 +29,7 @@ const Punk = () => {
             <Infos/>
 
         
-            {/* <Friends /> */}
+            <Friends />
           
 
             <ListMatch />

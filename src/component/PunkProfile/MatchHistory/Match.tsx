@@ -17,6 +17,7 @@ const Match = ({match}) => {
     return (
         <div className='match'>
             <div className=" card">
+                
                 <div className="my-content">
                     <img className="card-img" src={match.player1.image}/>
                     <p className='my-card-res'>{match.player1.result}</p>
@@ -69,25 +70,30 @@ const matches = [
 
 const [beginIndex, setbeginIndex] = useState(0);
 const [endIndex, setendIndex] = useState(Math.min(3, matches.length));
+const [animationClass, setAnimationClass] = useState("");
 
-const handleNext = () => 
-{
-    if (endIndex < matches.length)
-    {
-        setendIndex(endIndex + 1);
+
+const handleNext = () => {
+    if (endIndex < matches.length) {
+      setAnimationClass("slide-out-to-left");
+      setTimeout(() => {
         setbeginIndex(beginIndex + 1);
+        setendIndex(endIndex + 1);
+        setAnimationClass("slide-in");
+      }, 500); // Timeout matches CSS transition time
     }
-}
+  };
 
-const handlePrev = () => 
-{
-    if (beginIndex - 1 >= 0)
-    {
-        setendIndex(endIndex - 1);
+  const handlePrev = () => {
+    if (beginIndex - 1 > 0) {
+      setAnimationClass("slide-out-to-right");
+      setTimeout(() => {
         setbeginIndex(beginIndex - 1);
+        setendIndex(endIndex - 1);
+        setAnimationClass("slide-in");
+      }, 500); // Timeout matches CSS transition time
     }
-}
-
+  };
 return (
 
 
@@ -97,7 +103,7 @@ return (
             <p>List Matches</p>
         </div>
 
-        <div className='matches-list'>
+        <div className={`matches-list ${animationClass}`}>
             {matches.slice(beginIndex, endIndex).map((match, index) => (
                 <Match key={index} match={match} />
             ))}

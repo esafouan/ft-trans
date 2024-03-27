@@ -119,18 +119,19 @@
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    padding: 6px 8px;
-    background: #033310;
-    margin: 6px 70px;
+    padding: 1% 2%;
+    background: rgba(22, 89, 83,0.1);
+    margin: 3% 8%;
     border-radius: 11px;
-    max-height: 55px;
-    border: 2px solid #418C55;
+    max-height: 6.1vh;
+    border: 1px solid #8BD9D1;
+
     width: 17vw;
 }
 
 .friend:hover
 {
-    background:rgb(130, 199, 148)6;
+    background: #165953;
     box-shadow: -5px 20 30px rgba(207, 197, 197, 0.2);
     transform: scale(1.01);
 }
@@ -138,12 +139,14 @@
 .friend img 
 {
     position: relative;
-    width: 50px;
-    height: 50px;
-    border-radius: 20px; /* Make it a circle */
-    border: 2px solid #418C55;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50px;
+    border: 2px solid #8BD9D1;
     overflow: hidden;
-    margin-right: 10px;
+    margin-right: 8px;
+    margin-top: 2%;
+    object-fit: cover;
 }
 
 .friend .friend-name,
@@ -152,7 +155,7 @@
 .friend .friend-status .material-symbols-outlined {
     display: flex;
     align-items: center;
-    color: #418C55;
+    color: #ffffff;
 }
 
 .friend .unfriend .material-symbols-outlined,
@@ -168,7 +171,7 @@
 
 .friend .friend-name 
 {
-    font-size: 18px;
+    font-size: small;
 }
 
 
