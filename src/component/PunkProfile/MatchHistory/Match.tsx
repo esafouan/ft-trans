@@ -70,28 +70,22 @@ const matches = [
 
 const [beginIndex, setbeginIndex] = useState(0);
 const [endIndex, setendIndex] = useState(Math.min(3, matches.length));
-const [animationClass, setAnimationClass] = useState("");
+
 
 
 const handleNext = () => {
     if (endIndex < matches.length) {
-      setAnimationClass("slide-out-to-left");
-      setTimeout(() => {
+    
         setbeginIndex(beginIndex + 1);
         setendIndex(endIndex + 1);
-        setAnimationClass("slide-in");
-      }, 500); // Timeout matches CSS transition time
+
     }
   };
 
   const handlePrev = () => {
     if (beginIndex - 1 > 0) {
-      setAnimationClass("slide-out-to-right");
-      setTimeout(() => {
         setbeginIndex(beginIndex - 1);
         setendIndex(endIndex - 1);
-        setAnimationClass("slide-in");
-      }, 500); // Timeout matches CSS transition time
     }
   };
 return (
@@ -103,7 +97,7 @@ return (
             <p>List Matches</p>
         </div>
 
-        <div className={`matches-list ${animationClass}`}>
+        <div className="matches-list">
             {matches.slice(beginIndex, endIndex).map((match, index) => (
                 <Match key={index} match={match} />
             ))}

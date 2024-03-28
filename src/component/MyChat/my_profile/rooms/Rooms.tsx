@@ -36,7 +36,21 @@ const Rooms = ({Roomsdata, SetRoomData, selectedroom, RoomSelect, NotRoomsdata, 
       if (updatedRoom) {
         RoomSelect(updatedRoom); 
       }
+      useEffect(()=>{
+     
+        const memberLeaved = () => {
+          socket?.on('ileaved', () => {
+            console.log("hamiiiiiiiiiiiiiiiiiiiiid = ", selectedroom);
+            selectedroom && socket?.emit('chatroomdeselected', selectedroom.name) && RoomSelect(null)
+          });
+        }
+        memberLeaved()
+        return () => {
+          socket?.off('ileaved');
+        };
+      },[socket])
     }
+
    
       
 

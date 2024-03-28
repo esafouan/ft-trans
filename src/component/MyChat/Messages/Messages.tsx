@@ -3,6 +3,8 @@ import "./Messages.css"
 import axios from 'axios';
 import Input from "./inputPart/Input"
 import Profile from '../../Profile/Profile';
+import { Socket } from 'socket.io-client';
+import { useSocket } from '../../Socket';
 
 
 
@@ -11,11 +13,15 @@ import Profile from '../../Profile/Profile';
 const Messages = ({optionSelected ,room, user, profile, MessagesData, MessagesRoom}) => {
 
     const messagesEndRef = useRef(null);
-
+    const socket = useSocket()
     useEffect(() => {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [MessagesData]); 
+    const [stat, setstat] = useState(false);
 
+    useEffect(()=>{
+        socket?.on('muted', setstat)
+    }, [socket])
   return (
 
     <div className='messages-container'> 
@@ -100,12 +106,14 @@ const Messages = ({optionSelected ,room, user, profile, MessagesData, MessagesRo
                 
                 </div>
                 
-                <Input
-                    User={user}
-                    Room={room} 
-                    Profile={profile}
-
-                />
+                {
+                    room.mestatus != 'muted' && ( <Input
+                        User={user}
+                        Room={room} 
+                        Profile={profile}
+                    />
+                    )
+                }
             </>
           )
           : (<div className='No-conv'> <p> Select New Conversation Please </p> </div>)

@@ -3,23 +3,49 @@ import "./OwnerInfo.css"
 import "./owner.css"
 import AddFriendModal from '../../../../Modals/addfriend/addfriend'
 import SetOwnerModal from '../../../../Modals/Setowner/setowner'
+import axios from 'axios'
+import { useSocket } from '../../../../Socket'
 
-function OwnerOption (roleSelected : any) 
+function OwnerOption (roleSelected : any,SetRole:any, room: any, memberSelectedid :any, RoomSelceted:any) 
 {
+  const socket = useSocket()
 
-  if (roleSelected === 'default') {   
+  const handleKick = () => {
+    socket?.emit('kickuser', {id : memberSelectedid , name :  room.name});
+    SetRole(null)
+  }
+
+
+  const handleMute = () => {
+    socket?.emit('muteuser', {id : memberSelectedid , name :  room.name});
+    SetRole(null)
+  }
+
+  const handleBan = () => {
+    socket?.emit('banuser', {id : memberSelectedid , name :  room.name});
+    SetRole(null)
+  }
+
+  if (roleSelected === 'default') {
+    const SetAdmin = () => {
+      socket?.emit('setadmin', {id : memberSelectedid , name :  room.name});
+      SetRole(null)
+      
+    }
+
+
     return (
       <div className="owner-member">
-        <div className="optowner kick" >
+        <div className="optowner kick" onClick={handleKick}>
           kick
         </div>
-        <div className="optowner mute" >
+        <div className="optowner mute" onClick={handleMute}>
           mute
         </div>
-        <div className="optowner ban">
+        <div className="optowner ban" onClick={handleBan}>
           ban
         </div>
-        <div className="optowner setadmin">
+        <div className="optowner setadmin" onClick={SetAdmin}>
           admin
         </div>
       </div>
@@ -27,18 +53,24 @@ function OwnerOption (roleSelected : any)
   }
 
   if (roleSelected === 'admin') {
+
+    const UnAdmin = () => {
+      socket?.emit('unsetadmin', {id : memberSelectedid , name :  room.name});
+      SetRole(null)
+    }
+
     return (
       <div className="owner-member">
-        <div className="optowner kick" >
+          <div className="optowner kick" onClick={handleKick}>
           kick
         </div>
-        <div className="optowner mute" >
+        <div className="optowner mute" onClick={handleMute}>
           mute
         </div>
-        <div className="optowner ban">
+        <div className="optowner ban" onClick={handleBan}>
           ban
         </div>
-        <div className="optowner setadmin">
+        <div className="optowner setadmin" onClick={UnAdmin}>
           Unadmin
         </div> 
       </div>
@@ -87,7 +119,7 @@ function memberOption (roleSelected : any)
   )
 }
 
-function renderOptions(roleSelected : any, roomRole : any) {
+function renderOptions(roleSelected : any, SetRole:any, room : any, memberSelectedid: any, RoomSelceted:any) {
   if (!roleSelected) {
     return (
       <div className="friend-options">
@@ -96,11 +128,11 @@ function renderOptions(roleSelected : any, roomRole : any) {
     )
   }
 
-  if (roomRole === 'admin') 
+  if (room.me === 'admin') 
     return (adminOption(roleSelected));
-  else if (roomRole === 'owner') 
-      return (OwnerOption(roleSelected)) 
-  else if (roomRole === 'default') 
+  else if (room.me === 'owner') 
+      return (OwnerOption(roleSelected, SetRole,room, memberSelectedid, RoomSelceted)) 
+  else if (room.me === 'default') 
       return (memberOption(roleSelected))
 }
 
@@ -121,17 +153,11 @@ const Owner = () => {
   };
 
   const handleFormSubmit = async () => {
-   
-    //join group request
-
     setShowAdd(false);
     setFriendName("");
   };
 
   const handleLeaveSubmit = async () => {
-   
-    //Leave group request
-
     setShowAdd(false);
     setFriendName("");
   };
@@ -186,7 +212,7 @@ function MyOptions(roomRole : any) {
 const RoomInfo = ({profile, room, RoomSelceted}) => {
  
 
-  const [memberSelected, SetMember] = useState(null);
+  const [memberSelectedid, SetMember] = useState(null);
   const [RoleSelected, SetRole] = useState(null);
 
 
@@ -195,6 +221,7 @@ const RoomInfo = ({profile, room, RoomSelceted}) => {
     SetRole(member.role);
   }
   
+
 
   return (
     <>
@@ -217,24 +244,29 @@ const RoomInfo = ({profile, room, RoomSelceted}) => {
               <div className="other-options">
                 <>
                 {
-                  room && renderOptions(RoleSelected, room.me)
+                  room && renderOptions(RoleSelected, SetRole, room, memberSelectedid,RoomSelceted)
                 }
                 </>
                 
                 <div className="groupMembers">
                     {room.members && room.members.map( (member) => (
-                      
-                      <div className={`member ${member.id === memberSelected ? 'member-active' : ''}`}
+                      member.status != 'banned' && (
+                        
+                        <div className={`member ${member.id === memberSelectedid ? 'member-active' : ''}`}
                         onClick={()  => handleSelectMember(member) }
-                      >
-                        <div className="amis-image">
-                          <img  src={member.avatar}/>
-                        </div>
-                        <div className="amis-infos">
-                          <p className="amis-name"> <p>{member.login}</p> </p>
+                        >
+                          {console.log(member)}
+                          <div className="amis-image">
+                            <img  src={member.avatar}/>
+                          </div>
+                          <div className="amis-infos">
+                            <p className="amis-name"> <p>{member.login}</p> </p>
+                          </div> 
+                          <p className="amis-status"> <p>{member.role}</p> </p>
                         </div> 
-                        <p className="amis-status"> <p>{member.role}</p> </p>
-                      </div> 
+                        )
+                       
+                     
                     ))}
                   </div>
                 </div>

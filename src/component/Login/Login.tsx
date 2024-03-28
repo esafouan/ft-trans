@@ -13,7 +13,7 @@ export const TwoFa = ({user ,setError}) =>
   const [code, setcode] = useState('');
   const [isVerified, setIsVerified] = useState(false);
 
-  if(user)
+  if (user)
     return <Navigate to="/Home" replace />;
   const saveData = async () => {
     const data = await axios.post('http://localhost:3000/api/2fa/authenticate', {twofa:code},{withCredentials: true})
