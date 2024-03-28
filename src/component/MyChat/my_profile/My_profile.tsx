@@ -37,7 +37,7 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
   useEffect(() => {
     const fetchNotifs = async () =>{
 
-      const resp = await axios.get('http://localhost:3000/api/chat/notifications', {withCredentials:true})
+      const resp = await axios.get('http://10.14.55.85:3000/api/chat/notifications', {withCredentials:true})
       console.log("here 00")
 
       SetNotifs(resp.data);
@@ -48,7 +48,7 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
 
   useEffect(() => {
     const fetchNotifs = async () =>{
-      const resp = await axios.get('http://localhost:3000/api/room/roomnotifications', {withCredentials:true})
+      const resp = await axios.get('http://10.14.55.85:3000/api/room/roomnotifications', {withCredentials:true})
       SetRoomNotifs(resp.data);
     }
     fetchNotifs();
@@ -116,7 +116,7 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
     const getFriendsData = async () => {
       try {
         const resp = await axios.get(
-          "http://localhost:3000/api/friends/isaccepted",
+          "http://10.14.55.85:3000/api/friends/isaccepted",
           { withCredentials: true }
         );
         SetFriendsData(resp.data);
@@ -158,7 +158,7 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
     const getRoomData = async () => {
       try {
         const resp = await axios.get(
-          "http://localhost:3000/api/room/listjoinedrooms",
+          "http://10.14.55.85:3000/api/room/listjoinedrooms",
           { withCredentials: true }
         );
         SetRoomData(resp.data);
@@ -176,7 +176,7 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
     const getRoomData = async () => {
       try {
         const resp = await axios.get(
-          "http://localhost:3000/api/room/listnotjoinedrooms",
+          "http://10.14.55.85:3000/api/room/listnotjoinedrooms",
           { withCredentials: true }
         );
         SetNotRoomsdata(resp.data);
@@ -194,7 +194,7 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
   useEffect(() => {
     const getBlokcedData = async () => {
       try {
-          const resp = await axios.get('http://localhost:3000/api/friends/blockedlist', {withCredentials: true})
+          const resp = await axios.get('http://10.14.55.85:3000/api/friends/blockedlist', {withCredentials: true})
           SetBlockedData(resp.data);
       }
       catch(error) {
@@ -213,7 +213,7 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
         // Set Axios default configuration to include credentials
         const instance = axios.create({
           withCredentials: true,
-          baseURL: "http://localhost:3000/api",
+          baseURL: "http://10.14.55.85:3000/api",
         });
         instance
           .get("/auth/user")
@@ -238,7 +238,7 @@ const My_profile = ({ RoomSelceted, selectedroom,selectedUser, UserSelceted, Pro
   useEffect( () => {
     const getData = async () =>{
       try {
-        const resp = await axios.get('http://localhost:3000/api/friends/notaccepted', {withCredentials:true}); 
+        const resp = await axios.get('http://10.14.55.85:3000/api/friends/notaccepted', {withCredentials:true}); 
         SetPanding(resp.data)
       }   
       catch(error){

@@ -1,5 +1,5 @@
 
-import { AxesHelper } from 'three';
+// import { AxesHelper } from 'three';
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader , GLTF} from 'three/examples/jsm/loaders/GLTFLoader.js';

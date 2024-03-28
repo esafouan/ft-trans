@@ -11,7 +11,7 @@ function Modal({ onClose , toggleTwoFactor , isTwoFactorEnabled}) {
   useEffect(()=> {
     if(isTwoFactorEnabled){
         const generateQrcode =  async () => {
-            const resp = await axios.get('http://localhost:3000/api/2fa/generate', {withCredentials: true, responseType: 'blob'})
+            const resp = await axios.get('http://10.14.55.85:3000/api/2fa/generate', {withCredentials: true, responseType: 'blob'})
             SetQr(resp.data)
         }
         generateQrcode()
@@ -23,7 +23,7 @@ function Modal({ onClose , toggleTwoFactor , isTwoFactorEnabled}) {
   const sendConde = async (code) =>
   {
     if(code != ''){
-      const resp =  await axios.post('http://localhost:3000/api/2fa/turn-on', {twofa:code},{withCredentials: true});
+      const resp =  await axios.post('http://10.14.55.85:3000/api/2fa/turn-on', {twofa:code},{withCredentials: true});
       if (resp.status === 200){
         SetQr(null);
         toggleTwoFactor(false);
@@ -116,6 +116,7 @@ const MenuBar = () => {
               </svg>
             </div>
             </Link>
+            <Link to="/Game">
             <div className="icon  icon-game">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -133,6 +134,7 @@ const MenuBar = () => {
                 <path d="M9 5l1 2h4l1-2" />
               </svg>
             </div>
+            </Link>
             <Link to="/chat">
             <div className="icon  icon-chat">
               <svg

@@ -40,7 +40,7 @@ const Chat = () => {
           try 
           {
               if (User) {
-                  const resp = await axios.post('http://localhost:3000/api/chat/getconversation',{id: User.id},  {withCredentials: true})
+                  const resp = await axios.post('http://10.14.55.85:3000/api/chat/getconversation',{id: User.id},  {withCredentials: true})
                   SetMessages(resp.data);
                   socket.emit('notif',{type:"message",senderid: User.id})
               }
@@ -74,7 +74,7 @@ const Chat = () => {
             {
                 if (Room) {
                   
-                    const resp = await axios.post('http://localhost:3000/api/chat/getroomconversation',{roomname: Room.name},  {withCredentials: true})
+                    const resp = await axios.post('http://10.14.55.85:3000/api/chat/getroomconversation',{roomname: Room.name},  {withCredentials: true})
                     SetMessagesRoom(resp.data);
                     socket.emit('roomnotif', Room.name)
                 }

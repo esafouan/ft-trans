@@ -16,7 +16,7 @@ export const TwoFa = ({user ,setError}) =>
   if (user)
     return <Navigate to="/Home" replace />;
   const saveData = async () => {
-    const data = await axios.post('http://localhost:3000/api/2fa/authenticate', {twofa:code},{withCredentials: true})
+    const data = await axios.post('http://10.14.55.85:3000/api/2fa/authenticate', {twofa:code},{withCredentials: true})
     if(data.status == 200)
     {
       setError('');
@@ -48,7 +48,7 @@ export const Login = ({user}) => {
           <p></p>
         </div>
         {/* <a  className="button-link"></a> */}
-        <a href="http://localhost:3000/api/auth/42">
+        <a href="http://10.14.55.85:3000/api/auth/42">
           <p>Login</p>
         </a>
         <p className='game-title'>Heroes PingPong</p>
