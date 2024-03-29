@@ -1,16 +1,12 @@
-import { useContext } from "react";
 import { Socket } from "socket.io-client";
-import { UserContext } from "./StartGame";
 import './StartGame.css'
+
 interface Props{
     list : string[];
     user : any;
+    socket : Socket;
 }
-
-
-
-export function GamesList({list, user} : Props){
-    const socket = useContext(UserContext)
+export function GamesList({list, user, socket} : Props){
     console.log("Game Socket : ", socket.id);
 
     return(

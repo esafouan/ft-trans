@@ -1,14 +1,10 @@
-import Game from "./Game"
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState,  useEffect } from "react";
 import io, { Socket } from 'socket.io-client';
 import { GamesList } from "./GamesList";
 import './StartGame.css'
 import FirstPage from "./FirstPage";
 import axios from "axios";
 
-interface props{
-  socket : Socket;
-}
 
 interface gameScore{
   player1Name : string;
@@ -17,16 +13,16 @@ interface gameScore{
   player2Score : number;
 }
 
-const socket = io("ws://localhost:3000/game");
 
-export const UserContext = createContext(socket);
 
 function StartGame() {
-
-
-  const socket = useContext(UserContext);
+  
+  
+  const [socket,setsocket] = useState()
   let [gameslist, setGamesList] = useState<string[]>([]);
   const [start, setStart] = useState(false);
+  const [infos, setInfos] = useState();
+
   const [practice, setPractice] = useState(false);
 
   const [endGame, setendGame] = useState(false);
@@ -34,14 +30,19 @@ function StartGame() {
   const [waiting, setWaiting] = useState(false);
 
   // gameslist = ["0xMonster", "0xZero"];
-
   const [user, setUser] = useState(null);
-
+  
   useEffect(()=>{
     const getUser = async () =>{
       try {
-        const resp =  await axios.get('http://localhost:3000/api/auth/user', { withCredentials: true })
-        setUser(resp.data)
+        const resp =  await axios.get('http://10.14.55.85:3000/api/auth/user', { withCredentials: true })
+        setUser(resp.data);
+        const newsocket =  io("ws://10.14.55.85:3000/game", {
+        withCredentials: true,
+        transports: ['websocket']
+      });
+      setsocket(newsocket);
+        
       }
       catch(e){
         console.log(e);
@@ -49,26 +50,27 @@ function StartGame() {
     }
     getUser();
   },[])
-  socket.on('endGame',  (score : gameScore) =>{
+  
+  socket?.on('endGame',  (score : gameScore) =>{
     setendGame(true);
     setStart(false);
     setPractice(false);
     console.log("END Game PAGE ",  score);
   });
-
-  socket.on('GamesList', (gamesList : string[]) => {
+  socket?.on('GamesList', (gamesList : string[]) => {
     setGamesList(gamesList);
   });
-  // socket.on('connect', ()=>{
+  // socket?.on('connect', ()=>{
   //   socket.emit('connectEvent');
   // });
-  // socket.on('disconnect', ()=>{
+  // socket?.on('disconnect', ()=>{
   //   socket.emit('connectEvent');
 
   // })
 
-
-  socket.on('start', ()=>{
+  socket?.on('start', (roomInfos)=>{
+    console.log("roomNAME : ", roomInfos);
+      setInfos(roomInfos);
       setStart(true);
       setWaiting(false);
   })
@@ -86,12 +88,12 @@ function StartGame() {
   }
   else if (start){
     return(
-        <FirstPage roomName={user.login} mode="online"/>
+        <FirstPage infos={infos} mode="online" socket={socket}/>
     )
   }
   else if (practice){
     return(
-      <FirstPage roomName={user.login} mode="practice"/>)
+      <FirstPage infos={infos} mode="practice" socket={socket}/>)
   }
   else if (endGame){
       return(
@@ -108,8 +110,8 @@ function StartGame() {
           {!start && !endGame && !waiting && (
             <button className="practice-button" onClick={() => setPractice(true)}></button>
           )}
-          <button className="create-button" onClick={() => { socket.emit('CREATEROOM', user.login); setWaiting(true);  }}></button>
-          {gameslist.length > 0 && <GamesList list={gameslist} user={user}/>}
+          <button className="create-button" onClick={() => { socket.emit('CREATEROOM'); setWaiting(true);  }}></button>
+          {gameslist.length > 0 && <GamesList list={gameslist} user={user} socket={socket}/>}
         </div>
       );
     
@@ -126,3 +128,6 @@ function StartGame() {
 
 
 export default StartGame;
+
+
+//saad-ADAM2014

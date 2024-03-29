@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 import { FBXLoader, GLTFLoader, OrbitControls } from 'three/examples/jsm/Addons.js';
-import { UserContext } from './StartGame';
-import { createElement, useContext } from 'react';
 import './playersInfo.css'
+import { Socket } from 'socket.io-client';
 
 interface props{
-	roomName : string;
+	infos : string[];
     mode : string;
+	socket : Socket;
 };
 
 
@@ -24,11 +24,12 @@ export class Player
 }
 let i = 0;
 
-export default function FirstPage({roomName , mode} : props){
+export default function FirstPage({infos , mode, socket} : props){
 			if (i == 1){
 				console.log("yes");
 				return ;
 			}
+			console.log("infos: ", infos);
 			i++;
 			let tableWidth = 30;
 			let tableHeight = 50;
@@ -72,16 +73,16 @@ export default function FirstPage({roomName , mode} : props){
 			scoreInfo.append(player2Score);
 			scoreInfo.id = "score-info"
 			container.append(scoreInfo);
-			player1Img.src = 'src/component/game/startGameBack.jpg' 
-			player2Img.src = 'src/component/game/startGameBack.jpg' 
+			player1Img.src = infos[2];
+			player2Img.src = infos[3];
 			
-			player1Name.innerText = roomName;
+			player1Name.innerText = infos[0];
 			player1Info.appendChild(player1Name)
 			player1Info.appendChild(player1Img)
 
 			player1Info.id = 'player1-info';
 
-			player2Name.innerText = "Reda";
+			player2Name.innerText = infos[1];
 			player2Info.appendChild(player2Name);
 			player2Info.appendChild(player2Img);
 
@@ -151,7 +152,6 @@ export default function FirstPage({roomName , mode} : props){
 				scene.add(table);
 			})
 
-			const socket = useContext(UserContext);
 			const clock = new THREE.Clock();
 
 			let mixer:any;
@@ -211,12 +211,12 @@ export default function FirstPage({roomName , mode} : props){
 								player1.raquete.rotation.z  = 0;
 
 							if (mode == 'online')
-								socket.emit('PlayerMoves', [player1.raquete.position, player1.raquete.rotation, roomName, index]);
+								socket.emit('PlayerMoves', [player1.raquete.position, player1.raquete.rotation, infos[0], index]);
 							if (index == 1)
 							{
-								socket.emit('moveX', [roomName ,stepX]);
-								socket.emit('moveZ', [roomName ,moveZ]);
-								socket.emit('speed', [roomName, event.clientY - initClientY]);
+								socket.emit('moveX', [infos[0] ,stepX]);
+								socket.emit('moveZ', [infos[0] ,moveZ]);
+								socket.emit('speed', [infos[0], event.clientY - initClientY]);
 							}
 							else{
 								if (event.clientY - initClientY < -200){
@@ -253,7 +253,7 @@ export default function FirstPage({roomName , mode} : props){
 						player2.goals++;
 						player2Score.innerText = player2.goals;
 					}
-					socket.emit('score', [player1.goals, player2.goals, roomName]);
+					socket.emit('score', [player1.goals, player2.goals, infos[0]]);
 					ball.object.position.y = 50;
 					ball.object.position.z = -(boundingBox?.max.z - boundingBox?.min.z) * 0.4// * (stepZ < 0 ? 1 : -1);
 					ball.object.position.x = 35;
@@ -268,7 +268,7 @@ export default function FirstPage({roomName , mode} : props){
 					if (mode == "practice")
 						player2.raquete.position.z = (boundingBox?.max.z - boundingBox?.min.z) * 0.5;
 					if (player1.goals > 2 || player2.goals > 2){
-						socket.emit('endGame',[player1.goals, player2.goals, roomName]);
+						socket.emit('endGame',[player1.goals, player2.goals, infos[0]]);
 					}
 				}
 					
@@ -327,11 +327,11 @@ export default function FirstPage({roomName , mode} : props){
 					if (ball.object.position.x <= 0 && raqueteX <= 0 && raqueteRotZ == 0)
 						return((Math.abs(ball.object.position.x - raqueteX)) < 10 ? true : false);
 					else if (ball.object.position.x <= 0 && raqueteX <= 0 && raqueteRotZ != 0)
-						return((Math.abs(ball.object.position.x - (raqueteX - 12)) < 15) ? true : false);
+						return((Math.abs(ball.object.position.x - (raqueteX - 5)) < 6) ? true : false);
 					else if (ball.object.position.x >= 0 && raqueteX >= 0 && raqueteRotZ == 0)
 						return((Math.abs(ball.object.position.x - raqueteX)) < 10 ? true : false);
 					else if (ball.object.position.x >= 0 && raqueteX >= 0 && raqueteRotZ != 0)
-						return((Math.abs(ball.object.position.x - (raqueteX + 12)) < 15) ? true : false);
+						return((Math.abs(ball.object.position.x - (raqueteX + 5)) < 6) ? true : false);
 
 
 
@@ -350,7 +350,10 @@ export default function FirstPage({roomName , mode} : props){
 				let lastFallingZ = 0;
 		function animate() {
 				if (index == undefined && mode == 'online')
-					socket.emit('index', roomName);
+				{
+					socket.emit('index', infos[0]);
+					console.log("----------------EMIT INDEX : ", index);
+				}
 				if (ball.object && table && player1.raquete && player2.raquete && (index == 0 || mode == "practice"))
 				{
 						maxZ = tableHeight / 2;
@@ -441,7 +444,7 @@ export default function FirstPage({roomName , mode} : props){
 						timerCheck();
 						}
 						if (ball.object && mode == "online" && index == 0)
-							socket.emit('data', [{x : ball.object.position.x, y : ball.object.position.y, z : ball.object.position.z}, roomName]);
+							socket.emit('data', [{x : ball.object.position.x, y : ball.object.position.y, z : ball.object.position.z}, infos[0]]);
 
 						shodow.position.x = ball.object.position.x;
 						shodow.position.z = ball.object.position.z;
