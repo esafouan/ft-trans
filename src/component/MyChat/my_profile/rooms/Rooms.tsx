@@ -2,18 +2,27 @@ import React, { useEffect, useState } from 'react'
 import "./Rooms.css"
 import { useSocket } from '../../../Socket';
 import axios from "axios";
+import CodeModal from '../../../Modals/RoomCode/RoomCode';
 
 const Rooms = ({Roomsdata, SetRoomData, selectedroom, RoomSelect, NotRoomsdata, SetNotRoomsdata, RoomNotifs, SetRoomNotifs , SetMessagesRoom}) => {
 
 
   const socket = useSocket();
 
-  // userSelect(null)
 
-  
+  const [showPass, SetShow] = useState(false);
+  const [Pass, SetPass] = useState('');
+  const [joined, Setjoined] = useState(null);
   const Joinroom = async (room) => {
     //password need to field when user want to join room
-    socket?.emit("newmemberinroom", {name: room.roomname, password: ''});
+    if (room.type == 'public')
+       socket?.emit("newmemberinroom", {name: room.roomname, password: ''});
+    else if (room.type == 'protected')
+    {
+
+      Setjoined(room)
+      SetShow(true)
+    }
   }
 
 
@@ -36,23 +45,42 @@ const Rooms = ({Roomsdata, SetRoomData, selectedroom, RoomSelect, NotRoomsdata, 
       if (updatedRoom) {
         RoomSelect(updatedRoom); 
       }
-      useEffect(()=>{
+      useEffect(()=> {
      
         const memberLeaved = () => {
           socket?.on('ileaved', () => {
-            console.log("hamiiiiiiiiiiiiiiiiiiiiid = ", selectedroom);
             selectedroom && socket?.emit('chatroomdeselected', selectedroom.name) && RoomSelect(null)
           });
         }
         memberLeaved()
         return () => {
+
           socket?.off('ileaved');
         };
-      },[socket])
+      },[socket]) 
     }
+    const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        console.log("joined = ",joined);
+        joined && socket?.emit("newmemberinroom", {name: joined.roomname, password: Pass});
+        SetShow(false);
+        SetPass("");
+    }
+    catch(error){
+        console.log("error = ",error)
+    }
+};
 
+const handleCancel = () => {
+    SetShow(false);
+    SetPass("");
+};  
+
+
+    NotRoomsdata && console.log("not joined -> ",NotRoomsdata);
    
-      
+
 
   return (
     <div className='roomsContainer'>
@@ -73,7 +101,7 @@ const Rooms = ({Roomsdata, SetRoomData, selectedroom, RoomSelect, NotRoomsdata, 
             </div>
 
             {RoomNotifs && (
-              (selectedroom && room.name !== selectedroom.name) &&
+              (selectedroom && room.name !== selectedroom.name) ||
               (RoomNotifs.find(notification => notification.roomname === room.name)?.count > 0)
             ) ? (
               <div className="amis-status">
@@ -88,20 +116,27 @@ const Rooms = ({Roomsdata, SetRoomData, selectedroom, RoomSelect, NotRoomsdata, 
       {
         NotRoomsdata && NotRoomsdata.map((room) => 
         (
-          <div className="discussion message-active">
+          room.type !== 'private' && (
+            <div className="discussion" key={room.id}>
               <div className="amis-image">
-                  <img />
+                <img src={room.profileImage}  />
               </div>
-    
-
               <div className="amis-infos">
-                  <p className="amis-name"><p>{room.roomname}</p></p>
-                  {/* <p className="last-message">room.lastMessage</p> */}
+                <p className="amis-name">{room.roomname}</p>
+                {/* <p className="last-message">{room.lastMessage}</p> */}
               </div>
               <div className="amis-status" onClick={() => Joinroom(room)}> join </div>
-              </div>
+            </div>
+          )     
         ))
       }
+      {showPass && 
+      <CodeModal 
+          password={Pass}
+          setPassword={SetPass}
+          onSubmit={handleFormSubmit}
+          onCancel={handleCancel}
+      />}
       </div>
     </div>
   )

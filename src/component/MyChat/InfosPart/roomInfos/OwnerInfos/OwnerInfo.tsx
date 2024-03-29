@@ -5,6 +5,7 @@ import AddFriendModal from '../../../../Modals/addfriend/addfriend'
 import SetOwnerModal from '../../../../Modals/Setowner/setowner'
 import axios from 'axios'
 import { useSocket } from '../../../../Socket'
+import { Socket } from 'socket.io-client'
 
 function OwnerOption (roleSelected : any,SetRole:any, room: any, memberSelectedid :any, RoomSelceted:any) 
 {
@@ -14,7 +15,6 @@ function OwnerOption (roleSelected : any,SetRole:any, room: any, memberSelectedi
     socket?.emit('kickuser', {id : memberSelectedid , name :  room.name});
     SetRole(null)
   }
-
 
   const handleMute = () => {
     socket?.emit('muteuser', {id : memberSelectedid , name :  room.name});
@@ -79,20 +79,37 @@ function OwnerOption (roleSelected : any,SetRole:any, room: any, memberSelectedi
 
 }
 
-function adminOption (roleSelected : any) 
+function adminOption (roleSelected : any,SetRole:any, room: any, memberSelectedid :any, RoomSelceted:any)
 {
 
   if (roleSelected === 'default')
   {
+
+    const socket = useSocket()
+
+    const handleKick = () => {
+      socket?.emit('kickuser', {id : memberSelectedid , name :  room.name});
+      SetRole(null)
+    }
+
+    const handleMute = () => {
+      socket?.emit('muteuser', {id : memberSelectedid , name :  room.name});
+      SetRole(null)
+    }
+
+    const handleBan = () => {
+      socket?.emit('banuser', {id : memberSelectedid , name :  room.name});
+      SetRole(null)
+    }
     return (
       <div className="friend-options">
-        <div className="optowner kick" >
+        <div className="optowner kick" onClick={handleKick}>
           kick
         </div>
-        <div className="optowner mute" >
+        <div className="optowner mute" onClick={handleMute}>
           mute
         </div>
-        <div className="optowner ban">
+        <div className="optowner ban" onClick={handleBan}>
           ban
         </div>
       </div>
@@ -109,7 +126,7 @@ function adminOption (roleSelected : any)
   }
 }
 
-function memberOption (roleSelected : any)
+function memberOption ()
 {
   
   return (
@@ -129,21 +146,21 @@ function renderOptions(roleSelected : any, SetRole:any, room : any, memberSelect
   }
 
   if (room.me === 'admin') 
-    return (adminOption(roleSelected));
+    return (adminOption(roleSelected, SetRole,room, memberSelectedid, RoomSelceted));
   else if (room.me === 'owner') 
       return (OwnerOption(roleSelected, SetRole,room, memberSelectedid, RoomSelceted)) 
   else if (room.me === 'default') 
-      return (memberOption(roleSelected))
+      return (memberOption())
 }
 
 
 
 
-const Owner = () => {
+const Owner = ({room}) => {
   const [showAdd, setShowAdd] = useState(false);
   const [friendName, setFriendName] = useState("");
   const [showSetOwner, setShowSetOwner] = useState(false);
-
+  const  socket = useSocket();
   const handleAddClick = () => {
     setShowAdd(true);
   };
@@ -158,6 +175,7 @@ const Owner = () => {
   };
 
   const handleLeaveSubmit = async () => {
+    socket?.emit('userleaveroom', {name: room.name, newowner:friendName});
     setShowAdd(false);
     setFriendName("");
   };
@@ -171,7 +189,10 @@ const Owner = () => {
 
   return (
     <>
-      <div className='addowner own' onClick={handleAddClick}>add</div>
+      {
+        room.type == 'private' &&
+        <div className='addowner own' onClick={handleAddClick}>add</div>
+      }
       <div className='leaveowner own' onClick={handleLeaveClick}>leave</div>
 
       <AddFriendModal
@@ -194,16 +215,50 @@ const Owner = () => {
   );
 };
 
+const Admin = ({room}) => {
+  const socket = useSocket()
 
+  const handleLeaveClick = () => {
+    socket?.emit('userleaveroom', {name: room.name, newowner:''});
+  };
 
+  return (
+      <div className='leaveowner own' onClick={handleLeaveClick}>leave</div>
+  );
+};
 
+const Default = ({room}) => {
+  const socket = useSocket()
 
-function MyOptions(roomRole : any) {
+  const handleLeaveClick = () => {
+    socket?.emit('userleaveroom', {name: room.name, newowner:''});
+  };
+
+  return (
+      <div className='leaveowner own' onClick={handleLeaveClick}>leave</div>
+  );
+};
+
+function MyOptions(room: any , roomRole : any) {
   
   if (roomRole === 'owner') 
   {
     return(
-      <Owner />
+      <Owner room={room}/>
+    )
+  }
+
+  else if (roomRole === 'admin') 
+  {
+    return(
+      <Admin room={room}/>
+    )
+  }
+  
+  else 
+  {
+    return(
+      <Default room={room}/>
     )
   }
 
@@ -230,7 +285,7 @@ const RoomInfo = ({profile, room, RoomSelceted}) => {
           ? (<>
               <div className="other-title">
                 <p>Infos</p>
-                {room && MyOptions(room.me)}
+                {room && MyOptions(room , room.me)}
               </div>
 
               <div className="Otherimg">
@@ -255,7 +310,6 @@ const RoomInfo = ({profile, room, RoomSelceted}) => {
                         <div className={`member ${member.id === memberSelectedid ? 'member-active' : ''}`}
                         onClick={()  => handleSelectMember(member) }
                         >
-                          {console.log(member)}
                           <div className="amis-image">
                             <img  src={member.avatar}/>
                           </div>
@@ -265,8 +319,6 @@ const RoomInfo = ({profile, room, RoomSelceted}) => {
                           <p className="amis-status"> <p>{member.role}</p> </p>
                         </div> 
                         )
-                       
-                     
                     ))}
                   </div>
                 </div>

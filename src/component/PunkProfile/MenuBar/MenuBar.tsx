@@ -11,7 +11,7 @@ function Modal({ onClose , toggleTwoFactor , isTwoFactorEnabled}) {
   useEffect(()=> {
     if(isTwoFactorEnabled){
         const generateQrcode =  async () => {
-            const resp = await axios.get('http://localhost:3000/api/2fa/generate', {withCredentials: true, responseType: 'blob'})
+            const resp = await axios.get('http://10.14.55.85:3000/api/2fa/generate', {withCredentials: true, responseType: 'blob'})
             SetQr(resp.data)
         }
         generateQrcode()
@@ -23,7 +23,7 @@ function Modal({ onClose , toggleTwoFactor , isTwoFactorEnabled}) {
   const sendConde = async (code) =>
   {
     if(code != ''){
-      const resp =  await axios.post('http://localhost:3000/api/2fa/turn-on', {twofa:code},{withCredentials: true});
+      const resp =  await axios.post('http://10.14.55.85:3000/api/2fa/turn-on', {twofa:code},{withCredentials: true});
       if (resp.status === 200){
         SetQr(null);
         toggleTwoFactor(false);
