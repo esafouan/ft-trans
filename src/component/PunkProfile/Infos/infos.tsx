@@ -48,9 +48,9 @@ const Infos = () => {
                 <p>{profileData.login}</p>
               </div>
               <div className="edit-profile">
-                {/* <div className="edit">
+                <div className="edit">
                   <p>Edit profile</p>
-                </div>  */}
+                </div> 
               </div>
             </>
           ) : (
@@ -68,7 +68,6 @@ const Infos = () => {
               <div className="start-button">New game</div>
             </div>
           </div>
-          <div className="stats"></div>
         </div>
 
     </div>

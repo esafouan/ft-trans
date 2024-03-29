@@ -7,6 +7,7 @@ import Chat from './component/MyChat/Chat';
 import axios from 'axios';
 import StartGame from './component/game/StartGame';
 import { useSocket } from './component/Socket';
+import UserProfile from './component/UserProfile/UserProfile';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -76,7 +77,7 @@ function App() {
                 <Route path="/Home" element={<Punk />} />
                 <Route path="/Game" element={<StartGame/>} />
                 <Route path="/Chat" element={<Chat />} />
-
+                <Route path="/profile/:userId" element={<UserProfile />} />
               </>
             )
 

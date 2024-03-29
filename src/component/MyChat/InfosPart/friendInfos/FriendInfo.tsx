@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import "./FriendInfo.css"
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const FriendInfo = ({user ,profile, UserSelceted}) => {
 
@@ -26,7 +27,13 @@ const FriendInfo = ({user ,profile, UserSelceted}) => {
     }
 }
 
-  return (
+const navigate = useNavigate();
+
+const goToprofile = () => {
+  user && navigate(`/profile/${user.id}`, { state: { userData: user } });
+}
+
+return (
     <>
        {user
         ? (<>
@@ -35,7 +42,7 @@ const FriendInfo = ({user ,profile, UserSelceted}) => {
             </div>
 
             <div className="Otherimg">
-              <img src={user.avatar}/>
+              <img src={user.avatar} onClick={goToprofile}/>
             </div>
 
             <div className="Othername">
