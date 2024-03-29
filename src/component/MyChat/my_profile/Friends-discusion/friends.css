@@ -7,8 +7,8 @@
 
 .amis-image img 
 {
-    width: 50px;
-    height: 50px;
+    width: 5vmin;
+    height: 5vmin;
     border-radius: 50%; /* Make it a circle */
     border: 2px solid #418C55;
     overflow: hidden;
@@ -34,6 +34,7 @@
     position: absolute;
     top: 50%;
     color: white;
+    font-size: 1.5vmin;
 }
 
 .last-message {

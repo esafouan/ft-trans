@@ -58,7 +58,6 @@
     width: 60%;
     position: relative;
     left : 20%;
-    top: 20%;
 }
 
 .search-friend .searchInput {
@@ -66,32 +65,33 @@
   height: 100%;
   width: 100%;
   border-radius:  25px;
-  background: rgba(233, 230, 230, 0.4);
+  background: rgba(255, 255, 255, 1);
   outline: none;
   border: none;
   padding-left: 8px;
   font-size: 12px;
+  border: 2px solid #1DF2B6;
+  font-size: 1.5vmin;
 }
 
 .search-friend .material-symbols-outlined 
 {
     position: absolute;
     right: -3px;
-    top: 0;
-    background: rgba(117, 9, 9, 0.3);
+    background: #1DF2B6;
     height: 100%;
     width: 13%;
     text-align: center;
-    line-height: 31px;
+    line-height: 3.5vmin;
     border-radius: 0 25px 25px 0;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 0.6cm;
+    color: #165953;
     cursor: pointer;
 }
 .search-friend .material-symbols-outlined  .iconSearch
 {
     position: relative;
     top: 4%;
+    font-size: 2vmin;
 }
 
 /*/////////////search//////*/
@@ -121,12 +121,11 @@
     grid-row-gap: 0px;
     padding: 1% 2%;
     background: rgba(22, 89, 83,0.1);
-    margin: 3% 8%;
+    margin: 3vmin 4vmin;
     border-radius: 11px;
-    max-height: 6.1vh;
+    max-height: 6.1vmin;
     border: 1px solid #8BD9D1;
-
-    width: 17vw;
+    width: 79%;
 }
 
 .friend:hover
@@ -139,12 +138,11 @@
 .friend img 
 {
     position: relative;
-    width: 5vh;
-    height: 5vh;
+    width: 5vmin;
+    height: 5vmin;
     border-radius: 50px;
     border: 2px solid #8BD9D1;
     overflow: hidden;
-    margin-right: 8px;
     margin-top: 2%;
     object-fit: cover;
 }
@@ -171,25 +169,5 @@
 
 .friend .friend-name 
 {
-    font-size: small;
-}
-
-
-@media screen and (max-width: 768px)
-{
-    .friend {
-        grid-template-columns: auto repeat(3, 1fr);
-        grid-template-rows: auto;
-    }
-
-    .friend  img {
-        /* width: 35px; */
-        /* height: 35px; */
-        display: none;
-        border: none;
-    }
-
-    .friend .friend-name {
-        font-size: 10px;
-    }
+    font-size: 1.5vmin;
 }

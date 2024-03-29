@@ -19,13 +19,12 @@ const Match = ({match}) => {
             <div className=" card">
                 
                 <div className="my-content">
-                    <img className="card-img" src={match.player1.image}/>
+                    <img className="my-card-img" src={match.player1.image}/>
                     <p className='my-card-res'>{match.player1.result}</p>
                 </div>
                 <div className="component-content">
-                    <img className="card-img" src={match.player2.image}/>
+                    <img className="com-card-img" src={match.player2.image}/>
                     <p className='com-card-res'>{match.player2.result}</p>
-                    
                 </div>
             </div>
         </div>

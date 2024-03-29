@@ -8,7 +8,7 @@ const Blocked = ({Blocked, setboolblock,  userSelect}) => {
   userSelect(null);
  const handleUnblock = async (friendId : number) => {
   try {
-      const res = await axios.post('http://10.14.55.85:3000/api/friends/unblock', {id: friendId}, { withCredentials: true })
+      const res = await axios.post('http://localhost:3000/api/friends/unblock', {id: friendId}, { withCredentials: true })
       setboolblock((prevIsBool) => prevIsBool + 1);
   }  
   catch (error) {

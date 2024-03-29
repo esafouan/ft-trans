@@ -17,7 +17,7 @@ interface gameScore{
   player2Score : number;
 }
 
-const socket = io("ws://10.14.55.85:3000/game");
+const socket = io("ws://localhost:3000/game");
 
 export const UserContext = createContext(socket);
 
@@ -40,7 +40,7 @@ function StartGame() {
   useEffect(()=>{
     const getUser = async () =>{
       try {
-        const resp =  await axios.get('http://10.14.55.85:3000/api/auth/user', { withCredentials: true })
+        const resp =  await axios.get('http://localhost:3000/api/auth/user', { withCredentials: true })
         setUser(resp.data)
       }
       catch(e){

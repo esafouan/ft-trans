@@ -6,13 +6,14 @@
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    margin-left: -5%;
+    margin-top: 2%;
 }    
 
 
 
 .new-game-container{
     grid-area: 1 / 2 / 2 / 3;
-   
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 0.5fr;
@@ -24,11 +25,11 @@
     grid-area: 1 / 1 / 2 / 2;
     position: relative;
     border-radius: 10px;
-    /* background: linear-gradient(11deg,  rgb(109, 65, 8), rgba(189, 133, 69, 0.699)  100%); */
     margin-top: 4%;
     height: 84%;
     background: rgba(22, 89, 83,0.1);
     border: 1px solid #8BD9D1;
+    margin-left: -1.5%;
     
 }
 .myPl {
@@ -48,27 +49,27 @@
     position: absolute;
     color: rgb(255, 255, 255);
     top: 22%;
-    font-size: x-large;
+    font-size: 3vmin;
     left: 10%;
 }
 .ready {
     position: absolute;
     color: rgb(255, 255, 255);
     top: 44%;
-    font-size: x-large;
+    font-size: 3vmin;
     left: 10%;
 }
 
 
 .start-button {
     position: absolute;
-    color: rgb(255, 255, 255);
+    color: #165953;
     top: 70%;
     left: 15%;
     width: fit-content;
     height: fit-content;
     border-radius: 10px;
-    font-size: large;
+    font-size: 2vmin;
     padding: 5px 10px 5px 10px;
     cursor: pointer;
     background: #1DF2B6;
@@ -86,7 +87,7 @@
     grid-template-rows: 1fr 0.5fr 0.5fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    margin: 0px 0px 0px 25px;
+    margin: -3% 0% 0% -14%;
 }
 
 .ImgProfile {
@@ -100,8 +101,8 @@
 
 .ImgProfile img { 
     position: absolute;
-    width:100px;
-    height: 100px;
+    width:10vmin;
+    height: 10vmin;
     border-radius: 50%;
     text-align: center;
     border: 2px solid #8BD9D1; 
@@ -121,7 +122,7 @@
     margin: 0;
     text-align: center;
     color: #ffffff;
-    font-size: 1.4em;
+    font-size: 2vmin;
     padding-top: 5px;
     font-weight: bold;
 }

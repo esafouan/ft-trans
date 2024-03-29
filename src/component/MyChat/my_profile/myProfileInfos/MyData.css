@@ -36,11 +36,11 @@
     grid-template-rows: repeat(2, 1fr);
     justify-items: center;
     align-items: center;
+    margin-left: -1vmin;
 }
 
 .new-Friend {
     grid-area: 1 / 1 / 2 / 2;
-
 }
 
 .new{
@@ -50,16 +50,17 @@
     height: 2vh;
 }
 
-.new:hover{
-    padding: 0px 20px 0px 20px;
+.new:hover
+{
+    padding: 1vmin 2vmin 1vmin 2vmin;
     border-radius: 5px;
     background: rgba(29, 242, 182, 0.5);
     cursor: pointer;
-    transition: 0.5s ease;
+    transform: 1s ease;
 }
 
 .new svg{
-    width: 20px;
+    width: 2vmin;
     color: white;
 }
 
@@ -74,7 +75,6 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 0.4fr;
-    padding-left: 8%;
 }
 
 
@@ -83,14 +83,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
 }
 
 .myImgProfile img { 
     content: "";
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 8vmin;
+    height: 8vmin;
+    margin-left: 3vmin;
     border-radius: 50%;
     text-align: center;
     border: 2px solid #8BD9D1; 
@@ -102,15 +102,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
 .myname p {
-    margin: 0;
     text-align: center;
     color: white;
-    padding-top: 10px;
-    font-size: 1em;
-    padding-top: 5px;
+    font-size: 1.5vmin;
     font-weight: bold;
+    margin-left: 3vmin;
 }

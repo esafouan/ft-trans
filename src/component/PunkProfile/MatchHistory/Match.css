@@ -7,16 +7,18 @@
   justify-items: center; 
   align-items: center; 
   position: relative;
-  margin-top: -2vh;
+  margin-top: -2vmin;
+  margin-left: 6%;
 }
 
 .title-history{
-  grid-area: 1 / 1 / 2 / 2; 
+  grid-area: 1 / 1 / 2 / 2;
   text-align: center;
-  top: 45%;
+  top: 30%;
   position: absolute;
   font-size: x-large;
   color: white;
+  right: 1%;
 }
 
 
@@ -26,13 +28,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 90%;
+  
 }
 
 .card 
 {
     position: relative;
-    height: 30vh;
-    width: 15vw;
+    height: 27vh;
+    width: 12vw;
     background-image: none;
     border-radius: 20px;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
@@ -60,21 +64,31 @@
     
   }  
 
-  .card-img{
+  .my-card-img{
     position: absolute;
     border-radius: 50%;
-    height: 6vh;
-    width: 6vh;
+    height: 5vmin;
+    width: 5vmin;
     top: 15%;
-    left: 33%;
+    left: 23%;
+    border: 1px solid white;
+  }
+
+  .com-card-img{
+    position: absolute;
+    border-radius: 50%;
+    height: 5vmin;
+    width: 5vmin;
+    top: 15%;
+    left: 42%;
     border: 1px solid white;
   }
 
   .com-card-res{
     position: absolute;
     top: 55%;
-    left: 48%;
-    font-size: 3vh;
+    left: 54%;
+    font-size: 2.5vmin;
     color: aliceblue;
     
   }
@@ -82,22 +96,23 @@
   .my-card-res {
     position: absolute;
     top: 55%;
-    left: 40%;
-    font-size: 3vh;
+    left: 32%;
+    font-size: 2.5vmin;
     color: aliceblue;
   }
 
 .next {
     position: absolute;
-    size: 2vh;
+    size: 2vmin;
     color: aliceblue;
-    top: 43.5%;
+    top: 39.5%;
 }
 
 .prev
 {
-  size: 2vh;
+  size: 2vmin;
   position: absolute;
   color: aliceblue;
-  top: 43.5%;
+  top: 39.5%;
+  left: -1%;
 }

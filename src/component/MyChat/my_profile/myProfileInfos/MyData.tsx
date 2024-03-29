@@ -23,7 +23,7 @@ const MyData = ({profileData}) => {
         e.preventDefault();
         try{
 
-            const resp = await axios.post('http://10.14.55.85:3000/api/friends/sendrequest', {login: friendName}, {withCredentials:true});
+            const resp = await axios.post('http://localhost:3000/api/friends/sendrequest', {login: friendName}, {withCredentials:true});
             setShowAdd(false);
             setFriendName("");
             console.log("response friends = ", resp.data)
@@ -47,7 +47,7 @@ const MyData = ({profileData}) => {
       };
     
     return (
-        <div>
+       
             <>
           
             { profileData && (
@@ -122,7 +122,7 @@ const MyData = ({profileData}) => {
             }
             
             </>
-        </div>
+      
     )
 }
 

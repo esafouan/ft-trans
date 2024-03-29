@@ -6,14 +6,15 @@
     grid-template-rows: 0.3fr 0.1fr 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    margin: 5vh 0vh 0vh 0vh;
-    height: 90vh;
+    margin: 5vmin 0vmin 0vmin 0vmin;
     width: 21vw;
+    height: 90vh;
     border-radius: 5px;
-    padding: 0px 10px 0px 0px;
+    padding: 0vmin 1vmin 0vmin 0vmin;
     background: rgb(175, 185, 185, 0.2);
     border: 1px solid #8BD9D1;
-}
+  }
+
 
 
 
@@ -27,9 +28,10 @@
     grid-template-rows: 1fr;
     justify-items: center;
     align-items: center;
-    padding-left: 10px;
-    padding-top: 5px;
+    padding-left: 1vmin;
+    padding-top: 0.7vmin;
     border-top: 1px solid #8BD9D1;
+    position: relative;
 }
 
 
@@ -42,7 +44,7 @@
 }
 
 .select:hover{
-    padding: 0px 20px 0px 20px;
+    padding: 0vmin 2vmin 0vmin 2vmin;;
     border-radius: 5px;
     background: rgba(29, 242, 182, 0.5);
     cursor: pointer;
@@ -50,7 +52,7 @@
 }
 
 .selections .selected {
-    padding: 0px 20px 0px 20px;
+    padding: 0vmin 2vmin 0vmin 2vmin;;
     border-radius: 5px;
     background: rgba(29, 242, 182, 1);
     cursor: pointer;
@@ -75,9 +77,14 @@
 .Notification {
     width: fit-content;
     height: fit-content;
-    background: black;
+    background: rgb(172, 6, 6);
     border-radius: 50%;
-    padding: 0% 15% 0% 15%;
+    position: absolute;
+    font-size: 1.2vmin;
+    padding: 0.4vmin 0.7vmin 0.4vmin 0.7vmin;
+    top: 10%;
+    right: 2%;
+    color: white;
 }
                    /* /////////////////////////////// */
 
@@ -89,8 +96,8 @@
     overflow-y: auto;
     overflow-x:hidden;
     max-height: 69vh; 
-    padding-right: 10px;
-    padding-top: 10px;
+    padding-right: 1vmin;
+    padding-top: 2vmin;
     position: relative;
 }
 
@@ -109,7 +116,7 @@
     cursor: pointer;
     width: 100%;
     background: rgba(139, 217, 209, 0.3);
-    padding-left: 10px;
+    padding-left: 1vmin;
     transition: 0.5s ease;
     border: 1px solid #8BD9D1;
 }
