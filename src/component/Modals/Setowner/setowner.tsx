@@ -3,7 +3,7 @@ import {motion, AnimatePresence} from 'framer-motion'
 
 import "../addfriend/addfriend.css"
 
-function SetOwnerModal({ show, friendName, setFriendName, onSubmit, onCancel }) {
+function SetOwnerModal({ show, NewOwner, setNewOwner, onSubmit, onCancel }) {
     if (!show) {
       return null;
     }
@@ -37,8 +37,8 @@ function SetOwnerModal({ show, friendName, setFriendName, onSubmit, onCancel }) 
                 <input
                     className="input-add-modal"
                     type="text"
-                    value={friendName}
-                    onChange={(e) => setFriendName(e.target.value)}
+                    value={NewOwner}
+                    onChange={(e) => setNewOwner(e.target.value)}
                     placeholder="Enter Owner name"
                 />
                 <div className="butt-add-modal">
@@ -58,6 +58,7 @@ function SetOwnerModal({ show, friendName, setFriendName, onSubmit, onCancel }) 
                             <path d="M4 12l6 6L20 6" />
                         </svg>
                     </div>
+                    
                     <div className="But-modal Cancel-But-modal"
                     onClick={onCancel}>
                         <svg

@@ -26,7 +26,7 @@ function OwnerOption (roleSelected : any,SetRole:any, room: any, memberSelectedi
     SetRole(null)
   }
 
-  if (roleSelected === 'default') {
+    if (roleSelected === 'default') {
     const SetAdmin = () => {
       socket?.emit('setadmin', {id : memberSelectedid , name :  room.name});
       SetRole(null)
@@ -156,11 +156,13 @@ function renderOptions(roleSelected : any, SetRole:any, room : any, memberSelect
 
 
 
-const Owner = ({room}) => {
+const Owner = ({room, RoomSelceted}) => {
   const [showAdd, setShowAdd] = useState(false);
   const [friendName, setFriendName] = useState("");
+  const [NewOwner, setNewOwner] = useState("");
   const [showSetOwner, setShowSetOwner] = useState(false);
   const  socket = useSocket();
+
   const handleAddClick = () => {
     setShowAdd(true);
   };
@@ -172,17 +174,20 @@ const Owner = ({room}) => {
   const handleFormSubmit = async () => {
     setShowAdd(false);
     setFriendName("");
+   
   };
 
   const handleLeaveSubmit = async () => {
-    socket?.emit('userleaveroom', {name: room.name, newowner:friendName});
-    setShowAdd(false);
-    setFriendName("");
+    NewOwner.length > 0 && socket?.emit('userleaveroom', {name: room.name, newowner: NewOwner});
+    RoomSelceted(null);
+    setShowSetOwner(false);
+    setNewOwner("");
   };
 
   const handleCancel = () => {
     setShowAdd(false);
     setFriendName("");
+    setNewOwner("")
     setShowSetOwner(false);
 
   };
@@ -194,32 +199,35 @@ const Owner = ({room}) => {
         <div className='addowner own' onClick={handleAddClick}>add</div>
       }
       <div className='leaveowner own' onClick={handleLeaveClick}>leave</div>
-
-      <AddFriendModal
-        show={showAdd}
-        friendName={friendName}
-        setFriendName={setFriendName}
-        onSubmit={handleFormSubmit}
-        onCancel={handleCancel}
-      />
+      
+        <AddFriendModal
+          show={showAdd}
+          friendName={friendName}
+          setFriendName={setFriendName}
+          onSubmit={handleFormSubmit}
+          onCancel={handleCancel}
+        />
 
       <SetOwnerModal
           show={showSetOwner}
-          friendName={friendName}
-          setFriendName={setFriendName}
+          NewOwner={NewOwner}
+          setNewOwner={setNewOwner}
           onSubmit={handleLeaveSubmit}
           onCancel={handleCancel}
       />
-
+    
+      
     </>
   );
 };
 
-const Admin = ({room}) => {
+const Admin = ({room, RoomSelceted}) => {
   const socket = useSocket()
 
   const handleLeaveClick = () => {
     socket?.emit('userleaveroom', {name: room.name, newowner:''});
+
+    RoomSelceted(null);
   };
 
   return (
@@ -227,11 +235,12 @@ const Admin = ({room}) => {
   );
 };
 
-const Default = ({room}) => {
+const Default = ({room, RoomSelceted}) => {
   const socket = useSocket()
 
   const handleLeaveClick = () => {
     socket?.emit('userleaveroom', {name: room.name, newowner:''});
+    RoomSelceted(null);
   };
 
   return (
@@ -239,26 +248,26 @@ const Default = ({room}) => {
   );
 };
 
-function MyOptions(room: any , roomRole : any) {
+function MyOptions(room: any , roomRole : any, RoomSelceted) {
   
   if (roomRole === 'owner') 
   {
     return(
-      <Owner room={room}/>
+      <Owner room={room} RoomSelceted={RoomSelceted}/>
     )
   }
 
   else if (roomRole === 'admin') 
   {
     return(
-      <Admin room={room}/>
+      <Admin room={room} RoomSelceted={RoomSelceted}/>
     )
   }
   
-  else 
+  else if (roomRole === 'default') 
   {
     return(
-      <Default room={room}/>
+      <Default room={room} RoomSelceted={RoomSelceted}/>
     )
   }
 
@@ -285,7 +294,7 @@ const RoomInfo = ({profile, room, RoomSelceted}) => {
           ? (<>
               <div className="other-title">
                 <p>Infos</p>
-                {room && MyOptions(room , room.me)}
+                {room && MyOptions(room , room.me, RoomSelceted)}
               </div>
 
               <div className="Otherimg">

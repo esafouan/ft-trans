@@ -7,7 +7,7 @@ const FriendInfo = ({user ,profile, UserSelceted}) => {
 
   const handleBlock = async (userid : number) => {
         try {
-            const resp = await axios.post('http://10.14.55.85:3000/api/friends/block', {id: userid}, {withCredentials:true});
+            const resp = await axios.post('http://localhost:3000/api/friends/block', {id: userid}, {withCredentials:true});
             UserSelceted(null);
          
           }
@@ -18,7 +18,7 @@ const FriendInfo = ({user ,profile, UserSelceted}) => {
 
   const handleUnfriend = async (userid : number) => {
     try {
-      const resp = await axios.post('http://10.14.55.85:3000/api/friends/unfriend', {id: userid}, {withCredentials:true});
+      const resp = await axios.post('http://localhost:3000/api/friends/unfriend', {id: userid}, {withCredentials:true});
       UserSelceted(null);
    
     }
